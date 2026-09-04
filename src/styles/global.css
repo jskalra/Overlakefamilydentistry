@@ -38,3 +38,32 @@ h1, h2, h3, h4 {
   font-family: var(--font-heading);
   color: var(--color-navy);
 }
+
+/* Reusable component classes */
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-full px-6 py-3 font-medium transition-colors;
+  }
+  .btn-primary {
+    @apply bg-navy text-cream hover:bg-navy-dark;
+  }
+  .btn-secondary {
+    @apply border border-slate text-navy hover:bg-cream;
+  }
+  .btn-accent {
+    @apply bg-sage text-navy hover:bg-sage-light;
+  }
+  .eyebrow {
+    @apply text-sage font-semibold tracking-wide uppercase text-sm;
+  }
+  .card {
+    @apply rounded-2xl bg-white p-6 shadow-sm ring-1 ring-navy/5 transition-shadow hover:shadow-md;
+  }
+  .container-page {
+    @apply max-w-6xl mx-auto px-6;
+  }
+  .section {
+    @apply py-16 md:py-24;
+  }
+}
+

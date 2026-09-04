@@ -1,0 +1,97 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+
+const swatches = [
+  { name: "Navy (primary)", var: "bg-navy", hex: "#1F3A54", text: "text-cream" },
+  { name: "Navy Dark", var: "bg-navy-dark", hex: "#172C40", text: "text-cream" },
+  { name: "Slate (secondary)", var: "bg-slate", hex: "#5E86A0", text: "text-white" },
+  { name: "Slate Light", var: "bg-slate-light", hex: "#8AA9BE", text: "text-navy" },
+  { name: "Sage (accent)", var: "bg-sage", hex: "#7FA989", text: "text-navy" },
+  { name: "Sage Light", var: "bg-sage-light", hex: "#A7C4AE", text: "text-navy" },
+  { name: "Cream", var: "bg-cream", hex: "#F7F2E7", text: "text-navy" },
+  { name: "Cream Soft", var: "bg-cream-soft", hex: "#FBF8F1", text: "text-navy" },
+];
+---
+
+<BaseLayout title="Style Guide — Overlake Family Dentistry">
+  <div class="bg-navy text-cream text-center text-sm py-2 px-4">
+    Transition banner preview — Continuing 25+ Years of Conservative Care (Formerly Dr. Brian Brooks)
+  </div>
+
+  <main class="container-page section space-y-16">
+    <header>
+      <p class="eyebrow">Overlake Family Dentistry</p>
+      <h1 class="text-5xl font-semibold mt-2">Design System</h1>
+      <p class="mt-4 text-slate text-lg max-w-2xl">
+        Brand tokens, typography, and components. Inspired by mysmile.ca — Playfair Display
+        headings, Inter body, calm navy/slate/sage palette on white + cream.
+      </p>
+    </header>
+
+    <!-- Colors -->
+    <section>
+      <h2 class="text-3xl font-semibold mb-6">Color palette</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {swatches.map((s) => (
+          <div class="rounded-2xl overflow-hidden ring-1 ring-navy/10">
+            <div class={`${s.var} ${s.text} h-24 flex items-end p-3 text-sm font-medium`}>{s.name}</div>
+            <div class="bg-white p-3 text-xs text-slate font-mono">{s.hex}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section>
+      <h2 class="text-3xl font-semibold mb-6">Typography</h2>
+      <div class="space-y-4 card">
+        <h1 class="text-6xl font-semibold">Heading 1 — Playfair</h1>
+        <h2 class="text-4xl font-semibold">Heading 2 — Playfair</h2>
+        <h3 class="text-2xl font-semibold">Heading 3 — Playfair</h3>
+        <p class="eyebrow">Eyebrow / label — Inter</p>
+        <p class="text-lg text-slate max-w-2xl">
+          Body large (Inter). Comprehensive, tooth-preserving care from a team that has
+          looked after Eastside families for generations.
+        </p>
+        <p class="text-base max-w-2xl">
+          Body base (Inter). No pressure, no unnecessary treatment — just honest, gentle
+          dentistry in the Bel-Red corridor.
+        </p>
+      </div>
+    </section>
+
+    <!-- Buttons -->
+    <section>
+      <h2 class="text-3xl font-semibold mb-6">Buttons</h2>
+      <div class="flex flex-wrap gap-4 items-center">
+        <Button href="#" variant="primary">Call (425) 883-3040</Button>
+        <Button href="#" variant="secondary">Request an Appointment</Button>
+        <Button href="#" variant="accent">Learn More</Button>
+      </div>
+    </section>
+
+    <!-- Cards -->
+    <section>
+      <h2 class="text-3xl font-semibold mb-6">Cards</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {["Conservative Care", "Multi-Decade Trust", "Comprehensive Services"].map((t) => (
+          <article class="card">
+            <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
+            <h3 class="text-xl font-semibold">{t}</h3>
+            <p class="mt-2 text-slate text-sm">
+              Sample card body describing a pillar of the practice with a soft shadow and rounded corners.
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Section band -->
+    <section class="bg-cream rounded-3xl section text-center">
+      <p class="eyebrow">Cream section band</p>
+      <h2 class="text-4xl font-semibold mt-2">Warm, calm, trustworthy</h2>
+      <p class="mt-4 text-slate max-w-xl mx-auto">Alternating white and cream bands create the mysmile.ca-style rhythm.</p>
+    </section>
+  </main>
+</BaseLayout>
