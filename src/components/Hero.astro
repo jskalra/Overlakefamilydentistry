@@ -7,15 +7,33 @@ interface Props {
   subtitle?: string;
 }
 const {
-  eyebrow = "Bellevue · Bel-Red Corridor",
+  eyebrow,
   title = site.tagline,
   subtitle = "Comprehensive, tooth-preserving care from a team that has looked after Eastside families for generations. No pressure. No unnecessary treatment.",
 } = Astro.props;
+
+const areas = [
+  { label: "Bellevue", href: "/dentist/bellevue" },
+  { label: "Bel-Red", href: "/dentist/bellevue" },
+  { label: "Redmond", href: "/dentist/redmond" },
+  { label: "Kirkland", href: "/dentist/kirkland" },
+];
 ---
 <section class="bg-cream-soft">
   <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
     <div>
-      <p class="eyebrow">{eyebrow}</p>
+      {eyebrow ? (
+        <p class="eyebrow">{eyebrow}</p>
+      ) : (
+        <p class="eyebrow flex flex-wrap items-center gap-x-2 gap-y-1">
+          {areas.map((a, i) => (
+            <>
+              {i > 0 && <span class="text-slate/50" aria-hidden="true">|</span>}
+              <a href={a.href} class="hover:text-navy transition-colors">{a.label}</a>
+            </>
+          ))}
+        </p>
+      )}
       <h1 class="text-3xl md:text-4xl font-semibold mt-4 leading-tight">{title}</h1>
       <p class="mt-6 text-lg text-slate max-w-lg">{subtitle}</p>
       <div class="mt-8 flex gap-4 flex-wrap">
