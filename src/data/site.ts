@@ -9,7 +9,7 @@ export const site = {
   phoneHref: "tel:+14258833040",
   email: "info@overlakefamilydentistry.com",
   address: {
-    street: "14655 Bel-Red Road, Bldg. F, Ste. 101",
+    street: "14655 NE Bel-Red Rd., Bldg. F, Ste. 101",
     city: "Bellevue",
     state: "WA",
     zip: "98007",

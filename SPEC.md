@@ -15,7 +15,7 @@ families for decades.
 
 - **Practice Name (DBA):** Overlake Family Dentistry
 - **Heritage reference:** Practice of Brian D. Brooks, DDS
-- **Address:** 14655 Bel-Red Road, Bldg. F, Ste. 101, Bellevue, WA 98007
+- **Address:** 14655 NE Bel-Red Rd., Bldg. F, Ste. 101, Bellevue, WA 98007
 - **Phone:** (425) 883-3040
 - **Primary domain:** `overlakefamilydentistry.com`
 - **Prior site (redirect source):** https://drbrianbrooks.com/
@@ -183,7 +183,7 @@ license verification, liability insurance proof; GBP profile matching NAP; defin
 areas matching the 4 suburb pages; route Google reviews; set hours/services/budget.
 
 **Website requirements (build scope):**
-- **NAP consistency** — identical Name / Address (14655 Bel-Red Road, Bldg. F, Ste. 101) /
+- **NAP consistency** — identical Name / Address (14655 NE Bel-Red Rd., Bldg. F, Ste. 101) /
   Phone ((425) 883-3040) across code, schema, GBP, LSA docs. Single source in `src/data/site`.
 - **DBA verification** — license + insurance list *Overlake Family Dentistry* as active DBA.
 - **No doorway pages** — 4 location pages carry genuinely unique local content.
