@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { doctors, site } from "../data/site";
+---
+
+<BaseLayout
+  title="Meet the Doctors — Overlake Family Dentistry | Bellevue, WA"
+  description="Meet Dr. Brian Brooks and Dr. Ravneet Kaur Kalra — over 30 years of conservative, honest, gentle dental care in Bellevue's Bel-Red corridor."
+>
+  <section class="container-page section text-center max-w-2xl mx-auto">
+    <p class="eyebrow">Experienced, Long-Tenured Team</p>
+    <h1 class="text-4xl md:text-5xl font-semibold mt-3">Meet the Doctors</h1>
+    <p class="mt-5 text-lg text-slate">
+      Decades of experience, a commitment to conservative care, and a genuinely gentle
+      chairside manner — the reasons Eastside families have stayed with us for generations.
+    </p>
+  </section>
+
+  {doctors.map((doc, idx) => (
+    <section class={idx % 2 === 1 ? "bg-cream" : ""}>
+      <div class="container-page section grid md:grid-cols-3 gap-10 items-start">
+        <div class="md:col-span-1">
+          <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[3/4] flex items-center justify-center text-slate">
+            <span class="text-sm">Photo — {doc.name}</span>
+          </div>
+        </div>
+        <div class="md:col-span-2">
+          <h2 class="text-3xl font-semibold">{doc.name}, {doc.credential}</h2>
+          <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
+            {doc.bio.map((p) => <p>{p}</p>)}
+          </div>
+          {doc.memberships.length > 0 && (
+            <div class="mt-6">
+              <h3 class="text-sm uppercase tracking-wide text-sage font-semibold">Professional Memberships</h3>
+              <ul class="mt-2 space-y-1 text-navy/80 text-sm">
+                {doc.memberships.map((m) => <li>• {m}</li>)}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="container-page section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Ready to meet the team in person?</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>

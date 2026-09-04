@@ -16,10 +16,10 @@ export const site = {
   },
   hours: [
     { day: "Monday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Tuesday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Wednesday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Thursday", open: "8:00 AM", close: "5:00 PM" },
-    { day: "Friday", open: "8:00 AM", close: "2:00 PM" },
+    { day: "Tuesday", open: "7:30 AM", close: "4:30 PM" },
+    { day: "Wednesday", open: "7:30 AM", close: "4:30 PM" },
+    { day: "Thursday", open: "7:00 AM", close: "2:00 PM" },
+    { day: "Friday", open: "Closed", close: "" },
     { day: "Saturday", open: "Closed", close: "" },
     { day: "Sunday", open: "Closed", close: "" },
   ],
@@ -28,12 +28,43 @@ export const site = {
 
 export const nav = [
   { label: "About", href: "/about" },
+  { label: "Doctors", href: "/doctors" },
   { label: "Team", href: "/team" },
   { label: "Services", href: "/services" },
   { label: "New Patients", href: "/new-patients" },
   { label: "Reviews", href: "/reviews" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+export const doctors = [
+  {
+    name: "Dr. Brian Brooks",
+    credential: "DDS",
+    photo: "", // TODO: add headshot to /public
+    bio: [
+      "Dr. Brooks has served the Bellevue–Redmond area for over 30 years, building a large and loyal patient following through honest treatment assessments, high-quality care, and a gentle, compassionate approach. He strongly believes that healthy, functional teeth and gums can add years to your life — and make those years pain-free, with a smile worth sharing.",
+      "Dr. Brooks grew up in Ellensburg, Washington, where his father served as President of Central Washington University for many years. He earned his undergraduate degree from the University of Washington and went on to receive his DDS from the prestigious University of Washington School of Dentistry in 1986. After three years practicing in Tucson, Arizona, he returned to the Pacific Northwest to begin private practice.",
+      "He continuously attends educational courses and seminars to stay current with the constant evolution of modern dentistry, and holds membership in the American Dental Association, the Washington State Dental Association, and the Seattle/King County Dental Association.",
+      "Dr. Brooks makes his home in Bellevue. He is married with four grown children and one grandchild (so far!). In his spare time he enjoys traveling, sporting events, boating, and projects around the house.",
+    ],
+    memberships: [
+      "American Dental Association",
+      "Washington State Dental Association",
+      "Seattle/King County Dental Association",
+    ],
+  },
+  {
+    name: "Dr. Ravneet Kaur Kalra",
+    credential: "DDS",
+    photo: "",
+    bio: [
+      "Dr. Brooks selected Dr. Kaur for her exceptional clinical skill and her deep commitment to conservative, honest dental care. She brings a wealth of experience in modern, comfortable dental technology — and, just as importantly, a kind and compassionate manner with every patient.",
+      "Dr. Kaur completed her postgraduate training in orthodontics in India before moving to the United States in 2014, where she earned her Doctor of Dental Surgery (DDS) from Columbia University College of Dental Medicine in New York. She relocated to the Pacific Northwest in 2020 and has been an active, valued member of the local dental community ever since.",
+      "She is passionate about care that is both honest and minimally invasive — preserving natural tooth structure whenever possible. Outside the office, she enjoys traveling, reading, and spending time with her family and her twelve-year-old son.",
+    ],
+    memberships: [],
+  },
 ] as const;
 
 export const serviceCategories = [
