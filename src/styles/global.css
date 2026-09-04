@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Fonts: Playfair Display (headings) + Inter (body) — mysmile.ca-inspired pairing */
+@import "@fontsource-variable/inter";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+
+/* Design tokens — Overlake Family Dentistry brand (from logo) */
+@theme {
+  /* Brand colors */
+  --color-navy: #1f3a54;      /* primary — headings, nav */
+  --color-navy-dark: #172c40;
+  --color-slate: #5e86a0;     /* secondary (mysmile teal role) */
+  --color-slate-light: #8aa9be;
+  --color-sage: #7fa989;      /* accent — from the leaf */
+  --color-sage-light: #a7c4ae;
+  --color-cream: #f7f2e7;     /* warm section band */
+  --color-cream-soft: #fbf8f1;
+
+  /* Fonts */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter Variable", "Inter", system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-navy);
+  background: #ffffff;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-navy);
+}
