@@ -4,7 +4,7 @@ export const site = {
   heritage: "Formerly the Practice of Dr. Brian Brooks",
   tagline: "Conservative, Tooth-Preserving Care",
   transitionBanner:
-    "Continuing 25+ Years of Conservative, Patient-First Care in Bellevue",
+    "Continuing 30+ Years of Conservative, Patient-First Care in Bellevue",
   phone: "(425) 883-3040",
   phoneHref: "tel:+14258833040",
   email: "info@overlakefamilydentistry.com",

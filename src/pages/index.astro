@@ -4,10 +4,12 @@ import Hero from "../components/Hero.astro";
 import ReviewCarousel from "../components/ReviewCarousel.tsx";
 import { serviceCategories } from "../data/site";
 
+// ⚠️ PLACEHOLDER / ILLUSTRATIVE ONLY — do NOT launch as real reviews.
+// Replace with real, permissioned Google reviews before go-live (FTC/LSA compliance).
 const sampleReviews = [
-  { name: "Karen M.", years: "22 years", text: "Three generations of our family see Dr. Brooks' team. They never push treatment we don't need — that trust is why we've stayed for decades." },
-  { name: "David L.", years: "15 years", text: "Gentle, honest, and thorough. They saved a tooth another office wanted to pull. Conservative care is real here." },
-  { name: "Priya S.", years: "8 years", text: "Moved to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
+  { name: "Illustrative example", years: "sample", text: "Three generations of our family see this team. They never push treatment we don't need — that trust is why we've stayed for years." },
+  { name: "Illustrative example", years: "sample", text: "Gentle, honest, and thorough. They took a conservative approach when another office pushed bigger treatment." },
+  { name: "Illustrative example", years: "sample", text: "New to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
 ];
 ---
 
@@ -39,6 +41,7 @@ const sampleReviews = [
         <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
       </div>
       <ReviewCarousel client:visible reviews={sampleReviews} />
+      <p class="text-center mt-8 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>
     </div>
   </section>
 </BaseLayout>
