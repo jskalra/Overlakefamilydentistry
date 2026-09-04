@@ -1,0 +1,27 @@
+---
+import { site, nav } from "../data/site";
+import MobileNav from "./MobileNav.tsx";
+---
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-navy/5">
+  <!-- Transition / heritage banner -->
+  <div class="bg-navy text-cream text-center text-xs md:text-sm py-2 px-4">
+    {site.name} — {site.transitionBanner}
+    <span class="opacity-80 hidden sm:inline">({site.heritage})</span>
+  </div>
+
+  <div class="container-page relative flex items-center justify-between py-4">
+    <a href="/" class="flex flex-col leading-none">
+      <span class="font-heading text-xl md:text-2xl font-semibold text-navy">Overlake</span>
+      <span class="text-slate text-xs md:text-sm tracking-wide uppercase">Family Dentistry</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-6">
+      {nav.map((item) => (
+        <a href={item.href} class="text-navy/80 hover:text-navy font-medium text-sm transition-colors">{item.label}</a>
+      ))}
+      <a href={site.phoneHref} class="btn btn-primary text-sm">Call {site.phone}</a>
+    </nav>
+
+    <MobileNav client:load items={nav} phone={site.phone} phoneHref={site.phoneHref} />
+  </div>
+</header>

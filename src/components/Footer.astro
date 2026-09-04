@@ -1,0 +1,48 @@
+---
+import { site, nav, serviceCategories } from "../data/site";
+const { address } = site;
+---
+<footer class="bg-navy text-cream/90 mt-16">
+  <div class="container-page py-14 grid gap-10 md:grid-cols-4">
+    <div class="md:col-span-1">
+      <div class="font-heading text-2xl font-semibold text-cream">Overlake</div>
+      <div class="text-cream/70 text-sm uppercase tracking-wide">Family Dentistry</div>
+      <p class="mt-4 text-sm text-cream/70">{site.heritage}.</p>
+    </div>
+
+    <div>
+      <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wide">Explore</h3>
+      <ul class="space-y-2 text-sm">
+        {nav.map((i) => <li><a href={i.href} class="text-cream/80 hover:text-cream">{i.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wide">Services</h3>
+      <ul class="space-y-2 text-sm">
+        {serviceCategories.map((s) => <li><a href={s.href} class="text-cream/80 hover:text-cream">{s.title}</a></li>)}
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-cream font-semibold mb-3 text-sm uppercase tracking-wide">Visit Us</h3>
+      <address class="not-italic text-sm text-cream/80 space-y-1">
+        <div>{address.street}</div>
+        <div>{address.city}, {address.state} {address.zip}</div>
+        <div class="mt-2"><a href={site.phoneHref} class="hover:text-cream">{site.phone}</a></div>
+        <div><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a></div>
+      </address>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <div class="container-page py-5 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/60">
+      <span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span>
+      <div class="flex gap-4">
+        <a href="/privacy-policy" class="hover:text-cream">Privacy</a>
+        <a href="/cookie-policy" class="hover:text-cream">Cookies</a>
+        <a href="/accessibility" class="hover:text-cream">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>

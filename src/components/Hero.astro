@@ -1,0 +1,35 @@
+---
+import { site } from "../data/site";
+import Button from "./Button.astro";
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+}
+const {
+  eyebrow = "Bellevue · Bel-Red Corridor",
+  title = site.tagline,
+  subtitle = "Comprehensive, tooth-preserving care from a team that has looked after Eastside families for generations. No pressure. No unnecessary treatment.",
+} = Astro.props;
+---
+<section class="bg-cream-soft">
+  <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <p class="eyebrow">{eyebrow}</p>
+      <h1 class="text-4xl md:text-6xl font-semibold mt-4 leading-tight">{title}</h1>
+      <p class="mt-6 text-lg text-slate max-w-lg">{subtitle}</p>
+      <div class="mt-8 flex gap-4 flex-wrap">
+        <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+        <Button href="/contact" variant="secondary">Request an Appointment</Button>
+      </div>
+      <div class="mt-8 flex gap-6 text-sm text-navy/70">
+        <span>★★★★★ Trusted for 25+ years</span>
+        <span>Free building parking</span>
+      </div>
+    </div>
+    <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[4/3] flex items-center justify-center text-slate">
+      <!-- Placeholder for hero team photo -->
+      <span class="text-sm">Team photo</span>
+    </div>
+  </div>
+</section>

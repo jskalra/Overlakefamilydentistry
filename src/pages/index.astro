@@ -1,27 +1,44 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Button from "../components/Button.astro";
+import Hero from "../components/Hero.astro";
+import ReviewCarousel from "../components/ReviewCarousel.tsx";
+import { serviceCategories } from "../data/site";
+
+const sampleReviews = [
+  { name: "Karen M.", years: "22 years", text: "Three generations of our family see Dr. Brooks' team. They never push treatment we don't need — that trust is why we've stayed for decades." },
+  { name: "David L.", years: "15 years", text: "Gentle, honest, and thorough. They saved a tooth another office wanted to pull. Conservative care is real here." },
+  { name: "Priya S.", years: "8 years", text: "Moved to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
+];
 ---
 
-<BaseLayout title="Overlake Family Dentistry — Gentle, Conservative Dentistry in Bellevue">
-  <div class="bg-navy text-cream text-center text-sm py-2 px-4">
-    Overlake Family Dentistry — Continuing 25+ Years of Conservative, Patient-First Care in Bellevue
-    <span class="opacity-80">(Formerly the Practice of Dr. Brian Brooks)</span>
-  </div>
+<BaseLayout title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue">
+  <Hero />
 
-  <main class="container-page section text-center">
-    <p class="eyebrow">Bellevue · Bel-Red Corridor</p>
-    <h1 class="text-5xl md:text-6xl font-semibold mt-4 leading-tight max-w-3xl mx-auto">
-      Gentle, Conservative Dentistry in Bellevue
-    </h1>
-    <p class="mt-6 text-lg text-slate max-w-xl mx-auto">
-      Comprehensive, tooth-preserving care from a team that has looked after Eastside
-      families for generations. No pressure. No unnecessary treatment.
-    </p>
-    <div class="mt-8 flex gap-4 justify-center flex-wrap">
-      <Button href="tel:+14258833040" variant="primary">Call (425) 883-3040</Button>
-      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+  <!-- Services snapshot -->
+  <section class="container-page section">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Comprehensive In-House Care</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">Everything your family needs, under one roof</h2>
     </div>
-    <p class="mt-16 text-xs text-slate">Phase 2 — design system. See <a href="/styleguide" class="underline">/styleguide</a>.</p>
-  </main>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {serviceCategories.map((s) => (
+        <a href={s.href} class="card block">
+          <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
+          <h3 class="text-xl font-semibold">{s.title}</h3>
+          <p class="mt-2 text-slate text-sm">Learn more about our approach to {s.title.toLowerCase()}.</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="bg-cream section">
+    <div class="container-page">
+      <div class="text-center mb-10">
+        <p class="eyebrow">Multi-Decade Patient Loyalty</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
+      </div>
+      <ReviewCarousel client:visible reviews={sampleReviews} />
+    </div>
+  </section>
 </BaseLayout>
