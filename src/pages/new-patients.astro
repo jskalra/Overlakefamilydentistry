@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="New Patients | Overlake Family Dentistry, Bellevue"
+  description="What to expect on your first visit, downloadable new-patient forms, insurance and financing at Overlake Family Dentistry in Bellevue, WA."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Welcome</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">New Patients</h1>
+      <p class="mt-5 text-lg text-slate">
+        A calm, thorough first visit — with plenty of time to ask questions and no pressure.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page section max-w-3xl mx-auto grid md:grid-cols-2 gap-6">
+    <div class="card">
+      <h2 class="text-xl font-semibold">Your first visit</h2>
+      <p class="mt-2 text-slate text-sm">A comprehensive exam, gentle cleaning, and an honest conversation about any concerns. We take the time to know you.</p>
+    </div>
+    <div class="card">
+      <h2 class="text-xl font-semibold">New-patient forms</h2>
+      <p class="mt-2 text-slate text-sm">Downloadable intake forms — please bring them completed to your first appointment. <em>(PDFs coming soon.)</em></p>
+    </div>
+    <div class="card">
+      <h2 class="text-xl font-semibold">Insurance</h2>
+      <p class="mt-2 text-slate text-sm">We accept most major PPO plans and file directly. Call us for details about your specific plan.</p>
+    </div>
+    <div class="card">
+      <h2 class="text-xl font-semibold">Financing</h2>
+      <p class="mt-2 text-slate text-sm">We offer flexible payment options and third-party financing so quality care fits your budget.</p>
+    </div>
+  </section>
+
+  <section class="bg-cream section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Ready to schedule your first visit?</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>

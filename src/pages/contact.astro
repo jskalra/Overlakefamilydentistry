@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+const { address, hours } = site;
+---
+<BaseLayout
+  title="Contact & Hours | Overlake Family Dentistry, Bellevue"
+  description="Visit Overlake Family Dentistry at 14655 NE Bel-Red Rd., Bellevue, WA. Free parking, easy access. Call (425) 883-3040 to schedule."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Bel-Red Corridor · Free Parking</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Contact & Hours</h1>
+    </div>
+  </section>
+
+  <section class="container-page section grid md:grid-cols-2 gap-10">
+    <div class="space-y-6">
+      <div class="card">
+        <h2 class="text-xl font-semibold">Visit us</h2>
+        <address class="not-italic mt-2 text-slate text-sm space-y-1">
+          <div>{address.street}</div>
+          <div>{address.city}, {address.state} {address.zip}</div>
+        </address>
+        <div class="mt-4 flex gap-3 flex-wrap">
+          <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+          <Button href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address.street + " " + address.city + " " + address.state)}`} variant="secondary">Directions</Button>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="text-xl font-semibold">Office hours</h2>
+        <ul class="mt-2 text-sm text-slate space-y-1">
+          {hours.map((h) => (
+            <li class="flex justify-between border-b border-navy/5 py-1">
+              <span class="text-navy font-medium">{h.day}</span>
+              <span>{h.close ? `${h.open}–${h.close}` : h.open}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <form class="card space-y-4" method="post" action="/api/contact">
+      <h2 class="text-xl font-semibold">Send us a message</h2>
+      <p class="text-xs text-slate">Please do not include personal health information — call for anything medical.</p>
+      <input type="text" name="_hp" tabindex="-1" autocomplete="off" class="hidden" />
+      <label class="block text-sm">Name <input required name="name" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
+      <label class="block text-sm">Email <input required type="email" name="email" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
+      <label class="block text-sm">Phone <input name="phone" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
+      <label class="block text-sm">Message <textarea required name="message" rows="4" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea></label>
+      <button type="submit" class="btn btn-primary w-full">Send</button>
+      <p class="text-xs text-slate">Form wiring in Phase 7. Please call for urgent scheduling.</p>
+    </form>
+  </section>
+</BaseLayout>

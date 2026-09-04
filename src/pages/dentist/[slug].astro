@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("locations");
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<BaseLayout title={d.title} description={d.metaDescription}>
+  <section class="bg-cream-soft">
+    <div class="container-page section">
+      <p class="eyebrow">Serving {d.suburb}, WA</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">{d.heading}</h1>
+      <p class="mt-5 text-lg text-slate max-w-2xl">{d.summary}</p>
+      <div class="mt-8 flex gap-4 flex-wrap">
+        <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+        <Button href="/contact" variant="secondary">Request an Appointment</Button>
+      </div>
+    </div>
+  </section>
+  <section class="container-page section">
+    <div class="prose prose-lg max-w-2xl text-navy/80"><Content /></div>
+    <div class="card mt-8 max-w-2xl">
+      <h2 class="text-xl font-semibold">Getting here from {d.suburb}</h2>
+      <p class="mt-2 text-slate text-sm">{d.directions}</p>
+      <p class="mt-3 text-sm">{site.address.street}, {site.address.city}, {site.address.state} {site.address.zip}</p>
+    </div>
+  </section>
+</BaseLayout>

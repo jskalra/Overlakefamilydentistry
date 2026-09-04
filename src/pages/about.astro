@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="About Overlake Family Dentistry | Conservative Care in Bellevue"
+  description="A trusted Bellevue dental home for 25+ years — conservative, tooth-preserving care from a team that has looked after Eastside families for generations."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Our Story</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Caring for Eastside families for 25+ years</h1>
+      <p class="mt-5 text-lg text-slate">
+        Overlake Family Dentistry continues the legacy of Dr. Brian Brooks — decades of
+        honest, gentle, tooth-preserving care in Bellevue's Bel-Red corridor.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page section max-w-3xl mx-auto space-y-6 text-navy/80 leading-relaxed">
+    <p>
+      For over 30 years, Dr. Brooks has built a practice on a simple idea: recommend only
+      what a patient actually needs, treat conservatively, and treat gently. That philosophy
+      lives on at Overlake Family Dentistry.
+    </p>
+    <p>
+      We're a comprehensive family practice — general, cosmetic, restorative, orthodontic,
+      pediatric, and periodontal care under one roof — with a team many of our patients
+      have known for a decade or more.
+    </p>
+    <p>
+      Whether you're a returning patient or new to the Eastside, we'd love to earn a place
+      in your family's care for the next generation.
+    </p>
+  </section>
+
+  <section class="bg-cream section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Come see the difference</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href="/doctors" variant="secondary">Meet the Doctors</Button>
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+    </div>
+  </section>
+</BaseLayout>

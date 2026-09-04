@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
+    "linkinator": "^8.1.0",
     "typescript": "^6.0.3"
   }
 }

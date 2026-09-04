@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="Meet Our Team | Overlake Family Dentistry, Bellevue"
+  description="Meet the long-tenured, friendly team behind Overlake Family Dentistry — familiar faces caring for Eastside families for years."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Familiar Faces, Deep Experience</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Meet Our Team</h1>
+      <p class="mt-5 text-lg text-slate">
+        Low turnover, long tenure, and genuinely kind chairside manner — the team many of
+        our patients have known for a decade or more.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-page section">
+    <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[16/9] flex items-center justify-center text-slate max-w-4xl mx-auto">
+      <span class="text-sm">Team photo</span>
+    </div>
+    <p class="mt-6 text-center text-slate text-sm">Individual team bios coming soon.</p>
+  </section>
+
+  <section class="bg-cream section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Ready to meet us in person?</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>

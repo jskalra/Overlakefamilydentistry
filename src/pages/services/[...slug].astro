@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("services");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry, all: entries },
+  }));
+}
+
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const children = all
+  .filter((e) => e.data.categorySlug === d.categorySlug && !e.data.isCategory)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title={d.title} description={d.metaDescription}>
+  <section class="bg-cream-soft">
+    <div class="container-page section">
+      <nav class="text-sm text-slate mb-4">
+        <a href="/services" class="hover:text-navy">Services</a>
+        {!d.isCategory && <span> / <a href={`/services/${d.categorySlug}`} class="hover:text-navy">{d.category}</a></span>}
+      </nav>
+      <p class="eyebrow">{d.category}</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">{d.heading}</h1>
+      <p class="mt-5 text-lg text-slate max-w-2xl">{d.summary}</p>
+    </div>
+  </section>
+
+  <section class="container-page section">
+    <div class="prose prose-lg max-w-2xl text-navy/80">
+      <Content />
+    </div>
+
+    {d.isCategory && children.length > 0 && (
+      <div class="mt-10 grid sm:grid-cols-2 gap-6">
+        {children.map((c) => (
+          <a href={`/services/${c.id}`} class="card block">
+            <h3 class="text-xl font-semibold">{c.data.heading}</h3>
+            <p class="mt-2 text-slate text-sm">{c.data.summary}</p>
+          </a>
+        ))}
+      </div>
+    )}
+
+    {!d.isCategory && d.faq.length > 0 && (
+      <div class="mt-12 max-w-2xl">
+        <h2 class="text-2xl font-semibold mb-4">Frequently asked questions</h2>
+        <dl class="space-y-4">
+          {d.faq.map((f) => (
+            <div class="card">
+              <dt class="font-semibold text-navy">{f.q}</dt>
+              <dd class="mt-2 text-slate text-sm">{f.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    )}
+  </section>
+
+  <section class="bg-cream section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Questions about {d.heading.toLowerCase()}?</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>

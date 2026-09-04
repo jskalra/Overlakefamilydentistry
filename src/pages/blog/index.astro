@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const posts = (await getCollection("blog")).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+<BaseLayout
+  title="Dental Health Blog | Overlake Family Dentistry, Bellevue"
+  description="Tips, guides, and honest advice on conservative dental care from the team at Overlake Family Dentistry in Bellevue, WA."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">From Our Team</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Dental Health Blog</h1>
+    </div>
+  </section>
+  <section class="container-page section">
+    <div class="grid md:grid-cols-3 gap-6">
+      {posts.map((p) => (
+        <a href={`/blog/${p.id}`} class="card block">
+          <time class="text-xs text-slate">{p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+          <h2 class="text-xl font-semibold mt-2">{p.data.heading}</h2>
+          <p class="mt-2 text-slate text-sm">{p.data.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

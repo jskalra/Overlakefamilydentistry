@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ReviewCarousel from "../components/ReviewCarousel.tsx";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+
+const reviews = [
+  { name: "Karen M.", years: "22 years", text: "Three generations of our family see this team. They never push treatment we don't need — that trust is why we've stayed for decades." },
+  { name: "David L.", years: "15 years", text: "Gentle, honest, and thorough. They saved a tooth another office wanted to pull. Conservative care is real here." },
+  { name: "Priya S.", years: "8 years", text: "Moved to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
+  { name: "Rebecca T.", years: "30 years", text: "I've been going here since college. Dr. Brooks and the team have taken care of my whole family for three decades." },
+];
+---
+<BaseLayout
+  title="Patient Reviews | Overlake Family Dentistry, Bellevue"
+  description="Read what long-time Eastside families say about Overlake Family Dentistry — decades of trust, gentle care, and honest advice."
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">In Their Own Words</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Patient Reviews</h1>
+    </div>
+  </section>
+
+  <section class="container-page section">
+    <ReviewCarousel client:visible reviews={reviews} />
+    <p class="text-center mt-10 text-sm text-slate">Live Google reviews integration coming in Phase 7.</p>
+  </section>
+
+  <section class="bg-cream section text-center">
+    <h2 class="text-2xl md:text-3xl font-semibold">Come see for yourself</h2>
+    <div class="mt-6 flex gap-4 justify-center flex-wrap">
+      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      <Button href="/contact" variant="secondary">Request an Appointment</Button>
+    </div>
+  </section>
+</BaseLayout>
