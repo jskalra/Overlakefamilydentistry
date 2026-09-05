@@ -4,6 +4,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
 import { site } from "../../data/site";
+import { faqSchema, breadcrumbSchema } from "../../lib/schema";
 
 // Map service-detail slug -> optimized image (filename matches the leaf slug)
 const serviceImages = import.meta.glob<{ default: ImageMetadata }>(
@@ -29,9 +30,15 @@ const children = all
 const leaf = entry.id.split("/").pop();
 const imgMod = serviceImages[`../../assets/services/${leaf}.jpg`];
 const image = imgMod?.default;
+
+const crumbs = [{ name: "Services", url: "/services" }];
+if (!d.isCategory) crumbs.push({ name: d.category, url: `/services/${d.categorySlug}` });
+crumbs.push({ name: d.heading, url: `/services/${entry.id}` });
+
+const pageSchema = [breadcrumbSchema(crumbs), faqSchema(d.faq)].filter(Boolean) as object[];
 ---
 
-<BaseLayout title={d.title} description={d.metaDescription}>
+<BaseLayout title={d.title} description={d.metaDescription} jsonLd={pageSchema}>
   <section class="bg-cream-soft">
     <div class="container-page section">
       <nav class="text-sm text-slate mb-4">

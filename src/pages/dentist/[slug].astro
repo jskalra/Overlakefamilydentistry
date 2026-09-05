@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
 import { site } from "../../data/site";
+import { faqSchema } from "../../lib/schema";
 
 export async function getStaticPaths() {
   const entries = await getCollection("locations");
@@ -12,8 +13,9 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
+const pageSchema = [faqSchema(d.faq)].filter(Boolean) as object[];
 ---
-<BaseLayout title={d.title} description={d.metaDescription}>
+<BaseLayout title={d.title} description={d.metaDescription} jsonLd={pageSchema}>
   <section class="bg-cream-soft">
     <div class="container-page section">
       <p class="eyebrow">Serving {d.suburb}, WA</p>
