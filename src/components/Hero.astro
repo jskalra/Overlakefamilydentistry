@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { site } from "../data/site";
 import Button from "./Button.astro";
+import teamPhoto from "../assets/team.jpg";
 interface Props {
   eyebrow?: string;
   title?: string;
@@ -45,9 +47,8 @@ const areas = [
         <span>Free building parking</span>
       </div>
     </div>
-    <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[4/3] flex items-center justify-center text-slate">
-      <!-- Placeholder for hero team photo -->
-      <span class="text-sm">Team photo</span>
+    <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+      <Image src={teamPhoto} alt="The Overlake Family Dentistry team in Bellevue" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
     </div>
   </div>
 </section>

@@ -1,8 +1,15 @@
 ---
+import { Image } from "astro:assets";
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
 import { site } from "../../data/site";
+
+// Map service-detail slug -> optimized image (filename matches the leaf slug)
+const serviceImages = import.meta.glob<{ default: ImageMetadata }>(
+  "../../assets/services/*.jpg",
+  { eager: true },
+);
 
 export async function getStaticPaths() {
   const entries = await getCollection("services");
@@ -18,6 +25,10 @@ const d = entry.data;
 const children = all
   .filter((e) => e.data.categorySlug === d.categorySlug && !e.data.isCategory)
   .sort((a, b) => a.data.order - b.data.order);
+
+const leaf = entry.id.split("/").pop();
+const imgMod = serviceImages[`../../assets/services/${leaf}.jpg`];
+const image = imgMod?.default;
 ---
 
 <BaseLayout title={d.title} description={d.metaDescription}>
@@ -34,6 +45,11 @@ const children = all
   </section>
 
   <section class="container-page section">
+    {image && !d.isCategory && (
+      <div class="rounded-3xl overflow-hidden mb-10 max-w-3xl aspect-[16/9]">
+        <Image src={image} alt={d.heading} class="w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 700px" />
+      </div>
+    )}
     <div class="prose prose-lg max-w-2xl text-navy/80">
       <Content />
     </div>

@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import { site } from "../data/site";
+import teamPhoto from "../assets/team.jpg";
 ---
 <BaseLayout
   title="Meet Our Team | Overlake Family Dentistry, Bellevue"
@@ -19,8 +21,8 @@ import { site } from "../data/site";
   </section>
 
   <section class="container-page section">
-    <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[16/9] flex items-center justify-center text-slate max-w-4xl mx-auto">
-      <span class="text-sm">Team photo</span>
+    <div class="rounded-3xl overflow-hidden max-w-4xl mx-auto">
+      <Image src={teamPhoto} alt="The Overlake Family Dentistry team in Bellevue" class="w-full object-cover" widths={[600, 1000, 1600]} sizes="(max-width: 1024px) 100vw, 900px" />
     </div>
     <p class="mt-6 text-center text-slate text-sm">Individual team bios coming soon.</p>
   </section>

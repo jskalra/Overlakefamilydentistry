@@ -1,7 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import { site } from "../data/site";
+import familyPhoto from "../assets/family.jpg";
 ---
 <BaseLayout
   title="About Overlake Family Dentistry | Conservative Care in Bellevue"
@@ -17,6 +19,12 @@ import { site } from "../data/site";
       </p>
     </div>
   </section>
+
+  <div class="container-page mt-12">
+    <div class="rounded-3xl overflow-hidden max-w-4xl mx-auto aspect-[3/2]">
+      <Image src={familyPhoto} alt="A happy family enjoying time together" class="w-full h-full object-cover" widths={[600, 1000]} sizes="(max-width: 1024px) 100vw, 900px" />
+    </div>
+  </div>
 
   <section class="container-page section max-w-3xl mx-auto space-y-6 text-navy/80 leading-relaxed">
     <p>
