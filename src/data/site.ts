@@ -41,10 +41,11 @@ export const doctors = [
   {
     name: "Dr. Ravneet Kaur Kalra",
     credential: "DDS",
+    credentialLine: "Columbia University College of Dental Medicine",
     imageKey: "kalra",
     bio: [
       "Dr. Kaur brings exceptional clinical skill and a deep commitment to conservative, honest dental care. She has a wealth of experience with modern, comfortable dental technology — and, just as importantly, a kind and compassionate manner with every patient.",
-      "Dr. Kaur completed her postgraduate training in orthodontics in India before moving to the United States in 2014, where she earned her Doctor of Dental Surgery (DDS) from Columbia University College of Dental Medicine in New York. She relocated to the Pacific Northwest in 2020 and has been an active, valued member of the local dental community ever since.",
+      "She first completed postgraduate training in orthodontics in India, then earned her Doctor of Dental Surgery (DDS) at Columbia University College of Dental Medicine in New York after moving to the United States in 2014. Since relocating to the Pacific Northwest in 2020, she has been an active, valued member of the local dental community.",
       "She is passionate about care that is both honest and minimally invasive — preserving natural tooth structure whenever possible. Outside the office, she enjoys traveling, reading, and spending time with her family and her twelve-year-old son.",
     ],
     memberships: [],
@@ -52,6 +53,7 @@ export const doctors = [
   {
     name: "Dr. Brian Brooks",
     credential: "DDS",
+    credentialLine: "University of Washington School of Dentistry",
     imageKey: "brooks",
     bio: [
       "Dr. Brooks has served the Bellevue–Redmond area for over 30 years, building a large and loyal patient following through honest treatment assessments, high-quality care, and a gentle, compassionate approach. He strongly believes that healthy, functional teeth and gums can add years to your life — and make those years pain-free, with a smile worth sharing.",

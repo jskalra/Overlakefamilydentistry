@@ -32,6 +32,7 @@ const photos: Record<string, ImageMetadata> = { kalra: drKalra, brooks: drBrooks
         </div>
         <div class="md:col-span-2">
           <h2 class="text-3xl font-semibold">{doc.name}, {doc.credential}</h2>
+          <p class="mt-1 text-sage font-medium text-sm">{doc.credentialLine}</p>
           <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
             {doc.bio.map((p) => <p>{p}</p>)}
           </div>
