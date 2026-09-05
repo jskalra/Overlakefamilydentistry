@@ -3,7 +3,7 @@ import { useState } from "react";
 // Submits via Web3Forms (static-friendly, no backend). Set PUBLIC_WEB3FORMS_KEY to enable.
 // No PHI is collected (see disclaimer) so no BAA is required for this form.
 const ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined;
-const CONTACT_EMAIL = "info@overlakefamilydentistry.com";
+const CONTACT_EMAIL = "info@drbrianbrooks.com";
 
 type Status = "idle" | "sending" | "success" | "error";
 
