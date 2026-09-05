@@ -45,7 +45,7 @@ export const doctors = [
     credentialLine: "Columbia University College of Dental Medicine",
     imageKey: "kalra",
     bio: [
-      "Dr. Kaur brings exceptional clinical skill and a deep commitment to conservative, honest dental care. She has a wealth of experience with modern, comfortable dental technology — and, just as importantly, a kind and compassionate manner with every patient.",
+      "Dr. Brooks selected Dr. Kaur because of her exceptional clinical skill and her commitment to conservative, honest dental care. She brings a wealth of experience in modern, comfortable dental technology. More importantly, she is a kind and compassionate person.",
       "She first completed postgraduate training in orthodontics in India, then earned her Doctor of Dental Surgery (DDS) at Columbia University College of Dental Medicine in New York after moving to the United States in 2014. Since relocating to the Pacific Northwest in 2020, she has been an active, valued member of the local dental community.",
       "She is passionate about care that is both honest and minimally invasive — preserving natural tooth structure whenever possible. Outside the office, she enjoys traveling, reading, and spending time with her family and her twelve-year-old son.",
     ],
