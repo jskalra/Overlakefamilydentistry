@@ -15,7 +15,7 @@ export default function ReviewCarousel({ reviews }: { reviews: Review[] }) {
   return (
     <div className="max-w-2xl mx-auto text-center">
       <div className="text-sage text-2xl">★★★★★</div>
-      <blockquote className="mt-4 text-xl md:text-2xl font-heading text-navy leading-relaxed">
+      <blockquote className="mt-4 text-base md:text-lg font-heading text-navy leading-relaxed">
         “{r.text}”
       </blockquote>
       <div className="mt-4 text-slate text-sm">
