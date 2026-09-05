@@ -19,11 +19,11 @@ export interface Review {
   years?: string;
 }
 
-export const isPlaceholder = true; // set to false once real reviews are in
+export const isPlaceholder = false; // set to false once real reviews are in
 
 export const reviews: Review[] = [
-  { name: "Illustrative example", years: "sample", text: "Three generations of our family see this team. They never push treatment we don't need — that trust is why we've stayed for years." },
-  { name: "Illustrative example", years: "sample", text: "Gentle, honest, and thorough. They took a conservative approach when another office pushed bigger treatment." },
-  { name: "Illustrative example", years: "sample", text: "New to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
-  { name: "Illustrative example", years: "sample", text: "The team has cared for our whole family for years. Honest advice every time." },
+  { name: "Elizabeth Kronoff", text: "Our family has been going to Dr. Brooks for over 10 years. The reception is always friendly, the hygienists always gentle and informative, the exams always thorough. As Dr. Kaur is stepping in, she has taken the time to get to know our family, remembering our histories and concerns, and offering extra support asking after my daughter while she's away at college. I have recommended this office to several colleagues and will continue to do so." },
+  { name: "Marilee Hakkinen", text: "As a first time patient to see Dr. Kaur we were impressed with how thorough she was in dealing with Dave's dental and medical history and concerns. Dr. Kaur was committed to talking with his medical doctors to make sure her dental treatment plan would not conflict with any medical treatments. We loved being greeted by Kris at the front desk, who helped put us at ease, and meeting Kristie and Marta, who were also very professional and caring. We look forward to future appointments knowing the care we will receive." },
+  { name: "Darrel Spaytho", text: "I’m in my 60s and have been seeing Brian D. Brooks, DDS for about 20 years. I have found him to be the most competent and ethical dentist I’ve ever had. Update (June 10, 2026): I recently visited the office for a cleaning and examination and was seen by Dr. Kaur, who will be taking over the practice from Dr. Brooks. She was professional, thorough, and easy to talk with. Based on my experience, I am confident the practice will continue to provide the high standard of care that I have come to expect over the past 20+ years, and I look forward to having Dr. Kaur as my dentist moving forward." },
+  { name: "Chris Fellows", text: "Long time patient, always get the best care from super nice staff. We moved out of the area but still come back for all of our care. Couldn’t be happier." },
 ];
