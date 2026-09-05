@@ -3,14 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ReviewCarousel from "../components/ReviewCarousel.tsx";
 import Button from "../components/Button.astro";
 import { site } from "../data/site";
-
-// ⚠️ PLACEHOLDER / ILLUSTRATIVE ONLY — replace with real, permissioned Google reviews before launch.
-const reviews = [
-  { name: "Illustrative example", years: "sample", text: "Three generations of our family see this team. They never push treatment we don't need — that trust is why we've stayed for years." },
-  { name: "Illustrative example", years: "sample", text: "Gentle, honest, and thorough. They took a conservative approach when another office pushed bigger treatment." },
-  { name: "Illustrative example", years: "sample", text: "New to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
-  { name: "Illustrative example", years: "sample", text: "The team has cared for our whole family for years. Honest advice every time." },
-];
+import { reviews, isPlaceholder } from "../data/reviews";
 ---
 <BaseLayout
   title="Patient Reviews | Overlake Family Dentistry, Bellevue"
@@ -25,7 +18,11 @@ const reviews = [
 
   <section class="container-page section">
     <ReviewCarousel client:visible reviews={reviews} />
-    <p class="text-center mt-10 text-sm text-slate">Live Google reviews integration coming in Phase 7.</p>
+    <div class="text-center mt-10 flex flex-col items-center gap-3">
+      <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-primary">Read all reviews on Google</a>
+      <a href={site.googleProfile} target="_blank" rel="noopener" class="text-sm text-slate underline hover:text-navy">Leave us a review</a>
+      {isPlaceholder && <p class="text-xs text-slate">Illustrative examples — verified Google reviews will be added before launch.</p>}
+    </div>
   </section>
 
   <section class="bg-cream section text-center">

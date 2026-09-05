@@ -9,21 +9,14 @@ import officeLobby from "../assets/office-lobby.jpg";
 import officeRoom from "../assets/office-room.jpg";
 import drKalra from "../assets/dr-kalra.jpg";
 import drBrooks from "../assets/dr-brooks.webp";
-import { doctors } from "../data/site";
+import { doctors, site } from "../data/site";
+import { reviews, isPlaceholder } from "../data/reviews";
 
 const docPhotos: Record<string, any> = { kalra: drKalra, brooks: drBrooks };
 const docBlurbs: Record<string, string> = {
   kalra: "Conservative, minimally invasive care with a gentle touch.",
   brooks: "30+ years of honest, patient-first dentistry on the Eastside.",
 };
-
-// ⚠️ PLACEHOLDER / ILLUSTRATIVE ONLY — do NOT launch as real reviews.
-// Replace with real, permissioned Google reviews before go-live (FTC/LSA compliance).
-const sampleReviews = [
-  { name: "Illustrative example", years: "sample", text: "Three generations of our family see this team. They never push treatment we don't need — that trust is why we've stayed for years." },
-  { name: "Illustrative example", years: "sample", text: "Gentle, honest, and thorough. They took a conservative approach when another office pushed bigger treatment." },
-  { name: "Illustrative example", years: "sample", text: "New to Bellevue and found a dental home. The same friendly faces every visit — you feel remembered." },
-];
 ---
 
 <BaseLayout title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue">
@@ -122,8 +115,11 @@ const sampleReviews = [
         <p class="eyebrow">Multi-Decade Patient Loyalty</p>
         <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
       </div>
-      <ReviewCarousel client:visible reviews={sampleReviews} />
-      <p class="text-center mt-8 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>
+      <ReviewCarousel client:visible reviews={reviews} />
+      <div class="text-center mt-8">
+        <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Read our Google reviews</a>
+        {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
+      </div>
     </div>
   </section>
 </BaseLayout>

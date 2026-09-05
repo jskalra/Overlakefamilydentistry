@@ -24,6 +24,7 @@ export const site = {
     { day: "Sunday", open: "Closed", close: "" },
   ],
   domain: "https://overlakefamilydentistry.com",
+  googleProfile: "https://share.google/aJE7u7wdrqUzLuinB",
 } as const;
 
 export const nav = [
