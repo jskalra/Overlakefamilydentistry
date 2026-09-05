@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/meet-our-provider", "destination": "/doctors", "permanent": true },
+    { "source": "/meet-our-team", "destination": "/team", "permanent": true },
+    { "source": "/your-first-visit", "destination": "/new-patients", "permanent": true },
+    { "source": "/financial-information", "destination": "/new-patients", "permanent": true },
+    { "source": "/online-forms", "destination": "/new-patients", "permanent": true },
+    { "source": "/appointments", "destination": "/contact", "permanent": true },
+    { "source": "/general-dentistry", "destination": "/services/general-dentistry", "permanent": true },
+    { "source": "/cosmetic-dentistry", "destination": "/services/cosmetic-dentistry", "permanent": true },
+    { "source": "/restorative-dentistry", "destination": "/services/restorative-dentistry", "permanent": true },
+    { "source": "/periodontal-services", "destination": "/services/periodontal-services", "permanent": true },
+    { "source": "/pediatric-dentistry", "destination": "/services/pediatric-dentistry", "permanent": true },
+    { "source": "/orthodontic-services", "destination": "/services/orthodontic-services", "permanent": true }
+  ]
+}
