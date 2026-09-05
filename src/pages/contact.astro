@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
+import ContactForm from "../components/ContactForm.tsx";
 import { site } from "../data/site";
 const { address, hours } = site;
 ---
@@ -41,16 +42,6 @@ const { address, hours } = site;
       </div>
     </div>
 
-    <form class="card space-y-4" method="post" action="/api/contact">
-      <h2 class="text-xl font-semibold">Send us a message</h2>
-      <p class="text-xs text-slate">Please do not include personal health information — call for anything medical.</p>
-      <input type="text" name="_hp" tabindex="-1" autocomplete="off" class="hidden" />
-      <label class="block text-sm">Name <input required name="name" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
-      <label class="block text-sm">Email <input required type="email" name="email" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
-      <label class="block text-sm">Phone <input name="phone" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" /></label>
-      <label class="block text-sm">Message <textarea required name="message" rows="4" class="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea></label>
-      <button type="submit" class="btn btn-primary w-full">Send</button>
-      <p class="text-xs text-slate">Form wiring in Phase 7. Please call for urgent scheduling.</p>
-    </form>
+    <ContactForm client:load />
   </section>
 </BaseLayout>
