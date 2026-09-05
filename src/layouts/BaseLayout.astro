@@ -44,7 +44,7 @@ const graphs = [localBusinessSchema, ...jsonLd];
     <meta name="twitter:description" content={description} />
 
     {graphs.map((g) => (
-      <script type="application/ld+json" set:html={JSON.stringify(g)} />
+      <script type="application/ld+json" is:inline set:html={JSON.stringify(g)} />
     ))}
   </head>
   <body class="antialiased">
