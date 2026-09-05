@@ -1,8 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ReviewCarousel from "../components/ReviewCarousel.tsx";
-import { serviceCategories } from "../data/site";
+import Button from "../components/Button.astro";
+import { serviceCategories, site } from "../data/site";
+import officeLobby from "../assets/office-lobby.jpg";
+import officeRoom from "../assets/office-room.jpg";
 
 // ⚠️ PLACEHOLDER / ILLUSTRATIVE ONLY — do NOT launch as real reviews.
 // Replace with real, permissioned Google reviews before go-live (FTC/LSA compliance).
@@ -30,6 +34,40 @@ const sampleReviews = [
           <p class="mt-2 text-slate text-sm">Learn more about our approach to {s.title.toLowerCase()}.</p>
         </a>
       ))}
+    </div>
+  </section>
+
+  <!-- Conservative care band with photo -->
+  <section class="bg-cream-soft">
+    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+      <div class="rounded-3xl overflow-hidden aspect-[4/3] order-2 md:order-1">
+        <Image src={officeRoom} alt="A treatment room at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="eyebrow">Conservative, Tooth-Preserving Care</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">We treat only what needs treating</h2>
+        <p class="mt-5 text-slate text-lg">
+          We reach for the least invasive option first — preserving your natural teeth
+          whenever possible, and giving you honest second opinions without pressure.
+        </p>
+        <div class="mt-6"><Button href="/about" variant="secondary">Our Philosophy</Button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Welcome / office -->
+  <section class="container-page section grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      <p class="eyebrow">Welcome to Our Office</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
+      <p class="mt-5 text-slate text-lg">
+        Bright, comfortable, and easy to reach — with free dedicated building parking right
+        outside. Come see why Eastside families have felt at home here for years.
+      </p>
+      <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
+    </div>
+    <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+      <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
     </div>
   </section>
 
