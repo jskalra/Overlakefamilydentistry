@@ -1,12 +1,17 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import { doctors, site } from "../data/site";
+import drKalra from "../assets/dr-kalra.jpg";
+import drBrooks from "../assets/dr-brooks.webp";
+
+const photos: Record<string, ImageMetadata> = { kalra: drKalra, brooks: drBrooks };
 ---
 
 <BaseLayout
   title="Meet the Doctors — Overlake Family Dentistry | Bellevue, WA"
-  description="Meet Dr. Brian Brooks and Dr. Ravneet Kaur Kalra — over 30 years of conservative, honest, gentle dental care in Bellevue's Bel-Red corridor."
+  description="Meet Dr. Ravneet Kaur Kalra and Dr. Brian Brooks — over 30 years of conservative, honest, gentle dental care in Bellevue's Bel-Red corridor."
 >
   <section class="container-page section text-center max-w-2xl mx-auto">
     <p class="eyebrow">Experienced, Long-Tenured Team</p>
@@ -21,8 +26,8 @@ import { doctors, site } from "../data/site";
     <section class={idx % 2 === 1 ? "bg-cream" : ""}>
       <div class="container-page section grid md:grid-cols-3 gap-10 items-start">
         <div class="md:col-span-1">
-          <div class="rounded-3xl overflow-hidden bg-slate-light/30 aspect-[3/4] flex items-center justify-center text-slate">
-            <span class="text-sm">Photo — {doc.name}</span>
+          <div class="rounded-3xl overflow-hidden aspect-[3/4]">
+            <Image src={photos[doc.imageKey]} alt={`${doc.name}, ${doc.credential}`} class="w-full h-full object-cover" widths={[300, 600]} sizes="(max-width: 768px) 100vw, 33vw" />
           </div>
         </div>
         <div class="md:col-span-2">

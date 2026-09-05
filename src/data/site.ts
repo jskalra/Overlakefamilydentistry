@@ -39,9 +39,20 @@ export const nav = [
 
 export const doctors = [
   {
+    name: "Dr. Ravneet Kaur Kalra",
+    credential: "DDS",
+    imageKey: "kalra",
+    bio: [
+      "Dr. Kaur brings exceptional clinical skill and a deep commitment to conservative, honest dental care. She has a wealth of experience with modern, comfortable dental technology — and, just as importantly, a kind and compassionate manner with every patient.",
+      "Dr. Kaur completed her postgraduate training in orthodontics in India before moving to the United States in 2014, where she earned her Doctor of Dental Surgery (DDS) from Columbia University College of Dental Medicine in New York. She relocated to the Pacific Northwest in 2020 and has been an active, valued member of the local dental community ever since.",
+      "She is passionate about care that is both honest and minimally invasive — preserving natural tooth structure whenever possible. Outside the office, she enjoys traveling, reading, and spending time with her family and her twelve-year-old son.",
+    ],
+    memberships: [],
+  },
+  {
     name: "Dr. Brian Brooks",
     credential: "DDS",
-    photo: "", // TODO: add headshot to /public
+    imageKey: "brooks",
     bio: [
       "Dr. Brooks has served the Bellevue–Redmond area for over 30 years, building a large and loyal patient following through honest treatment assessments, high-quality care, and a gentle, compassionate approach. He strongly believes that healthy, functional teeth and gums can add years to your life — and make those years pain-free, with a smile worth sharing.",
       "Dr. Brooks grew up in Ellensburg, Washington, where his father served as President of Central Washington University for many years. He earned his undergraduate degree from the University of Washington and went on to receive his DDS from the prestigious University of Washington School of Dentistry in 1986. After three years practicing in Tucson, Arizona, he returned to the Pacific Northwest to begin private practice.",
@@ -53,17 +64,6 @@ export const doctors = [
       "Washington State Dental Association",
       "Seattle/King County Dental Association",
     ],
-  },
-  {
-    name: "Dr. Ravneet Kaur Kalra",
-    credential: "DDS",
-    photo: "",
-    bio: [
-      "Dr. Brooks selected Dr. Kaur for her exceptional clinical skill and her deep commitment to conservative, honest dental care. She brings a wealth of experience in modern, comfortable dental technology — and, just as importantly, a kind and compassionate manner with every patient.",
-      "Dr. Kaur completed her postgraduate training in orthodontics in India before moving to the United States in 2014, where she earned her Doctor of Dental Surgery (DDS) from Columbia University College of Dental Medicine in New York. She relocated to the Pacific Northwest in 2020 and has been an active, valued member of the local dental community ever since.",
-      "She is passionate about care that is both honest and minimally invasive — preserving natural tooth structure whenever possible. Outside the office, she enjoys traveling, reading, and spending time with her family and her twelve-year-old son.",
-    ],
-    memberships: [],
   },
 ] as const;
 
