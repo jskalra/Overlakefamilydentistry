@@ -12,10 +12,11 @@
   /* Brand colors */
   --color-navy: #1f3a54;      /* primary — headings, nav */
   --color-navy-dark: #172c40;
-  --color-slate: #5e86a0;     /* secondary (mysmile teal role) */
+  --color-slate: #457089;     /* secondary (mysmile teal role); darkened to meet WCAG AA on white AND cream */
   --color-slate-light: #8aa9be;
-  --color-sage: #7fa989;      /* accent — from the leaf */
+  --color-sage: #7fa989;       /* accent — from the leaf (use on dark/cream backgrounds) */
   --color-sage-light: #a7c4ae;
+  --color-sage-dark: #3f6a4f;  /* WCAG AA on white AND cream (≥4.5:1) — use for sage text */
   --color-cream: #f7f2e7;     /* warm section band */
   --color-cream-soft: #fbf8f1;
 
@@ -54,7 +55,7 @@ h1, h2, h3, h4 {
     @apply bg-sage text-navy hover:bg-sage-light;
   }
   .eyebrow {
-    @apply text-sage font-semibold tracking-wide uppercase text-sm;
+    @apply text-sage-dark font-semibold tracking-wide uppercase text-sm;
   }
   .card {
     @apply rounded-2xl bg-white p-6 shadow-sm ring-1 ring-navy/5 transition-shadow hover:shadow-md;

@@ -83,7 +83,7 @@ const docBlurbs: Record<string, string> = {
               <Image src={docPhotos[doc.imageKey]} alt={`${doc.name}, ${doc.credential}`} class="w-full h-full object-cover transition-transform group-hover:scale-[1.02]" widths={[300, 600]} sizes="(max-width: 768px) 100vw, 320px" />
             </div>
             <h3 class="mt-4 text-xl font-semibold">{doc.name}, {doc.credential}</h3>
-            <p class="text-sage text-sm font-medium mt-0.5">{doc.credentialLine}</p>
+            <p class="text-sage-dark text-sm font-medium mt-0.5">{doc.credentialLine}</p>
             <p class="mt-2 text-slate text-sm">{docBlurbs[doc.imageKey]}</p>
           </a>
         ))}
