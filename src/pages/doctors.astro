@@ -5,8 +5,11 @@ import Button from "../components/Button.astro";
 import { doctors, site } from "../data/site";
 import drKalra from "../assets/dr-kalra.jpg";
 import drBrooks from "../assets/dr-brooks.webp";
+import columbiaLogo from "../assets/columbia-logo.png";
+import uwLogo from "../assets/uw-logo.png";
 
 const photos: Record<string, ImageMetadata> = { kalra: drKalra, brooks: drBrooks };
+const logos: Record<string, ImageMetadata> = { kalra: columbiaLogo, brooks: uwLogo };
 ---
 
 <BaseLayout
@@ -32,7 +35,10 @@ const photos: Record<string, ImageMetadata> = { kalra: drKalra, brooks: drBrooks
         </div>
         <div class="md:col-span-2">
           <h2 class="text-3xl font-semibold">{doc.name}, {doc.credential}</h2>
-          <p class="mt-1 text-sage font-medium text-sm">{doc.credentialLine}</p>
+          <div class="mt-2 flex items-center gap-3">
+            <Image src={logos[doc.imageKey]} alt={`${doc.credentialLine} logo`} class="h-10 w-auto" widths={[80, 160]} />
+            <p class="text-sage font-medium text-sm">{doc.credentialLine}</p>
+          </div>
           <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
             {doc.bio.map((p) => <p>{p}</p>)}
           </div>
