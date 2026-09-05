@@ -69,6 +69,13 @@ export const doctors = [
   },
 ] as const;
 
+export const serviceAreas = [
+  { label: "Bellevue", href: "/dentist/bellevue" },
+  { label: "Redmond", href: "/dentist/redmond" },
+  { label: "Kirkland", href: "/dentist/kirkland" },
+  { label: "Sammamish", href: "/dentist/sammamish" },
+] as const;
+
 export const serviceCategories = [
   { title: "General Dentistry", href: "/services/general-dentistry" },
   { title: "Cosmetic Dentistry", href: "/services/cosmetic-dentistry" },

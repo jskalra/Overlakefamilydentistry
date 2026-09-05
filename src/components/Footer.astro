@@ -1,5 +1,5 @@
 ---
-import { site, nav, serviceCategories } from "../data/site";
+import { site, nav, serviceCategories, serviceAreas } from "../data/site";
 const { address } = site;
 ---
 <footer class="bg-navy text-cream/90 mt-16">
@@ -32,6 +32,17 @@ const { address } = site;
         <div class="mt-2"><a href={site.phoneHref} class="hover:text-cream">{site.phone}</a></div>
         <div><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a></div>
       </address>
+    </div>
+  </div>
+
+  <div class="border-t border-cream/10">
+    <div class="container-page py-5 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm">
+      <span class="text-cream font-semibold uppercase tracking-wide text-xs">Areas We Serve</span>
+      <div class="flex flex-wrap gap-x-4 gap-y-1">
+        {serviceAreas.map((a) => (
+          <a href={a.href} class="text-cream/80 hover:text-cream">{a.label}</a>
+        ))}
+      </div>
     </div>
   </div>
 
