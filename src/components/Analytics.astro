@@ -9,7 +9,7 @@
 //
 // Fallback (legacy): if only PUBLIC_GA_ID ("G-XXXXXXXXXX") is set, load GA4
 // directly with the built-in conversion event tracking below.
-const gtmId = import.meta.env.PUBLIC_GTM_ID;
+const gtmId = import.meta.env.PUBLIC_GTM_ID || "GTM-M6XQFBJR";
 const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
 {gtmId && (
