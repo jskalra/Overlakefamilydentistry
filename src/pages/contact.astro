@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import ContactForm from "../components/ContactForm.tsx";
-import EmergencyBanner from "../components/EmergencyBanner.astro";
 import { site } from "../data/site";
 const { address, hours } = site;
 ---
@@ -17,10 +16,6 @@ const { address, hours } = site;
     </div>
   </section>
 
-  <section class="container-page pt-8">
-    <EmergencyBanner />
-  </section>
-
   <section class="container-page section grid md:grid-cols-2 gap-10">
     <div class="space-y-6">
       <div class="card">
@@ -32,6 +27,13 @@ const { address, hours } = site;
         <div class="mt-4 flex gap-3 flex-wrap">
           <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
           <Button href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(address.street + " " + address.city + " " + address.state)}`} variant="secondary">Directions</Button>
+        </div>
+      </div>
+      <div class="card ring-1 ring-sage/40">
+        <h2 class="text-xl font-semibold">⚠ Dental Emergency?</h2>
+        <p class="mt-2 text-slate text-sm">Can't reach the front desk? Call or text this line directly.</p>
+        <div class="mt-4">
+          <Button href={site.emergencyPhoneHref} variant="primary">Call/Text {site.emergencyPhone}</Button>
         </div>
       </div>
       <div class="card">
