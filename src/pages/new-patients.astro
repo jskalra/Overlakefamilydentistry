@@ -18,10 +18,6 @@ import { site } from "../data/site";
     </div>
   </section>
 
-  <section class="container-page pt-8 max-w-3xl mx-auto">
-    <EmergencyBanner />
-  </section>
-
   <section class="container-page section max-w-3xl mx-auto grid md:grid-cols-2 gap-6">
     <div class="card">
       <h2 class="text-xl font-semibold">Your first visit</h2>
@@ -47,5 +43,9 @@ import { site } from "../data/site";
       <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
       <Button href="/contact" variant="secondary">Request an Appointment</Button>
     </div>
+  </section>
+
+  <section class="container-page pb-16 max-w-3xl mx-auto">
+    <EmergencyBanner />
   </section>
 </BaseLayout>
