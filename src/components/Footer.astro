@@ -32,6 +32,11 @@ const { address } = site;
         <div class="mt-2"><a href={site.phoneHref} class="hover:text-cream">{site.phone}</a></div>
         <div><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a></div>
       </address>
+      <div class="mt-4 rounded-lg bg-sage/20 border border-sage/50 px-4 py-3">
+        <div class="text-sage font-semibold uppercase tracking-wide text-xs">⚠ Dental Emergency?</div>
+        <p class="text-cream/70 text-xs mt-1">Can't reach the front desk? Call or text:</p>
+        <a href={site.emergencyPhoneHref} class="mt-1 inline-block text-cream font-bold text-lg hover:text-sage">{site.emergencyPhone}</a>
+      </div>
       <a href={site.googleProfile} target="_blank" rel="noopener" class="mt-4 inline-flex items-center gap-2 text-cream/80 hover:text-cream text-sm">
         <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 10.2v3.9h5.5c-.24 1.4-1.7 4.1-5.5 4.1a6.2 6.2 0 0 1 0-12.4c1.9 0 3.2.8 3.9 1.5l2.7-2.6C17.1 2.6 14.8 1.6 12 1.6a10.4 10.4 0 0 0 0 20.8c6 0 10-4.2 10-10.1 0-.7-.1-1.2-.2-1.7z"/></svg>
         Review us on Google

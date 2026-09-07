@@ -7,6 +7,8 @@ export const site = {
     "Continuing 30+ Years of Conservative, Patient-First Care in Bellevue",
   phone: "(425) 883-3040",
   phoneHref: "tel:+14258833040",
+  emergencyPhone: "(571) 341-0957",
+  emergencyPhoneHref: "tel:+15713410957",
   email: "info@overlakefamilydentistry.com",
   address: {
     street: "14655 NE Bel-Red Rd., Bldg. F, Ste. 101",

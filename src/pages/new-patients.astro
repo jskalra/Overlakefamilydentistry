@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
+import EmergencyBanner from "../components/EmergencyBanner.astro";
 import { site } from "../data/site";
 ---
 <BaseLayout
@@ -15,6 +16,10 @@ import { site } from "../data/site";
         A calm, thorough first visit — with plenty of time to ask questions and no pressure.
       </p>
     </div>
+  </section>
+
+  <section class="container-page pt-8 max-w-3xl mx-auto">
+    <EmergencyBanner />
   </section>
 
   <section class="container-page section max-w-3xl mx-auto grid md:grid-cols-2 gap-6">
