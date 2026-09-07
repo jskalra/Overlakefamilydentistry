@@ -1,10 +1,70 @@
 ---
-// Consent-gated GA4 (MHMDA / privacy). Nothing loads until the user accepts
-// via the cookie banner, which dispatches a `consent-granted` event.
-// Set PUBLIC_GA_ID in the environment (e.g. "G-XXXXXXXXXX") to enable.
+// Consent-gated Google tags (MHMDA / privacy). NOTHING loads until the user
+// accepts via the cookie banner, which dispatches a `consent-granted` event.
+//
+// Preferred: set PUBLIC_GTM_ID ("GTM-XXXXXXX") — loads Google Tag Manager so
+// GA4, Google Ads conversion, remarketing, etc. are managed in the GTM UI
+// (no code deploy needed). Consent Mode v2 defaults to denied and flips to
+// granted on accept, so Google tags behave correctly once they fire.
+//
+// Fallback (legacy): if only PUBLIC_GA_ID ("G-XXXXXXXXXX") is set, load GA4
+// directly with the built-in conversion event tracking below.
+const gtmId = import.meta.env.PUBLIC_GTM_ID;
 const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
-{gaId && (
+{gtmId && (
+  <script is:inline define:vars={{ gtmId }}>
+    (function () {
+      const KEY = "ofd-consent";
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      window.gtag = window.gtag || gtag;
+
+      // Consent Mode v2 — everything denied by default (hard gate below also
+      // prevents GTM from loading at all until the user accepts).
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
+
+      // Bridge our built-in conversion signals into the dataLayer so GTM
+      // triggers can fire tags (GA4 events, Ads conversions) off them.
+      document.addEventListener("click", function (e) {
+        const a = e.target.closest("a, button");
+        if (!a) return;
+        const href = a.getAttribute("href") || "";
+        if (href.startsWith("tel:")) window.dataLayer.push({ event: "call_click", value: href });
+        else if (/maps|directions/i.test(href)) window.dataLayer.push({ event: "directions_click" });
+        else if (/contact|appointment|request/i.test((a.textContent || "").toLowerCase()))
+          window.dataLayer.push({ event: "appointment_cta_click" });
+      });
+      document.addEventListener("submit", function () {
+        window.dataLayer.push({ event: "contact_form_submit" });
+      });
+
+      function loadGTM() {
+        if (window.__gtmLoaded) return;
+        window.__gtmLoaded = true;
+        gtag("consent", "update", {
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+          analytics_storage: "granted",
+        });
+        window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+        const s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtm.js?id=" + gtmId;
+        document.head.appendChild(s);
+      }
+      if (localStorage.getItem(KEY) === "accepted") loadGTM();
+      window.addEventListener("consent-granted", loadGTM);
+    })();
+  </script>
+)}
+{!gtmId && gaId && (
   <script is:inline define:vars={{ gaId }}>
     (function () {
       const KEY = "ofd-consent";
