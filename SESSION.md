@@ -36,7 +36,15 @@ navy/slate/sage/cream tokens in `src/styles/global.css`).
 
 ## Env vars (set in Vercel → Settings → Environment Variables; see .env.example)
 - `PUBLIC_WEB3FORMS_KEY` — contact form (already hardcoded fallback `45cbc7e7-...`; form sends to info@drbrianbrooks.com)
-- `PUBLIC_GA_ID` — GA4 (consent-gated). **Not set yet** — add `G-XXXX` to enable analytics.
+- `PUBLIC_GTM_ID` — Google Tag Manager (consent-gated). **Live via hardcoded fallback `GTM-M6XQFBJR`** in `Analytics.astro` (no env var needed). Preferred over GA4-direct.
+- `PUBLIC_GA_ID` — GA4 direct (legacy fallback, only used if GTM id blank). Not set.
+
+## Analytics / Ads (Google) — setup state
+- **GTM container:** `GTM-M6XQFBJR` — loaded consent-gated (hard gate: nothing loads until cookie-banner Accept; Consent Mode v2 denied→granted). Owner Google acct: hiravneet@gmail.com.
+- **GA4 property (new site):** Measurement ID `G-4CNJER32XH`, stream "Overlake Family Dentistry" (fix typo "…dentisyry" in GA4 Admin → Data streams if not done). Legacy site has separate property `G-61CL1HFCYV` — do NOT mix; leave as historical archive.
+- **GTM tags (published v3):** `GA4 - Google Tag-New` (pageview, All Pages) · `GA4 Event - Contact Form` (event `contact_form_submit`, trigger `CE - contact_form_submit`) · `GA4 Event - Phone Click` (event `call_click`, trigger `CE - call_click`). Site pushes these + `appointment_cta_click`/`directions_click` to dataLayer (see `src/components/Analytics.astro`).
+- **Verified working:** call_click + contact_form_submit confirmed in GA4 Realtime (tested on mobile). Consent Accept required or nothing fires.
+- **⬜ NEXT (blocked on GA4's ~24h data lag):** In GA4 Admin → Events → Recent events, **star** `call_click` and `contact_form_submit` to mark as key events (this GA4 UI has no "create key event by name" option, so must wait for them to list). Then in Google Ads → conversion setup → "Select events" → pick both → create conversions → set **Contact Form Submit = Primary**, **Phone Click = Secondary**. (Decision: phone click is Secondary since a click ≠ answered call; consider Google Ads call reporting w/ forwarding number later for true call conversions.)
 
 ## Phase status (see SPEC.md §14 + phase gates in §11)
 - ✅ 1 Scaffold · 2 Design system · 3 Core components · 4 Page structure · 5 Content + review-doc · 7 SEO/schema · 8 QA
@@ -49,7 +57,7 @@ navy/slate/sage/cream tokens in `src/styles/global.css`).
 2. **Phase 6 clinical sign-off** — dentist reviews bios + all service/medical claims.
 3. **Google Search Console** — verify domain (TXT record already in Namecheap DNS), submit `https://overlakefamilydentistry.com/sitemap-index.xml`.
 4. **GBP rename** — USER will do this themselves (rename existing profile, do NOT create new — preserves reviews).
-5. **GA4** — set `PUBLIC_GA_ID` when ready.
+5. **Analytics/Ads** — GTM + GA4 live (see "Analytics / Ads" section above). Remaining: star the 2 key events in GA4 (24h lag), then finish Google Ads conversions.
 6. Optional: add exams-cleanings service image (only detail page without one); consider a UW wordmark to match Columbia logo style; real office/patient photography to replace stock service images.
 7. Manual pre-launch: real cross-browser + phone tap-through, screen-reader pass.
 
