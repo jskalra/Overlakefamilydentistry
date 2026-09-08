@@ -9,7 +9,7 @@ export const site = {
   phoneHref: "tel:+14258833040",
   emergencyPhone: "(571) 341-0957",
   emergencyPhoneHref: "tel:+15713410957",
-  email: "info@overlakefamilydentistry.com",
+  email: "info@drkaurdds.com",
   address: {
     street: "14655 NE Bel-Red Rd., Bldg. F, Ste. 101",
     city: "Bellevue",

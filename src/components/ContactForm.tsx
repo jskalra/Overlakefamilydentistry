@@ -4,7 +4,7 @@ import { useState } from "react";
 // No PHI is collected (see disclaimer) so no BAA is required for this form.
 // Public Web3Forms access key (safe to commit). Overridable via env.
 const ACCESS_KEY = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || "45cbc7e7-14f1-4411-aa78-55e8b24d2e36";
-const CONTACT_EMAIL = "info@drbrianbrooks.com";
+const CONTACT_EMAIL = "info@drkaurdds.com";
 
 type Status = "idle" | "sending" | "success" | "error";
 
