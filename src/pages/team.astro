@@ -4,6 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
 import { site } from "../data/site";
 import teamPhoto from "../assets/team.jpg";
+import office7 from "../assets/team/office-0007.jpg";
+import office8 from "../assets/team/office-0008.jpg";
+import office9 from "../assets/team/office-0009.jpg";
+
+const officePhotos = [office7, office8, office9];
 ---
 <BaseLayout
   title="Meet Our Team | Overlake Family Dentistry, Bellevue"
@@ -24,7 +29,26 @@ import teamPhoto from "../assets/team.jpg";
     <div class="rounded-3xl overflow-hidden max-w-4xl mx-auto">
       <Image src={teamPhoto} alt="The Overlake Family Dentistry team in Bellevue" class="w-full object-cover" widths={[600, 1000, 1600]} sizes="(max-width: 1024px) 100vw, 900px" />
     </div>
-    <p class="mt-6 text-center text-slate text-sm">Individual team bios coming soon.</p>
+  </section>
+
+  <section class="bg-cream-soft">
+    <div class="container-page section">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="eyebrow">Life at the Office</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A team that enjoys the work</h2>
+        <p class="mt-4 text-slate">
+          Good care starts with people who like being here. A few moments from around the office.
+        </p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {officePhotos.map((photo, i) => (
+          <div class="rounded-3xl overflow-hidden aspect-[3/4]">
+            <Image src={photo} alt={`The team at Overlake Family Dentistry (${i + 1})`} class="w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 33vw" />
+          </div>
+        ))}
+      </div>
+      <p class="mt-6 text-center text-slate text-sm">Individual team bios coming soon.</p>
+    </div>
   </section>
 
   <section class="bg-cream section text-center">

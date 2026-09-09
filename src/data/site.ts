@@ -42,7 +42,7 @@ export const nav = [
 
 export const doctors = [
   {
-    name: "Dr. Ravneet Kaur Kalra",
+    name: "Dr. Ravneet Kaur",
     credential: "DDS",
     credentialLine: "Columbia University College of Dental Medicine",
     imageKey: "kalra",
