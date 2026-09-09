@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" width="720" height="420" role="img" aria-label="Overlake Family Dentistry — Conservative, Tooth-Preserving Care">
+  <defs>
+    <style>
+      .wordmark { font-family: 'Arial Black','Helvetica Neue',Arial,sans-serif; font-weight: 800; }
+      .sub      { font-family: 'Helvetica Neue',Arial,sans-serif; font-weight: 700; }
+      .fine     { font-family: 'Helvetica Neue',Arial,sans-serif; font-weight: 600; }
+      .navy { fill: #1e3a52; }
+      .slate{ fill: #5f7488; }
+    </style>
+  </defs>
+
+  <!-- Leaf mark -->
+  <g transform="translate(360 92) rotate(22)">
+    <path d="M0 -52 C 34 -34, 40 26, 0 60 C -40 26, -34 -34, 0 -52 Z" fill="#8bab97"/>
+    <path d="M0 -52 C 20 -30, 22 26, 0 60 C 0 20, 0 -20, 0 -52 Z" fill="#6f9a80"/>
+    <path d="M0 -44 L 0 54" stroke="#f4f1e8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="360" y="235" text-anchor="middle" class="wordmark navy" font-size="88" letter-spacing="4">OVERLAKE</text>
+  <text x="360" y="292" text-anchor="middle" class="sub slate" font-size="46" letter-spacing="10">FAMILY DENTISTRY</text>
+
+  <!-- Tagline (swapped) -->
+  <text x="360" y="336" text-anchor="middle" class="fine navy" font-size="21" letter-spacing="3">CONSERVATIVE, TOOTH-PRESERVING CARE</text>
+
+  <!-- Heritage line -->
+  <text x="360" y="368" text-anchor="middle" class="fine slate" font-size="15" letter-spacing="2">FORMERLY DR. BRIAN BROOKS DENTISTRY</text>
+</svg>
