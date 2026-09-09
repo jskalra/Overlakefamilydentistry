@@ -7,16 +7,9 @@ import Button from "../components/Button.astro";
 import { serviceCategories } from "../data/site";
 import officeLobby from "../assets/office-lobby.jpg";
 import officeRoom from "../assets/office-room.jpg";
-import drKalra from "../assets/dr-kalra.jpg";
-import drBrooks from "../assets/dr-brooks.webp";
-import { doctors, site } from "../data/site";
+import drsBrooksKaur from "../assets/drs-brooks-kaur.jpg";
+import { site } from "../data/site";
 import { reviews, isPlaceholder } from "../data/reviews";
-
-const docPhotos: Record<string, any> = { kalra: drKalra, brooks: drBrooks };
-const docBlurbs: Record<string, string> = {
-  kalra: "Conservative, minimally invasive care with a gentle touch.",
-  brooks: "30+ years of honest, patient-first dentistry on the Eastside.",
-};
 ---
 
 <BaseLayout title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue">
@@ -76,19 +69,12 @@ const docBlurbs: Record<string, string> = {
         <p class="eyebrow">Experienced, Long-Tenured Team</p>
         <h2 class="text-3xl md:text-4xl font-semibold mt-2">Meet your doctors</h2>
       </div>
-      <div class="mt-10 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
-        {doctors.map((doc) => (
-          <a href="/doctors" class="group text-center">
-            <div class="rounded-3xl overflow-hidden aspect-[3/4]">
-              <Image src={docPhotos[doc.imageKey]} alt={`${doc.name}, ${doc.credential}`} class="w-full h-full object-cover transition-transform group-hover:scale-[1.02]" widths={[300, 600]} sizes="(max-width: 768px) 100vw, 320px" />
-            </div>
-            <h3 class="mt-4 text-xl font-semibold">{doc.name}, {doc.credential}</h3>
-            <p class="text-sage-dark text-sm font-medium mt-0.5">{doc.credentialLine}</p>
-            <p class="mt-2 text-slate text-sm">{docBlurbs[doc.imageKey]}</p>
-          </a>
-        ))}
-      </div>
-      <div class="text-center mt-8"><Button href="/doctors" variant="secondary">Read Full Bios</Button></div>
+      <a href="/doctors" class="group block mt-10 max-w-2xl mx-auto">
+        <div class="rounded-3xl overflow-hidden">
+          <Image src={drsBrooksKaur} alt="Dr. Brooks and Dr. Kaur, Overlake Family Dentistry" class="w-full h-auto object-cover transition-transform group-hover:scale-[1.02]" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 640px" />
+        </div>
+      </a>
+      <div class="text-center mt-8"><Button href="/doctors" variant="secondary">Read Bios</Button></div>
     </div>
   </section>
 
