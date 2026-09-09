@@ -58,6 +58,7 @@ export const doctors = [
     credential: "DDS",
     credentialLine: "University of Washington School of Dentistry",
     imageKey: "brooks",
+    retiredNote: "Retired 2026 — Founder",
     bio: [
       "Dr. Brooks has served the Bellevue–Redmond area for over 30 years, building a large and loyal patient following through honest treatment assessments, high-quality care, and a gentle, compassionate approach. He strongly believes that healthy, functional teeth and gums can add years to your life — and make those years pain-free, with a smile worth sharing.",
       "Dr. Brooks grew up in Ellensburg, Washington, where his father served as President of Central Washington University for many years. He earned his undergraduate degree from the University of Washington and went on to receive his DDS from the prestigious University of Washington School of Dentistry in 1986. After three years practicing in Tucson, Arizona, he returned to the Pacific Northwest to begin private practice.",
