@@ -5,10 +5,9 @@ import Button from "../components/Button.astro";
 import { site } from "../data/site";
 import teamPhoto from "../assets/team.jpg";
 import office7 from "../assets/team/office-0007.jpg";
-import office8 from "../assets/team/office-0008.jpg";
 import office9 from "../assets/team/office-0009.jpg";
 
-const officePhotos = [office7, office8, office9];
+const officePhotos = [office7, office9];
 ---
 <BaseLayout
   title="Meet Our Team | Overlake Family Dentistry, Bellevue"
@@ -40,10 +39,10 @@ const officePhotos = [office7, office8, office9];
           Good care starts with people who like being here. A few moments from around the office.
         </p>
       </div>
-      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="mt-10 grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {officePhotos.map((photo, i) => (
-          <div class="rounded-3xl overflow-hidden aspect-[3/4]">
-            <Image src={photo} alt={`The team at Overlake Family Dentistry (${i + 1})`} class="w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 33vw" />
+          <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+            <Image src={photo} alt={`The team at Overlake Family Dentistry (${i + 1})`} class="w-full h-full object-cover" widths={[400, 800]} sizes="(max-width: 768px) 100vw, 50vw" />
           </div>
         ))}
       </div>
