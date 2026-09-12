@@ -32,6 +32,17 @@ const { address } = site;
         <div class="mt-2"><a href={site.phoneHref} class="hover:text-cream">{site.phone}</a></div>
         <div><a href={`mailto:${site.email}`} class="hover:text-cream">{site.email}</a></div>
       </address>
+      <div class="mt-4">
+        <h4 class="text-cream font-semibold text-xs uppercase tracking-wide mb-1">Office Hours</h4>
+        <ul class="text-sm text-cream/70 space-y-0.5">
+          {site.hours.map((h) => (
+            <li class="flex justify-between gap-4">
+              <span>{h.day}</span>
+              <span>{h.close ? `${h.open}–${h.close}` : h.open}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div class="mt-4 rounded-lg bg-sage/20 border border-sage/50 px-4 py-3">
         <div class="text-sage font-semibold uppercase tracking-wide text-xs">⚠ Dental Emergency?</div>
         <p class="text-cream/70 text-xs mt-1">Can't reach the front desk? Call or text:</p>
