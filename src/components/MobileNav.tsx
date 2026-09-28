@@ -5,7 +5,7 @@ interface NavItem { label: string; href: string; }
 export default function MobileNav({ items, phoneHref, phone }: { items: readonly NavItem[]; phoneHref: string; phone: string; }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
