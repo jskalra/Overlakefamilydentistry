@@ -66,5 +66,45 @@ h1, h2, h3, h4 {
   .section {
     @apply py-16 md:py-24;
   }
+
+  /* Long-form content (blog, services, locations, legal). No typography plugin — styles defined here. */
+  .prose {
+    @apply leading-relaxed;
+  }
+  .prose-lg {
+    @apply text-lg leading-8;
+  }
+  .prose > :first-child {
+    @apply mt-0;
+  }
+  .prose p {
+    @apply my-5;
+  }
+  .prose h2 {
+    @apply font-heading font-bold text-navy text-2xl md:text-3xl leading-tight mt-14 mb-4 pt-8 border-t border-navy/10;
+  }
+  .prose h3 {
+    @apply font-heading font-semibold text-navy text-xl md:text-2xl leading-snug mt-10 mb-3;
+  }
+  .prose h2 + h3 {
+    @apply mt-6;
+  }
+  .prose strong {
+    @apply font-semibold text-navy;
+  }
+  .prose a {
+    @apply text-slate font-medium underline underline-offset-2 hover:text-navy;
+  }
+  .prose ul, .prose ol {
+    @apply my-5 pl-6 space-y-2;
+  }
+  .prose ul { @apply list-disc; }
+  .prose ol { @apply list-decimal; }
+  .prose li::marker {
+    @apply text-sage-dark;
+  }
+  .prose blockquote {
+    @apply my-6 border-l-4 border-sage pl-5 italic text-navy/70;
+  }
 }
 
