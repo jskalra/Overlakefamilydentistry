@@ -27,6 +27,7 @@ export const site = {
   ],
   domain: "https://overlakefamilydentistry.com",
   googleProfile: "https://share.google/aJE7u7wdrqUzLuinB",
+  yelpProfile: "https://www.yelp.com/biz/overlake-family-dentistry-bellevue",
 } as const;
 
 export const nav = [

@@ -44,6 +44,7 @@ export const localBusinessSchema = {
     name: n,
   })),
   openingHoursSpecification: openingHours,
+  sameAs: [site.yelpProfile],
   member: doctors.map((d) => ({
     "@type": "Person",
     name: d.name,
