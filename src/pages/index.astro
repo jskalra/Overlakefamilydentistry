@@ -4,15 +4,169 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ReviewCarousel from "../components/ReviewCarousel.tsx";
 import Button from "../components/Button.astro";
-import { serviceCategories } from "../data/site";
 import officeLobby from "../assets/office-lobby.jpg";
 import officeRoom from "../assets/office-room.jpg";
 import drsBrooksKaur from "../assets/drs-brooks-kaur.jpg";
 import { site } from "../data/site";
 import { reviews, isPlaceholder } from "../data/reviews";
+import { faqSchema } from "../lib/schema";
+
+const svc = (category: string, slug: string) => `/services/${category}/${slug}`;
+
+const helpCards = [
+  {
+    title: "I'm due for a checkup",
+    blurb: "A regular exam and cleaning lets us catch small problems while they are still small and easy to fix. We also check your gums and bite, and we answer any questions you bring.",
+    links: [
+      { label: "Exams & cleanings", href: svc("general-dentistry", "exams-cleanings") },
+      { label: "Preventive care", href: svc("pediatric-dentistry", "preventative-dentistry") },
+      { label: "Gum care (scaling & root planing)", href: svc("periodontal-services", "scaling-root-planing") },
+      { label: "Nightguards for grinding", href: svc("general-dentistry", "nightguards") },
+    ],
+  },
+  {
+    title: "I have a toothache or dental emergency",
+    blurb: `Call us at ${site.phone} and tell us what hurts. If you can't reach the front desk, call or text our emergency line at ${site.emergencyPhone}.`,
+    links: [
+      { label: "Fillings for cavities", href: svc("pediatric-dentistry", "cavities-fillings") },
+      { label: "Root canals", href: svc("restorative-dentistry", "root-canals") },
+      { label: "Extractions", href: svc("restorative-dentistry", "extractions") },
+      { label: "Jaw pain (TMJ)", href: svc("general-dentistry", "tmj-treatment") },
+    ],
+  },
+  {
+    title: "I want a brighter smile",
+    blurb: "Stains, chips, and small gaps often need less work than people expect. We'll start with the simplest fix that fits your goal.",
+    links: [
+      { label: "Teeth whitening", href: svc("cosmetic-dentistry", "teeth-whitening") },
+      { label: "Bonding", href: svc("cosmetic-dentistry", "bonding") },
+      { label: "Veneers", href: svc("cosmetic-dentistry", "veneers") },
+    ],
+  },
+  {
+    title: "I have a damaged or missing tooth",
+    blurb: "We try to save the tooth you have first. When a tooth can't be saved, we'll walk you through ways to replace it.",
+    links: [
+      { label: "Inlays & onlays (partial crowns)", href: svc("cosmetic-dentistry", "inlays-onlays") },
+      { label: "Porcelain crowns", href: svc("cosmetic-dentistry", "porcelain-crowns") },
+      { label: "Dental implants", href: svc("restorative-dentistry", "dental-implants") },
+      { label: "Bridges", href: svc("restorative-dentistry", "bridges") },
+      { label: "Dentures & partials", href: svc("restorative-dentistry", "dentures") },
+    ],
+  },
+  {
+    title: "I want straighter teeth",
+    blurb: "Clear aligners are thin, clear plastic trays that slowly move your teeth into place, with no metal braces. You take them out to eat and brush.",
+    links: [
+      { label: "Invisalign for adults", href: svc("orthodontic-services", "invisalign") },
+      { label: "Invisalign for teens", href: svc("orthodontic-services", "invisalign-for-teens") },
+    ],
+  },
+  {
+    title: "My child needs a dentist",
+    blurb: "We see kids from their first visit as toddlers. Short, friendly appointments help them feel at ease in the chair. We also coat back teeth with sealants, a thin layer that helps keep cavities out.",
+    links: [
+      { label: "Preventive care for kids", href: svc("pediatric-dentistry", "preventative-dentistry") },
+      { label: "Sealants", href: svc("pediatric-dentistry", "sealants") },
+      { label: "Cavities & fillings", href: svc("pediatric-dentistry", "cavities-fillings") },
+      { label: "Sports mouthguards", href: svc("pediatric-dentistry", "sports-mouthguards") },
+    ],
+  },
+];
+
+const steps = [
+  {
+    title: "Call or request a visit",
+    text: `Call ${site.phone} or send a request online. We'll find a time that works, answer your questions, and tell you what to bring, such as your insurance card and a list of any medicines you take.`,
+  },
+  {
+    title: "Get to know us",
+    text: "Park for free right outside and check in with our front desk. We'll ask about your health history, any worries you have about your teeth, and what you'd like to get out of your care.",
+  },
+  {
+    title: "Exam and cleaning",
+    text: "Your dentist checks your teeth, gums, and bite, and takes X-rays if you need them. Your hygienist cleans your teeth. We explain what we see in plain words as we go.",
+  },
+  {
+    title: "A clear plan, no pressure",
+    text: "If you need treatment, we'll show you why, list your options from least to most involved, and go over costs up front. You decide what to do and when.",
+  },
+];
+
+const reasons = [
+  {
+    title: "Honest advice",
+    text: "We tell you what we see, what needs care now, and what can wait. If a tooth only needs watching, we'll say so.",
+  },
+  {
+    title: "One dentist for every age",
+    text: "Toddlers, teens, parents, and grandparents can all see the same team, often on the same day.",
+  },
+  {
+    title: "A team that stays",
+    text: "Kris, Kristie, Marta, Ana, and Jeannie have worked here for years. You'll see familiar faces at every visit.",
+  },
+  {
+    title: "Most care in one place",
+    text: "From cleanings to crowns to clear aligners, we handle most of your family's dental needs in our own office.",
+  },
+];
+
+const cities = [
+  { label: "Bellevue", href: "/dentist/bellevue" },
+  { label: "Redmond", href: "/dentist/redmond" },
+  { label: "Kirkland", href: "/dentist/kirkland" },
+  { label: "Sammamish", href: "/dentist/sammamish" },
+];
+
+const faqs = [
+  {
+    q: "Are you accepting new patients?",
+    a: `Yes. We welcome new patients of all ages, including whole families who want to book together. Call ${site.phone} or request an appointment online, and our front desk will find a time that suits you and tell you what to bring to your first visit.`,
+  },
+  {
+    q: "What ages do you see?",
+    a: "We care for patients from toddlers to seniors. Parents can book their own cleanings on the same day as their kids. Seeing the whole family lets us spot patterns, like a tendency toward cavities or grinding, and plan care that fits each person's age and needs.",
+  },
+  {
+    q: "Do you take my insurance?",
+    a: `Dental plans vary a lot, so the best way to know is to call us at ${site.phone} with your plan details. Our front desk will check your coverage and explain what to expect before your visit, so you aren't surprised by a bill later.`,
+  },
+  {
+    q: "What should I do in a dental emergency?",
+    a: `Call our office at ${site.phone} first and tell us what happened, so we can help you decide how soon you need to be seen. If you can't reach the front desk, call or text our emergency line at ${site.emergencyPhone}. If you have severe swelling or trouble breathing, go to the nearest emergency room.`,
+  },
+  {
+    q: "What does \"conservative dentistry\" mean?",
+    a: "It means we try the least invasive treatment that will work. We'd rather watch a tiny spot or place a small filling than drill more tooth than needed. Your natural teeth are worth keeping, so we save them whenever we reasonably can.",
+  },
+  {
+    q: "How often should I get a checkup?",
+    a: "Most people do well with an exam and cleaning every six months. Some patients, such as those with gum disease, may need visits more often. Your dentist will suggest a schedule based on your mouth, not a one-size-fits-all rule.",
+  },
+  {
+    q: "Where are you, and is parking easy?",
+    a: "We're in Forest Office Park at 148th Ave NE and NE Bel-Red Rd. in Bellevue (Bldg. F, Ste. 101). Free dedicated parking sits right outside the building. The office is a short drive from Redmond, Kirkland, and Sammamish.",
+  },
+  {
+    q: "Can I come in for a second opinion?",
+    a: "Yes. If another office has suggested major work and you're not sure, bring your X-rays or treatment plan. We'll take an honest look and tell you what we'd do. Sometimes that's the same plan, and sometimes a simpler one will work.",
+  },
+  {
+    q: "Do you treat gum disease?",
+    a: "Yes. Early gum disease often shows up as red, puffy gums that bleed when you brush. We check your gums at every exam. If you need more than a regular cleaning, we offer a deep cleaning called scaling and root planing, which clears buildup from below the gumline.",
+  },
+  {
+    q: "I get nervous at the dentist. Can you help?",
+    a: "You are not alone, and there is nothing to be embarrassed about. Tell us what worries you, and we'll go at your pace, explain each step before we do it, and stop whenever you raise a hand. Our team has worked together for years and keeps the mood calm.",
+  },
+];
 ---
 
-<BaseLayout title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue">
+<BaseLayout
+  title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue"
+  jsonLd={[faqSchema(faqs)].filter(Boolean) as object[]}
+>
   <Hero />
 
   <!-- Trust strip -->
@@ -27,21 +181,30 @@ import { reviews, isPlaceholder } from "../data/reviews";
     </div>
   </div>
 
-  <!-- Services snapshot -->
+  <!-- How can we help? -->
   <section class="container-page section">
     <div class="text-center max-w-2xl mx-auto">
       <p class="eyebrow">Comprehensive In-House Care</p>
-      <h2 class="text-3xl md:text-4xl font-semibold mt-2">Everything your family needs, under one roof</h2>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">How can we help?</h2>
+      <p class="mt-4 text-slate text-lg">Pick what sounds like you. Each card links to the treatments we offer for it, and your whole family can get care under one roof.</p>
     </div>
     <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {serviceCategories.map((s) => (
-        <a href={s.href} class="card block">
+      {helpCards.map((c) => (
+        <div class="card flex flex-col">
           <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
-          <h3 class="text-xl font-semibold">{s.title}</h3>
-          <p class="mt-2 text-slate text-sm">Learn more about our approach to {s.title.toLowerCase()}.</p>
-        </a>
+          <h3 class="text-xl font-semibold">{c.title}</h3>
+          <p class="mt-2 text-slate text-sm">{c.blurb}</p>
+          <ul class="mt-4 space-y-1.5 text-sm">
+            {c.links.map((l) => (
+              <li>
+                <a href={l.href} class="text-navy font-medium hover:underline">{l.label} &rarr;</a>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
     </div>
+    <div class="text-center mt-10"><Button href="/services" variant="secondary">See All Services</Button></div>
   </section>
 
   <!-- Conservative care band with photo -->
@@ -54,8 +217,15 @@ import { reviews, isPlaceholder } from "../data/reviews";
         <p class="eyebrow">Conservative, Tooth-Preserving Care</p>
         <h2 class="text-3xl md:text-4xl font-semibold mt-2">We treat only what needs treating</h2>
         <p class="mt-5 text-slate text-lg">
-          We reach for the least invasive option first — preserving your natural teeth
-          whenever possible, and giving you honest second opinions without pressure.
+          We reach for the least invasive option first. That might mean watching a small spot
+          on a tooth instead of filling it right away, or fixing a chip with bonding (a
+          tooth-colored resin) instead of a crown.
+        </p>
+        <p class="mt-4 text-slate text-lg">
+          Your own teeth are worth keeping. Each time a dentist drills, less natural tooth is
+          left, so we don't rush into work you may not need. When treatment does make sense,
+          we show you what we see and explain your choices. If another office has told you
+          that you need major work, we're happy to give you an honest second opinion.
         </p>
         <div class="mt-6"><Button href="/about" variant="secondary">Our Philosophy</Button></div>
       </div>
@@ -68,6 +238,13 @@ import { reviews, isPlaceholder } from "../data/reviews";
       <div class="text-center max-w-2xl mx-auto">
         <p class="eyebrow">Experienced, Long-Tenured Team</p>
         <h2 class="text-3xl md:text-4xl font-semibold mt-2">Meet your doctors</h2>
+        <p class="mt-5 text-slate text-lg">
+          Dr. Ravneet Kaur, DDS, now leads the practice. She trained at Columbia University
+          College of Dental Medicine in New York City. Dr. Brian Brooks cared for Eastside
+          families here for more than 30 years. When he retired in 2026, he chose Dr. Kaur to
+          carry on his gentle, conservative approach. The same trusted team still greets you
+          at the front desk and in the chair.
+        </p>
       </div>
       <a href="/doctors" class="group block mt-10 max-w-[470px] mx-auto">
         <div class="rounded-3xl overflow-hidden">
@@ -78,20 +255,101 @@ import { reviews, isPlaceholder } from "../data/reviews";
     </div>
   </section>
 
+  <!-- Why families stay -->
+  <section class="container-page section">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Why Families Stay</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">What you can count on here</h2>
+    </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {reasons.map((r) => (
+        <div class="card">
+          <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
+          <h3 class="text-lg font-semibold">{r.title}</h3>
+          <p class="mt-2 text-slate text-sm">{r.text}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Your first visit -->
+  <section class="bg-cream-soft">
+  <div class="container-page section">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="eyebrow">New Patients</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">Your first visit</h2>
+      <p class="mt-4 text-slate text-lg">Here's what to expect, step by step.</p>
+    </div>
+    <ol class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {steps.map((s, i) => (
+        <li class="card">
+          <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-sage/20 text-navy font-semibold">{i + 1}</span>
+          <h3 class="text-lg font-semibold mt-4">{s.title}</h3>
+          <p class="mt-2 text-slate text-sm">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="text-center mt-10"><Button href="/new-patients" variant="secondary">New Patient Info</Button></div>
+  </div>
+  </section>
+
   <!-- Welcome / office -->
-  <section class="container-page section grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      <p class="eyebrow">Welcome to Our Office</p>
-      <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
-      <p class="mt-5 text-slate text-lg">
-        Bright, comfortable, and easy to reach — with free dedicated building parking right
-        outside. Come see why Eastside families have felt at home here for years.
+  <section>
+    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="eyebrow">Welcome to Our Office</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
+        <p class="mt-5 text-slate text-lg">
+          You'll find us in Forest Office Park, at 148th Ave NE and NE Bel-Red Rd. in Bellevue.
+          Free dedicated parking sits right outside the door, so there's no hunting for a spot
+          or paying a meter.
+        </p>
+        <p class="mt-4 text-slate text-lg">
+          The office is bright and quiet, and it's an easy drive from Redmond, Kirkland, and
+          Sammamish. We're open Monday 8 to 5, Tuesday and Wednesday 7:30 to 4:30, and Thursday
+          7 to 2. Early starts make it easier to fit a visit in before work or school.
+        </p>
+        <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+        <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance & payment + Serving the Eastside -->
+  <section class="bg-cream-soft">
+  <div class="container-page section grid md:grid-cols-2 gap-6">
+    <div class="card">
+      <p class="eyebrow">Insurance &amp; Payment</p>
+      <h2 class="text-2xl md:text-3xl font-semibold mt-2">Questions about cost? Just ask.</h2>
+      <p class="mt-4 text-slate">
+        Every dental plan is different, so please call us at <a href={site.phoneHref} class="text-navy font-medium hover:underline">{site.phone}</a> to
+        confirm your coverage before your visit. Our front desk will check your benefits and
+        explain what your plan is likely to cover.
       </p>
-      <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
+      <p class="mt-3 text-slate">
+        Before any treatment, we go over the cost with you so there are no surprises. We take
+        common forms of payment, and third-party financing may be available for larger
+        treatment plans. Ask us what options fit your situation.
+      </p>
     </div>
-    <div class="rounded-3xl overflow-hidden aspect-[4/3]">
-      <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+    <div class="card">
+      <p class="eyebrow">Serving the Eastside</p>
+      <h2 class="text-2xl md:text-3xl font-semibold mt-2">Your neighborhood dentist for 30+ years</h2>
+      <p class="mt-4 text-slate">
+        For more than 30 years, families from across the Eastside have come to this office
+        for their dental care. Our spot near the Bel-Red corridor makes the drive short from
+        all four cities we serve, and you can skip downtown traffic and paid garages. Choose
+        your city below for directions and local details.
+      </p>
+      <ul class="mt-5 flex flex-wrap gap-3">
+        {cities.map((c) => (
+          <li><a href={c.href} class="btn btn-secondary text-sm">Dentist in {c.label}</a></li>
+        ))}
+      </ul>
     </div>
+  </div>
   </section>
 
   <!-- Reviews -->
@@ -105,6 +363,39 @@ import { reviews, isPlaceholder } from "../data/reviews";
       <div class="text-center mt-8">
         <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Additional Google Reviews</a>
         {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container-page section">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Good to Know</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">Frequently asked questions</h2>
+    </div>
+    <div class="mt-10 max-w-3xl mx-auto space-y-4">
+      {faqs.map((f) => (
+        <details class="card">
+          <summary class="font-semibold cursor-pointer">{f.q}</summary>
+          <p class="mt-3 text-slate">{f.a}</p>
+        </details>
+      ))}
+    </div>
+    <p class="mt-8 text-center text-slate">
+      Have a question we didn't cover? Call us at <a href={site.phoneHref} class="text-navy font-medium hover:underline">{site.phone}</a> and our front desk will be glad to help.
+    </p>
+  </section>
+
+  <!-- CTA band -->
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-semibold">Ready to book your visit?</h2>
+      <p class="mt-4 text-slate text-lg">
+        Call us or send a request, and we'll find a time that works for you and your family.
+      </p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+        <Button href="/contact" variant="secondary">Request an Appointment</Button>
       </div>
     </div>
   </section>

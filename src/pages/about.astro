@@ -2,20 +2,97 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
-import { site } from "../data/site";
+import { site, serviceAreas } from "../data/site";
+import { faqSchema } from "../lib/schema";
 import familyPhoto from "../assets/family.jpg";
+
+const beliefs = [
+  {
+    title: "Treat only what needs treating",
+    body: "If a tooth is healthy, we leave it alone. If a small problem can be watched, we watch it and check again at your next visit. You will never hear us push work you don't need. Our job is to keep your mouth healthy, not to fill the schedule.",
+  },
+  {
+    title: "Start with the least invasive option",
+    body: "Natural tooth is worth saving. When a tooth does need care, we look at the smallest fix first. A filling before a crown. A crown before an extraction. We only move to bigger work when a smaller step won't hold up, and we tell you why.",
+  },
+  {
+    title: "Honest answers, and room for a second opinion",
+    body: "We explain what we see in plain words and show you the images. If you want time to think, take it. If you want another dentist to look, we'll send your records. A good plan still makes sense after a second look.",
+  },
+  {
+    title: "Visits that don't feel rushed",
+    body: "We book enough time to do the work well and to talk with you. You can ask questions in the chair, at the front desk, or by phone later. Nobody should leave our office confused about their own teeth.",
+  },
+  {
+    title: "Care for every generation",
+    body: "Many families here have come to us for years, parents first and then their kids. We like that. Seeing a whole family helps us spot patterns, plan ahead, and make visits easier to schedule for busy households.",
+  },
+];
+
+const stays = [
+  { title: "Same office", body: "Forest Office Park on NE Bel-Red Rd., with the same free parking." },
+  { title: "Same phone number", body: `Call ${site.phone}, just as you always have.` },
+  { title: "Same team", body: "The staff you know stayed on to care for you." },
+  { title: "Same records", body: "Your charts and X-rays stayed with the practice." },
+];
+
+const team = [
+  { name: "Kris", role: "Front Office Manager" },
+  { name: "Kristie", role: "Dental Hygienist" },
+  { name: "Marta", role: "Dental Assistant" },
+  { name: "Ana", role: "Dental Hygienist" },
+  { name: "Jeannie", role: "Front Office Assistant" },
+];
+
+const faqs = [
+  {
+    q: "Is this the same practice as Dr. Brooks'?",
+    a: "Yes. Overlake Family Dentistry was formerly known as the practice of Dr. Brian Brooks. When he retired in 2026, he chose Dr. Ravneet Kaur to carry on his work. The office, phone number, team, and way of caring for patients all stayed the same. Only the name on the door changed.",
+  },
+  {
+    q: "Are my records and X-rays still here?",
+    a: "Yes. Your charts, X-rays, and treatment history stayed with the practice. Dr. Kaur can review them before your next visit, so you won't need to start over. If you ever need copies sent to another office or a specialist, call us and we'll take care of it.",
+  },
+  {
+    q: "Is the team the same?",
+    a: "Yes. Kris, Kristie, Marta, Ana, and Jeannie have all stayed on. Many of them have worked with our patients for a long time, and they know the families who come here. You'll hear the same voices when you call and see the same faces in the chair.",
+  },
+  {
+    q: "Are you taking new patients?",
+    a: `Yes. We welcome new patients of all ages, from toddlers to seniors. Call us at ${site.phone} to book a first visit. We'll ask a few questions about your dental history and any concerns, then find a time that fits your week.`,
+  },
+  {
+    q: "What does \"conservative\" dentistry mean?",
+    a: "It means we try to keep as much of your natural tooth as we can. We recommend treatment only when you need it, and we choose the smallest fix that will last. Sometimes the right call is to watch a spot and check it again in six months.",
+  },
+  {
+    q: "Do you see children?",
+    a: "Yes. We see kids from their first visit, usually around the first birthday or when the first teeth come in. Early visits are short and gentle. They help your child get used to the chair and let us catch small problems before they become big ones.",
+  },
+  {
+    q: "What if I'm nervous about the dentist?",
+    a: "Tell us. Many of our patients feel the same way. We'll explain each step before we do it, go at your pace, and stop whenever you raise a hand. You can ask to take a break at any time. Nobody here will judge you for how long it has been.",
+  },
+  {
+    q: "How do I book an appointment?",
+    a: `Call our front office at ${site.phone}. Kris and Jeannie can find a time, answer questions about your first visit, and help you get your records sent over if you're coming from another office. We're open Monday through Thursday.`,
+  },
+];
+
+const openHours = site.hours.filter((h) => h.close);
 ---
 <BaseLayout
   title="About Overlake Family Dentistry | Conservative Care in Bellevue"
-  description="A trusted Bellevue dental home for 30+ years — conservative, tooth-preserving care from a team that has looked after Eastside families for generations."
+  description="Formerly the practice of Dr. Brian Brooks. Dr. Ravneet Kaur and the same trusted team continue 30+ years of conservative, tooth-preserving care in Bellevue."
+  jsonLd={[faqSchema(faqs)].filter(Boolean) as object[]}
 >
   <section class="bg-cream-soft">
     <div class="container-page section text-center max-w-2xl mx-auto">
       <p class="eyebrow">Our Story</p>
       <h1 class="text-4xl md:text-5xl font-semibold mt-3">Caring for Eastside families for 30+ years</h1>
       <p class="mt-5 text-lg text-slate">
-        Overlake Family Dentistry continues the legacy of Dr. Brian Brooks — decades of
-        honest, gentle, tooth-preserving care in Bellevue's Bel-Red corridor.
+        Overlake Family Dentistry carries on the work of Dr. Brian Brooks: honest, gentle,
+        tooth-preserving care in Bellevue's Bel-Red corridor.
       </p>
     </div>
   </section>
@@ -26,28 +103,235 @@ import familyPhoto from "../assets/family.jpg";
     </div>
   </div>
 
-  <section class="container-page section max-w-3xl mx-auto space-y-6 text-navy/80 leading-relaxed">
-    <p>
-      For over 30 years, Dr. Brooks has built a practice on a simple idea: recommend only
-      what a patient actually needs, treat conservatively, and treat gently. That philosophy
-      lives on at Overlake Family Dentistry.
-    </p>
-    <p>
-      We're a comprehensive family practice — general, cosmetic, restorative, orthodontic,
-      pediatric, and periodontal care under one roof — with a team many of our patients
-      have known for a decade or more.
-    </p>
-    <p>
-      Whether you're a returning patient or new to the Eastside, we'd love to earn a place
-      in your family's care for the next generation.
-    </p>
+  <!-- Our story -->
+  <section class="container-page section max-w-3xl mx-auto">
+    <p class="eyebrow">Where we come from</p>
+    <h2 class="text-3xl md:text-4xl font-semibold mt-3">Same practice, new name</h2>
+    <div class="mt-6 space-y-5 text-navy/80 leading-relaxed">
+      <p>
+        For more than 30 years, Dr. Brian Brooks cared for families in Bellevue and Redmond.
+        He built the practice on one simple rule: recommend only what a patient needs, and
+        do it gently. Patients stayed with him for decades. Many brought their kids, and
+        some of those kids now bring theirs.
+      </p>
+      <p>
+        In 2026, Dr. Brooks retired. He took his time choosing who would take over, because
+        he wanted someone who shared his views on care. He chose Dr. Ravneet Kaur for her
+        clinical skill and her honest, conservative approach. He also saw that she is kind,
+        and he knew his patients would notice.
+      </p>
+      <p>
+        The practice is now called Overlake Family Dentistry. It was formerly known as the
+        practice of Dr. Brian Brooks, and most of what you know about it hasn't changed.
+        We're in the same office, with the same phone number and the same team. Your
+        records are here. The philosophy is the same too: {site.tagline.toLowerCase()}. If
+        you've been coming for years, your next visit should feel familiar.
+      </p>
+    </div>
+    <ul class="mt-8 grid gap-3 sm:grid-cols-2">
+      {stays.map((x) => (
+        <li class="card py-4">
+          <p class="font-semibold">{x.title}</p>
+          <p class="text-sm text-slate mt-1">{x.body}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- What we believe -->
+  <section class="bg-cream-soft">
+    <div class="container-page section">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="eyebrow">What we believe</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">Five ideas that guide our care</h2>
+        <p class="mt-4 text-slate">These shaped the practice under Dr. Brooks, and Dr. Kaur holds to them today. You'll see them in how we talk with you and in the plans we suggest.</p>
+      </div>
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {beliefs.map((b, i) => (
+          <div class="card">
+            <p class="eyebrow">0{i + 1}</p>
+            <h3 class="text-xl font-semibold mt-2">{b.title}</h3>
+            <p class="mt-3 text-slate leading-relaxed">{b.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Meet Dr. Kaur + team -->
+  <section class="container-page section">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Your dentist</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">Meet Dr. Kaur</h2>
+        <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
+          <p>
+            Dr. Ravneet Kaur began her career in India, where she finished postgraduate
+            training in orthodontics. She moved to the United States in 2014 and earned her
+            DDS from Columbia University College of Dental Medicine in New York City. She has
+            lived and worked in the Pacific Northwest since 2020.
+          </p>
+          <p>
+            Her approach is honest and minimally invasive. She explains what she sees, shows
+            you the images, and saves natural tooth whenever she can. Outside the office, she
+            likes to travel, read, and spend time with her family, including her twelve-year-old son.
+          </p>
+          <p>
+            Her orthodontic training helps her notice how teeth and bite fit together. That
+            matters for kids who are still growing and for adults weighing their options.
+          </p>
+        </div>
+        <a href="/doctors" class="inline-block mt-5 font-semibold text-navy underline underline-offset-4">Read about our doctors</a>
+      </div>
+      <div>
+        <p class="eyebrow">The people you know</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">Our team</h2>
+        <p class="mt-5 text-navy/80 leading-relaxed">
+          The team stayed through the transition. Many of them have cared for our patients
+          for a long time, so they already know your name and your history. They'll greet
+          you at the desk, clean your teeth, and help Dr. Kaur during treatment. Kris and
+          Jeannie run the front office and handle scheduling and records. Kristie and Ana
+          do cleanings and teach home care. Marta works chairside with Dr. Kaur. When you
+          call with a question, you'll talk to someone who knows the practice well.
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+          {team.map((t) => (
+            <li class="card py-4">
+              <p class="font-semibold">{t.name}</p>
+              <p class="text-sm text-slate">{t.role}</p>
+            </li>
+          ))}
+        </ul>
+        <a href="/team" class="inline-block mt-5 font-semibold text-navy underline underline-offset-4">Meet the whole team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visit + ages -->
+  <section class="bg-cream-soft">
+    <div class="container-page section grid gap-10 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">In the chair</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">What a visit feels like</h2>
+        <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
+          <p>
+            A visit here should feel calm. We start by asking how you're doing and whether
+            anything has bothered you since last time. Then we look, and we tell you what we find.
+          </p>
+          <p>
+            When we spot something, we show you. X-rays and photos of your teeth go up on the
+            screen so you can see the same thing we see. We'll explain your options, what each
+            one involves, and what happens if you wait. Then the choice is yours. There's no
+            pressure to decide that day.
+          </p>
+          <p>
+            If dental visits make you anxious, you're in good company. Let us know when you
+            book. We'll walk you through each step before we start, check in as we go, and
+            pause whenever you need a break. Some patients like to talk through the whole
+            visit, and others prefer quiet. Both are fine.
+          </p>
+          <p>
+            Before you leave, we'll go over what comes next. That might be a date for your next
+            cleaning, a plan for any work you've chosen, or simply a note to keep doing what
+            you're doing. You'll get the plan in writing if you want it, and you're welcome to
+            call later with questions.
+          </p>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Toddlers to grandparents</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">Care for every age</h2>
+        <div class="mt-5 space-y-4 text-navy/80 leading-relaxed">
+          <p>
+            We see patients at every stage of life. A toddler's first visit is short and
+            playful, a chance to sit in the chair and meet us. School-age kids get cleanings,
+            sealants, and advice on brushing. Teens and adults get checkups, fillings, and
+            help with a smile they feel good about.
+          </p>
+          <p>
+            Older patients often have different needs, like caring for crowns, bridges, or
+            gums. We plan with you so your teeth keep working for years. And since the whole
+            family can come to one office, you can often book visits back to back.
+          </p>
+          <p>
+            One office also means one set of records for the family. We can see how things
+            change over time and plan care that fits each person at each age.
+          </p>
+        </div>
+        <a href="/services" class="inline-block mt-5 font-semibold text-navy underline underline-offset-4">See our services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our office -->
+  <section class="container-page section">
+    <div class="grid gap-10 lg:grid-cols-2 items-start">
+      <div>
+        <p class="eyebrow">Find us</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">Our office</h2>
+        <p class="mt-5 text-navy/80 leading-relaxed">
+          You'll find us in Forest Office Park at {site.address.street}, Bellevue, near
+          148th Ave NE. Parking is free, with spaces set aside for our patients, so you won't
+          circle the lot or feed a meter. Patients come to us from across the Eastside. Our
+          building is Bldg. F, and our suite is 101. If you
+          can't find us, call the front desk and we'll guide you in. We're open four days a
+          week, with early starts on Tuesday, Wednesday, and Thursday for people who want to
+          come in before work.
+        </p>
+        <p class="mt-5 text-sm font-semibold">We serve families in:</p>
+        <ul class="mt-2 flex flex-wrap gap-2">
+          {serviceAreas.map((a) => (
+            <li><a href={a.href} class="inline-block rounded-full bg-cream px-4 py-1.5 text-sm font-medium hover:underline">{a.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="text-xl font-semibold">Office hours</h3>
+        <dl class="mt-4 divide-y divide-navy/10">
+          {openHours.map((h) => (
+            <div class="flex justify-between py-2">
+              <dt class="font-medium">{h.day}</dt>
+              <dd class="text-slate">{h.open} to {h.close}</dd>
+            </div>
+          ))}
+          <div class="flex justify-between py-2">
+            <dt class="font-medium">Friday to Sunday</dt>
+            <dd class="text-slate">Closed</dd>
+          </div>
+        </dl>
+        <p class="mt-4 text-sm text-slate">
+          Call <a href={site.phoneHref} class="font-semibold text-navy">{site.phone}</a> to book or ask a question.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-cream-soft">
+    <div class="container-page section max-w-3xl mx-auto">
+      <div class="text-center">
+        <p class="eyebrow">Questions</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">About the transition and our care</h2>
+      </div>
+      <div class="mt-10 space-y-4">
+        {faqs.map((f) => (
+          <details class="card">
+            <summary class="font-semibold cursor-pointer">{f.q}</summary>
+            <p class="mt-3 text-slate leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
   </section>
 
   <section class="bg-cream section text-center">
-    <h2 class="text-2xl md:text-3xl font-semibold">Come see the difference</h2>
-    <div class="mt-6 flex gap-4 justify-center flex-wrap">
-      <Button href="/doctors" variant="secondary">Meet the Doctors</Button>
-      <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+    <div class="container-page max-w-2xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-semibold">Come see us</h2>
+      <p class="mt-3 text-slate">Whether you've been with us for years or you're new to the Eastside, we'd be glad to care for your family.</p>
+      <div class="mt-6 flex gap-4 justify-center flex-wrap">
+        <Button href="/doctors" variant="secondary">Meet the Doctors</Button>
+        <Button href={site.phoneHref} variant="primary">Call {site.phone}</Button>
+      </div>
     </div>
   </section>
 </BaseLayout>

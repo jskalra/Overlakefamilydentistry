@@ -1,32 +1,277 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Button from "../../components/Button.astro";
+import { site } from "../../data/site";
+import { faqSchema } from "../../lib/schema";
+
 const entries = await getCollection("services");
-const cats = entries.filter((e) => e.data.isCategory).sort((a, b) => a.data.category.localeCompare(b.data.category));
+const cats = entries
+  .filter((e) => e.data.isCategory)
+  .sort((a, b) => a.data.category.localeCompare(b.data.category));
+const childrenOf = (slug: string) =>
+  entries
+    .filter((e) => !e.data.isCategory && e.data.categorySlug === slug)
+    .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+// Category descriptions written for this index page (keyed by category id).
+const catCopy: Record<string, string> = {
+  "general-dentistry":
+    "This is the care most people need most of the time. A checkup and cleaning every six months lets us spot a small cavity or a cracked filling while it is still an easy fix. We also make custom nightguards for people who grind their teeth, and we treat jaw pain and clicking (often called TMJ problems) with the simplest steps first, like a guard, habit changes, and stretches.",
+  "cosmetic-dentistry":
+    "Cosmetic work changes how your teeth look. We start with the gentlest option that gets you the result you want. Whitening and bonding, a tooth-colored resin shaped right on the tooth, remove little or no enamel. Veneers and crowns involve reshaping the tooth, so we suggest them only when a smaller fix won't hold up. Inlays and onlays sit in between, repairing a damaged tooth while keeping more of it than a crown would.",
+  "orthodontic-services":
+    "Crooked or crowded teeth are harder to clean, and some bites wear teeth down unevenly. We straighten teeth with Invisalign, a series of clear, removable trays that move teeth a little at a time. Adults and teens both use it. Dr. Kaur completed postgraduate training in orthodontics, so she will tell you plainly whether aligners suit your case or whether you would do better with a specialist.",
+  "pediatric-dentistry":
+    "We see kids from their first teeth through their teen years. Early visits are short and relaxed, mostly counting teeth and getting used to the chair. As children grow, we add cleanings, sealants (a thin coating that protects the grooves of back molars), and tooth-colored fillings when a cavity does show up. Active kids can get a custom mouthguard for sports.",
+  "periodontal-services":
+    "Gum disease often starts without pain. Bleeding when you brush is usually the first sign. Caught early, it can often be reversed with better cleaning at home and in the office. When it has gone deeper, we do scaling and root planing, a deep cleaning below the gumline that removes buildup and smooths the roots so the gums can heal and reattach.",
+  "restorative-dentistry":
+    "When a tooth is broken, infected, or missing, our first question is whether we can save it. A root canal clears infection from inside a tooth so you can keep it. If a tooth has to come out, we talk through replacements: implants, bridges, full dentures, or partials. Each has trade-offs in cost, time, and effect on nearby teeth, and we lay those out before you choose.",
+};
+
+const starters = [
+  {
+    q: "I'm due for a checkup",
+    a: "Start with an exam and cleaning. We check your teeth, gums, and bite, take X-rays if you're due for them, and look for early signs of trouble. New patients get a full exam so we have a baseline to compare against next time.",
+    links: [{ label: "Exams & Cleanings", href: "/services/general-dentistry/exams-cleanings" }],
+  },
+  {
+    q: "I have a toothache",
+    a: `Call us at ${site.phone} and tell us what's going on. We'll get you in as soon as we can. If you can't reach the front desk, including after hours, call or text our emergency line at ${site.emergencyPhone}.`,
+    links: [
+      { label: "Root Canals", href: "/services/restorative-dentistry/root-canals" },
+      { label: "Contact us", href: "/contact" },
+    ],
+  },
+  {
+    q: "I want a brighter smile",
+    a: "Most people start with professional whitening, and for many that's enough. Chips, small gaps, or one dark tooth can often be fixed with bonding in a single visit. We'll show you what each option can do before you commit to anything.",
+    links: [
+      { label: "Teeth Whitening", href: "/services/cosmetic-dentistry/teeth-whitening" },
+      { label: "Bonding", href: "/services/cosmetic-dentistry/bonding" },
+    ],
+  },
+  {
+    q: "I have a broken or missing tooth",
+    a: "A cracked tooth can often be repaired with a filling, onlay, or crown, depending on how much is left. If a tooth is already gone, we'll compare implants, bridges, and partials with you. Come in soon, since cracks tend to spread.",
+    links: [
+      { label: "Restorative Dentistry", href: "/services/restorative-dentistry" },
+      { label: "Dental Implants", href: "/services/restorative-dentistry/dental-implants" },
+    ],
+  },
+  {
+    q: "I'd like straighter teeth",
+    a: "Clear aligners can fix a lot of crowding and spacing without metal braces. You wear the trays most of the day and switch to a new set every week or two. A consultation tells you whether your teeth are a good fit and roughly how long it may take.",
+    links: [
+      { label: "Invisalign", href: "/services/orthodontic-services/invisalign" },
+      { label: "Invisalign for Teens", href: "/services/orthodontic-services/invisalign-for-teens" },
+    ],
+  },
+  {
+    q: "My child needs a dentist",
+    a: "Bring them in by their first birthday, or once the first tooth comes in. We keep early visits short and friendly so they learn the dentist isn't scary. Parents and kids can often be seen on the same day.",
+    links: [{ label: "Pediatric Dentistry", href: "/services/pediatric-dentistry" }],
+  },
+];
+
+const faqs = [
+  {
+    q: "Do you offer dental implants?",
+    a: "Yes. Implants are part of our restorative care. We start with an exam and imaging to check your bone and gums, then plan the implant and the crown that goes on top. Healing usually takes a few months between steps. If a bridge or partial would serve you better, we'll say so.",
+  },
+  {
+    q: "What should I do in a dental emergency?",
+    a: `Call ${site.phone} during office hours and we'll fit you in as soon as we can. If you can't reach the front desk, call or text ${site.emergencyPhone}. For a knocked-out tooth, keep it moist in milk and come in right away. For facial swelling with fever or trouble breathing, go to an emergency room.`,
+  },
+  {
+    q: "Is Invisalign a good choice for teenagers?",
+    a: "It can be, if your teen will wear the trays 20 to 22 hours a day. Teen aligners have small indicators that fade with wear, so you can see whether they're being used. Many teens like that they can remove them for sports and instruments. We'll check whether their teeth and habits make it a good fit.",
+  },
+  {
+    q: "At what age should my child first see a dentist?",
+    a: "By their first birthday, or within six months of the first tooth. The first visit is mostly a quick look and a chance for parents to ask about brushing, teething, and diet. Starting early means small problems get caught, and kids get comfortable here before they ever need a filling.",
+  },
+  {
+    q: "Is professional teeth whitening safe?",
+    a: "When it's used as directed, yes. We examine your teeth and gums first, since cavities or exposed roots can make whitening uncomfortable. Some people feel short-lived sensitivity to cold, which usually fades within a few days. Whitening won't change the color of crowns, veneers, or fillings, so we'll plan around those.",
+  },
+  {
+    q: "What's the difference between a regular cleaning and a deep cleaning?",
+    a: "A regular cleaning removes plaque and tartar above and just below the gumline. A deep cleaning, called scaling and root planing, goes further below the gums to clean and smooth the roots. We suggest it only when gum measurements and X-rays show gum disease. We numb the area, and it often takes one or two visits.",
+  },
+  {
+    q: "How long does it take to get a crown?",
+    a: "Most crowns take two visits. At the first, we shape the tooth, take an impression, and place a temporary crown. At the second, once the lab has made it, we fit and cement the permanent one. Before any of that, we check whether a filling or onlay could do the job and save more of your tooth.",
+  },
+  {
+    q: "Can I come in for a second opinion?",
+    a: "Yes. Bring your X-rays and treatment plan if you have them, or we can take new ones. Dr. Kaur will examine you, explain what she sees, and tell you whether she agrees. Sometimes she does. Sometimes she thinks a smaller treatment, or waiting and watching, makes more sense.",
+  },
+];
 ---
 <BaseLayout
   title="Dental Services in Bellevue, WA | Overlake Family Dentistry"
   description="Comprehensive, conservative dental services in Bellevue — general, cosmetic, restorative, orthodontic, pediatric, and periodontal care under one roof."
+  jsonLd={[faqSchema(faqs)].filter(Boolean) as object[]}
 >
   <section class="bg-cream-soft">
     <div class="container-page section text-center max-w-2xl mx-auto">
       <p class="eyebrow">Comprehensive In-House Care</p>
       <h1 class="text-4xl md:text-5xl font-semibold mt-3">Our Services</h1>
       <p class="mt-5 text-lg text-slate">
-        Everything your family needs, under one roof in Bellevue's Bel-Red corridor — always
-        delivered conservatively and honestly.
+        Everything your family needs, under one roof in Bellevue's Bel-Red corridor, delivered
+        conservatively and honestly.
+      </p>
+      <p class="mt-4 text-slate">
+        For more than 30 years, Eastside families have come to this office for cleanings, fillings,
+        crowns, and everything in between. Dr. Ravneet Kaur now leads the practice and keeps the same
+        approach: save your natural teeth when we can, and do the smallest treatment that will work.
+        We see patients from toddlers to seniors. Pick a category below, or tell us what's bothering
+        you and we'll point you in the right direction.
       </p>
     </div>
   </section>
+
   <section class="container-page section">
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {cats.map((c) => (
-        <a href={`/services/${c.id}`} class="card block">
-          <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
-          <h2 class="text-xl font-semibold">{c.data.heading}</h2>
-          <p class="mt-2 text-slate text-sm">{c.data.summary}</p>
-        </a>
+    <div class="max-w-2xl">
+      <p class="eyebrow">Not sure where to start?</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-3">Start with what you need</h2>
+      <p class="mt-4 text-slate">You don't need to know the dental term. Find the line that sounds like you.</p>
+    </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {starters.map((s) => (
+        <div class="card">
+          <h3 class="text-xl font-semibold">"{s.q}"</h3>
+          <p class="mt-3 text-slate text-sm">{s.a}</p>
+          <ul class="mt-4 space-y-1 text-sm">
+            {s.links.map((l) => (
+              <li>
+                <a href={l.href} class="font-semibold text-slate hover:text-navy underline underline-offset-2">
+                  {l.label} &rarr;
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
+    </div>
+  </section>
+
+  <section class="bg-cream">
+    <div class="container-page section">
+      <div class="max-w-2xl">
+        <p class="eyebrow">All services</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">What we do</h2>
+        <p class="mt-4 text-slate">
+          Six areas of care, each with its own page. Every treatment listed below has a detail page
+          that explains how it works and what to expect.
+        </p>
+      </div>
+      <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cats.map((c) => (
+          <div class="card flex flex-col">
+            <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
+            <h3 class="text-xl font-semibold">
+              <a href={`/services/${c.id}`} class="hover:text-slate">{c.data.heading}</a>
+            </h3>
+            <p class="mt-3 text-slate text-sm">{catCopy[c.id] ?? c.data.summary}</p>
+            <ul class="mt-4 space-y-1 text-sm list-disc pl-5">
+              {childrenOf(c.data.categorySlug).map((d) => (
+                <li>
+                  <a href={`/services/${d.id}`} class="text-slate hover:text-navy underline-offset-2 hover:underline">
+                    {d.data.heading}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href={`/services/${c.id}`} class="mt-auto pt-5 text-sm font-semibold text-navy hover:text-slate underline underline-offset-2">
+              See all {c.data.heading.toLowerCase()} &rarr;
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="container-page section">
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div>
+        <p class="eyebrow">Our approach</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-3">How we recommend treatment</h2>
+        <div class="mt-5 space-y-4 text-slate">
+          <p>
+            You should see what we see. After your exam, Dr. Kaur pulls up your X-rays and photos of
+            your teeth on the screen and walks you through them. If there's a cavity, you'll see where it
+            is and how big it is.
+          </p>
+          <p>
+            Then we talk options, starting with the least invasive one. A small cavity gets a small
+            filling. A worn spot that isn't causing trouble may just need watching, and we'll check it
+            again at your next visit instead of drilling now. Once enamel is removed, it doesn't grow
+            back, so we'd rather wait when waiting is safe.
+          </p>
+          <p>
+            Bigger treatment, like a crown or a root canal, comes up only when a smaller fix won't last.
+            We'll explain why and what happens if you hold off.
+          </p>
+          <p>
+            Want a second opinion? Get one. We're glad to share your X-rays. The decision is yours, and
+            we'll respect it.
+          </p>
+        </div>
+      </div>
+      <div class="space-y-6">
+        <div class="card">
+          <h3 class="text-xl font-semibold">What's done here, and what's referred</h3>
+          <p class="mt-3 text-slate">
+            Most of your care happens in our office, from cleanings to crowns to Invisalign, so you
+            aren't driving across town. Some cases do better with a specialist who does that one thing
+            every day. Examples include wisdom teeth that sit deep in the jaw, advanced gum disease, and
+            root canals on molars with curved or hard-to-reach canals. When we refer you, we send your
+            records, explain why, and stay involved in your care afterward. You'll come back here for
+            checkups and the rest of your treatment.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="text-xl font-semibold">Insurance and payment</h3>
+          <p class="mt-3 text-slate">
+            Coverage varies a lot from plan to plan. Call us with your insurance details and we'll
+            confirm whether we accept your plan and what it includes. Before larger work, we
+            can send a pre-estimate to your insurer so you know your share ahead of time. We accept
+            common payment methods and can talk through financing options if you'd like to spread out
+            the cost. Ask us before treatment starts, and we'll give you a written estimate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-cream-soft">
+    <div class="container-page section max-w-3xl">
+      <p class="eyebrow">Questions</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-3">Frequently asked questions</h2>
+      <div class="mt-8 space-y-4">
+        {faqs.map((f) => (
+          <details class="card">
+            <summary class="font-semibold cursor-pointer">{f.q}</summary>
+            <p class="mt-3 text-slate">{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy text-cream">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-semibold text-cream">Ready to book?</h2>
+      <p class="mt-4 text-cream/80">
+        Call us or send a request online. We'll find a time that works and answer any questions first.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <Button href={site.phoneHref} variant="accent">Call {site.phone}</Button>
+        <Button href="/contact" variant="secondary" class="bg-cream">Request an Appointment</Button>
+      </div>
     </div>
   </section>
 </BaseLayout>
