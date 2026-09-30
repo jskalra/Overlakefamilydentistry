@@ -120,12 +120,12 @@ export default function ContactForm() {
           <input type="checkbox" name="flexible" value="Yes" checked={flexible} onChange={onFlexible} className="h-4 w-4 accent-navy" />
           I'm flexible on day and time
         </label>
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className={`grid sm:grid-cols-2 gap-3 ${flexible ? "text-navy/40" : ""}`}>
           <label className="block text-sm">{showSecond ? "First choice date" : "Date"}
-            <input type="date" name="preferred_date" min={today} value={d1} onChange={pick(setD1)} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
+            <input type="date" name="preferred_date" min={today} value={d1} onChange={pick(setD1)} disabled={flexible} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2 disabled:bg-navy/5 disabled:text-navy/40 disabled:cursor-not-allowed" />
           </label>
           <label className="block text-sm">Time of day
-            <select name="preferred_time" value={t1} onChange={pick(setT1)} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2 bg-white">
+            <select name="preferred_time" value={t1} onChange={pick(setT1)} disabled={flexible} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2 bg-white disabled:bg-navy/5 disabled:text-navy/40 disabled:cursor-not-allowed">
               <option value="">No preference</option>
               <option value="Morning">Morning</option>
               <option value="Afternoon">Afternoon</option>
@@ -151,7 +151,7 @@ export default function ContactForm() {
             </button>
           </div>
         ) : (
-          <button type="button" onClick={() => setShowSecond(true)} className="text-sm font-medium text-slate hover:text-navy">
+          <button type="button" onClick={() => setShowSecond(true)} disabled={flexible} className="text-sm font-medium text-slate hover:text-navy disabled:text-navy/30 disabled:cursor-not-allowed disabled:hover:text-navy/30">
             + Add another option
           </button>
         )}
