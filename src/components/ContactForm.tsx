@@ -12,7 +12,8 @@ type Status = "idle" | "sending" | "success" | "error";
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
-  const [closedDay, setClosedDay] = useState(false);
+  const [dateState, setDateState] = useState<"none" | "open" | "closed">("none");
+  const closedDay = dateState === "closed";
 
   // Earliest selectable date: today (local time), formatted YYYY-MM-DD.
   const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
@@ -21,7 +22,7 @@ export default function ContactForm() {
     const v = e.currentTarget.value;
     // Office is open Monday–Thursday. getUTCDay on a YYYY-MM-DD string avoids timezone shifts.
     const day = v ? new Date(v).getUTCDay() : -1;
-    setClosedDay(day === 0 || day === 5 || day === 6);
+    setDateState(!v ? "none" : day === 0 || day === 5 || day === 6 ? "closed" : "open");
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -113,6 +114,8 @@ export default function ContactForm() {
               We are open Mon - Thursday. For dental emergencies, please call{" "}
               <a href={site.emergencyPhoneHref} className="font-semibold underline">{site.emergencyPhone}</a>.
             </>
+          ) : dateState === "open" ? (
+            "Thanks! We'll call or email to confirm the time."
           ) : (
             "We're open Monday to Thursday. We'll call or email to confirm a time."
           )}
