@@ -117,7 +117,7 @@ export default function ContactForm() {
           ) : dateState === "open" ? (
             "Thanks! We'll call or email to confirm the time."
           ) : (
-            "We're open Monday to Thursday. We'll call or email to confirm a time."
+            "We're open Monday to Thursday. We'll call or email to confirm the time."
           )}
         </p>
       </fieldset>
