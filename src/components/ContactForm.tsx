@@ -11,6 +11,17 @@ type Status = "idle" | "sending" | "success" | "error";
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const [closedDay, setClosedDay] = useState(false);
+
+  // Earliest selectable date: today (local time), formatted YYYY-MM-DD.
+  const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+
+  function onDateChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const v = e.currentTarget.value;
+    // Office is open Monday–Thursday. getUTCDay on a YYYY-MM-DD string avoids timezone shifts.
+    const day = v ? new Date(v).getUTCDay() : -1;
+    setClosedDay(day === 0 || day === 5 || day === 6);
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -22,7 +33,7 @@ export default function ContactForm() {
 
     // No key configured yet → fall back to opening the user's email client.
     if (!ACCESS_KEY) {
-      const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}\n\n${data.get("message")}`;
+      const body = `Name: ${data.get("name")}\nEmail: ${data.get("email")}\nPhone: ${data.get("phone")}\nPreferred date: ${data.get("preferred_date") || "—"}\nPreferred time: ${data.get("preferred_time") || "No preference"}\n\n${data.get("message")}`;
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Website inquiry")}&body=${encodeURIComponent(body)}`;
       return;
     }
@@ -31,7 +42,8 @@ export default function ContactForm() {
     setError("");
     try {
       data.append("access_key", ACCESS_KEY);
-      data.append("subject", "New inquiry from Overlake Family Dentistry website");
+      const wantsAppt = data.get("preferred_date") || data.get("preferred_time");
+      data.append("subject", wantsAppt ? "Appointment request from Overlake Family Dentistry website" : "New inquiry from Overlake Family Dentistry website");
       data.append("from_name", "Overlake Family Dentistry Website");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -66,7 +78,7 @@ export default function ContactForm() {
 
   return (
     <form className="card space-y-4" onSubmit={handleSubmit}>
-      <h2 className="text-xl font-semibold">Send us a message</h2>
+      <h2 className="text-xl font-semibold">Send us a message / Choose an appointment time</h2>
       <p className="text-xs text-slate">
         Please do not include personal health information — call for anything medical.
       </p>
@@ -80,6 +92,26 @@ export default function ContactForm() {
       <label className="block text-sm">Phone
         <input name="phone" className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
       </label>
+      <fieldset className="rounded-xl border border-navy/10 p-4">
+        <legend className="px-1 text-sm font-medium">Preferred appointment <span className="font-normal text-slate">(optional)</span></legend>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <label className="block text-sm">Date
+            <input type="date" name="preferred_date" min={today} onChange={onDateChange} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
+          </label>
+          <label className="block text-sm">Time of day
+            <select name="preferred_time" defaultValue="" className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2 bg-white">
+              <option value="">No preference</option>
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+            </select>
+          </label>
+        </div>
+        <p className={`mt-2 text-xs ${closedDay ? "text-red-600" : "text-slate"}`}>
+          {closedDay
+            ? "We're closed Friday through Sunday. Please pick a Monday to Thursday date."
+            : "We're open Monday to Thursday. We'll call or email to confirm a time."}
+        </p>
+      </fieldset>
       <label className="block text-sm">Message
         <textarea required name="message" rows={4} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea>
       </label>
