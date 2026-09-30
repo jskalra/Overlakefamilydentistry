@@ -94,6 +94,9 @@ export default function ContactForm() {
       <label className="block text-sm">Phone
         <input name="phone" className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
       </label>
+      <label className="block text-sm">Message
+        <textarea required name="message" rows={4} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea>
+      </label>
       <fieldset className="rounded-xl border border-navy/10 p-4">
         <legend className="px-1 text-sm font-medium">Preferred appointment <span className="font-normal text-slate">(optional)</span></legend>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -121,9 +124,6 @@ export default function ContactForm() {
           )}
         </p>
       </fieldset>
-      <label className="block text-sm">Message
-        <textarea required name="message" rows={4} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea>
-      </label>
       <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
         {status === "sending" ? "Sending…" : "Send"}
       </button>
