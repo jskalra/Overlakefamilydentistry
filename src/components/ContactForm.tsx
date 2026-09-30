@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { site } from "../data/site";
 
 // Submits via Web3Forms (static-friendly, no backend). Set PUBLIC_WEB3FORMS_KEY to enable.
 // No PHI is collected (see disclaimer) so no BAA is required for this form.
@@ -107,9 +108,14 @@ export default function ContactForm() {
           </label>
         </div>
         <p className={`mt-2 text-xs ${closedDay ? "text-red-600" : "text-slate"}`}>
-          {closedDay
-            ? "We're closed Friday through Sunday. Please pick a Monday to Thursday date."
-            : "We're open Monday to Thursday. We'll call or email to confirm a time."}
+          {closedDay ? (
+            <>
+              We are open Mon - Thursday. For dental emergencies, please call{" "}
+              <a href={site.emergencyPhoneHref} className="font-semibold underline">{site.emergencyPhone}</a>.
+            </>
+          ) : (
+            "We're open Monday to Thursday. We'll call or email to confirm a time."
+          )}
         </p>
       </fieldset>
       <label className="block text-sm">Message
