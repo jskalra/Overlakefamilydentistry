@@ -25,7 +25,7 @@ const posts = (await getCollection("blog")).sort((a, b) => b.data.date.getTime()
             </div>
           )}
           <div class="p-6">
-          <time class="text-xs text-slate">{p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+          <time class="text-xs text-slate">{p.data.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time>
           <h2 class="text-xl font-semibold mt-2">{p.data.heading}</h2>
           <p class="mt-2 text-slate text-sm">{p.data.excerpt}</p>
           </div>

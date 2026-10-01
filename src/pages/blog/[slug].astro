@@ -17,7 +17,7 @@ const hero = blogImages[entry.id];
 <BaseLayout title={d.title} description={d.metaDescription}>
   <article class="container-page section max-w-2xl mx-auto">
     <a href="/blog" class="text-sm text-slate hover:text-navy">← All articles</a>
-    <time class="block mt-6 text-sm text-slate">{d.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+    <time class="block mt-6 text-sm text-slate">{d.date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" })}</time>
     <h1 class="text-4xl font-semibold mt-2">{d.heading}</h1>
     <p class="mt-2 text-slate">By {d.author}</p>
     {hero && (
