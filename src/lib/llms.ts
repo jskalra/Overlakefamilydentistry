@@ -46,6 +46,7 @@ export async function buildLlmsTxt(full = false): Promise<string> {
     `- [New Patients](${url("/new-patients")}): What to expect, forms, and insurance`,
     `- [Contact & Hours](${url("/contact")}): Address, hours, directions, and appointment requests`,
     `- [Reviews](${url("/reviews")}): Patient reviews`,
+    `- [FAQ](${url("/faq")}): Every patient question answered on the site, grouped by topic`,
     "",
     "## Services",
     "",

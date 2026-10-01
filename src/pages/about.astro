@@ -1,4 +1,5 @@
 ---
+import { aboutFaqs as faqs } from "../data/faqs";
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Button from "../components/Button.astro";
@@ -44,40 +45,6 @@ const team = [
   { name: "Jeannie", role: "Front Office Assistant" },
 ];
 
-const faqs = [
-  {
-    q: "Is this the same practice as Dr. Brooks'?",
-    a: "Yes. Overlake Family Dentistry was formerly known as the practice of Dr. Brian Brooks. Dr. Ravneet Kaur now leads the practice. The office, phone number, team, and way of caring for patients all stayed the same. Only the name on the door changed.",
-  },
-  {
-    q: "Are my records and X-rays still here?",
-    a: "Yes. Your charts, X-rays, and treatment history stayed with the practice. Dr. Kaur can review them before your next visit, so you won't need to start over. If you ever need copies sent to another office or a specialist, call us and we'll take care of it.",
-  },
-  {
-    q: "Is the team the same?",
-    a: "Yes. Kris, Kristie, Marta, Ana, and Jeannie have all stayed on. Many of them have worked with our patients for a long time, and they know the families who come here. You'll hear the same voices when you call and see the same faces in the chair.",
-  },
-  {
-    q: "Are you taking new patients?",
-    a: `Yes. We welcome new patients of all ages, from toddlers to seniors. Call us at ${site.phone} to book a first visit. We'll ask a few questions about your dental history and any concerns, then find a time that fits your week.`,
-  },
-  {
-    q: "What does \"conservative\" dentistry mean?",
-    a: "It means we try to keep as much of your natural tooth as we can. We recommend treatment only when you need it, and we choose the smallest fix that will last. Sometimes the right call is to watch a spot and check it again in six months.",
-  },
-  {
-    q: "Do you see children?",
-    a: "Yes. We see kids from their first visit, usually around the first birthday or when the first teeth come in. Early visits are short and gentle. They help your child get used to the chair and let us catch small problems before they become big ones.",
-  },
-  {
-    q: "What if I'm nervous about the dentist?",
-    a: "Tell us. Many of our patients feel the same way. We'll explain each step before we do it, go at your pace, and stop whenever you raise a hand. You can ask to take a break at any time. Nobody here will judge you for how long it has been.",
-  },
-  {
-    q: "How do I book an appointment?",
-    a: `Call our front office at ${site.phone}. Kris and Jeannie can find a time, answer questions about your first visit, and help you get your records sent over if you're coming from another office. We're open Monday through Thursday.`,
-  },
-];
 
 const openHours = site.hours.filter((h) => h.close);
 ---

@@ -1,4 +1,5 @@
 ---
+import { servicesFaqs as faqs } from "../../data/faqs";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Button from "../../components/Button.astro";
@@ -75,40 +76,6 @@ const starters = [
   },
 ];
 
-const faqs = [
-  {
-    q: "Do you offer dental implants?",
-    a: "Yes. Implants are part of our restorative care. We start with an exam and imaging to check your bone and gums, then plan the implant and the crown that goes on top. Healing usually takes a few months between steps. If a bridge or partial would serve you better, we'll say so.",
-  },
-  {
-    q: "What should I do in a dental emergency?",
-    a: `Call ${site.phone} during office hours and we'll fit you in as soon as we can. If you can't reach the front desk, call or text ${site.emergencyPhone}. For a knocked-out tooth, keep it moist in milk and come in right away. For facial swelling with fever or trouble breathing, go to an emergency room.`,
-  },
-  {
-    q: "Is Invisalign a good choice for teenagers?",
-    a: "It can be, if your teen will wear the trays 20 to 22 hours a day. Teen aligners have small indicators that fade with wear, so you can see whether they're being used. Many teens like that they can remove them for sports and instruments. We'll check whether their teeth and habits make it a good fit.",
-  },
-  {
-    q: "At what age should my child first see a dentist?",
-    a: "By their first birthday, or within six months of the first tooth. The first visit is mostly a quick look and a chance for parents to ask about brushing, teething, and diet. Starting early means small problems get caught, and kids get comfortable here before they ever need a filling.",
-  },
-  {
-    q: "Is professional teeth whitening safe?",
-    a: "When it's used as directed, yes. We examine your teeth and gums first, since cavities or exposed roots can make whitening uncomfortable. Some people feel short-lived sensitivity to cold, which usually fades within a few days. Whitening won't change the color of crowns, veneers, or fillings, so we'll plan around those.",
-  },
-  {
-    q: "What's the difference between a regular cleaning and a deep cleaning?",
-    a: "A regular cleaning removes plaque and tartar above and just below the gumline. A deep cleaning, called scaling and root planing, goes further below the gums to clean and smooth the roots. We suggest it only when gum measurements and X-rays show gum disease. We numb the area, and it often takes one or two visits.",
-  },
-  {
-    q: "How long does it take to get a crown?",
-    a: "Most crowns take two visits. At the first, we shape the tooth, take an impression, and place a temporary crown. At the second, once the lab has made it, we fit and cement the permanent one. Before any of that, we check whether a filling or onlay could do the job and save more of your tooth.",
-  },
-  {
-    q: "Can I come in for a second opinion?",
-    a: "Yes. Bring your X-rays and treatment plan if you have them, or we can take new ones. Dr. Kaur will examine you, explain what she sees, and tell you whether she agrees. Sometimes she does. Sometimes she thinks a smaller treatment, or waiting and watching, makes more sense.",
-  },
-];
 ---
 <BaseLayout
   title="Dental Services in Bellevue, WA | Overlake Family Dentistry"

@@ -16,11 +16,11 @@ import logo from "../assets/logo/overlake-logo.png";
       <Image src={logo} alt={site.name} class="h-9 sm:h-10 lg:h-11 w-auto" widths={[340, 440, 660]} sizes="(max-width: 768px) 175px, 215px" loading="eager" />
     </a>
 
-    <nav class="hidden lg:flex items-center gap-6">
+    <nav class="hidden lg:flex items-center gap-4 xl:gap-6">
       {nav.map((item) => (
-        <a href={item.href} class="text-navy/80 hover:text-navy font-medium text-sm transition-colors">{item.label}</a>
+        <a href={item.href} class="whitespace-nowrap text-navy/80 hover:text-navy font-medium text-sm transition-colors">{item.label}</a>
       ))}
-      <a href={site.phoneHref} class="btn btn-primary text-sm">Call {site.phone}</a>
+      <a href={site.phoneHref} class="btn btn-primary text-sm whitespace-nowrap">Call {site.phone}</a>
     </nav>
 
     <MobileNav client:load items={nav} phone={site.phone} phoneHref={site.phoneHref} />

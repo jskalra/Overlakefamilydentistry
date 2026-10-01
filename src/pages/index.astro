@@ -1,4 +1,5 @@
 ---
+import { homeFaqs as faqs } from "../data/faqs";
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
@@ -119,52 +120,6 @@ const cities = [
   { label: "Sammamish", href: "/dentist/sammamish" },
 ];
 
-const faqs = [
-  {
-    q: "Are you accepting new patients?",
-    a: `Yes. We welcome new patients of all ages, including whole families who want to book together. Call ${site.phone} or request an appointment online, and our front desk will find a time that suits you and tell you what to bring to your first visit.`,
-  },
-  {
-    q: "What ages do you see?",
-    a: "We care for patients from toddlers to seniors. Parents can book their own cleanings on the same day as their kids. Seeing the whole family lets us spot patterns, like a tendency toward cavities or grinding, and plan care that fits each person's age and needs.",
-  },
-  {
-    q: "Do you take my insurance?",
-    a: `We accept most dental insurance plans, and we file claims on your behalf. Call us at ${site.phone} with your plan details, and our front desk will confirm your coverage and explain what to expect before your visit, so you aren't surprised by a bill later.`,
-  },
-  {
-    q: "What should I do in a dental emergency?",
-    a: `Call our office at ${site.phone} first and tell us what happened, so we can help you decide how soon you need to be seen. If you can't reach the front desk, call or text our emergency line at ${site.emergencyPhone}. If you have severe swelling or trouble breathing, go to the nearest emergency room.`,
-  },
-  {
-    q: "What does \"conservative dentistry\" mean?",
-    a: "It means we try the least invasive treatment that will work. We'd rather watch a tiny spot or place a small filling than drill more tooth than needed. Your natural teeth are worth keeping, so we save them whenever we reasonably can.",
-  },
-  {
-    q: "How often should I get a checkup?",
-    a: "Most people do well with an exam and cleaning every six months. Some patients, such as those with gum disease, may need visits more often. Your dentist will suggest a schedule based on your mouth, not a one-size-fits-all rule.",
-  },
-  {
-    q: "Where are you, and is parking easy?",
-    a: "We're in Forest Office Park at 148th Ave NE and NE Bel-Red Rd. in Bellevue (Bldg. F, Ste. 101). Free dedicated parking sits right outside the building. The office is a short drive from Redmond, Kirkland, and Sammamish.",
-  },
-  {
-    q: "Can I come in for a second opinion?",
-    a: "Yes. If another office has suggested major work and you're not sure, bring your X-rays or treatment plan. We'll take an honest look and tell you what we'd do. Sometimes that's the same plan, and sometimes a simpler one will work.",
-  },
-  {
-    q: "Do you treat gum disease?",
-    a: "Yes. Early gum disease often shows up as red, puffy gums that bleed when you brush. We check your gums at every exam. If you need more than a regular cleaning, we offer a deep cleaning called scaling and root planing, which clears buildup from below the gumline.",
-  },
-  {
-    q: "I get nervous at the dentist. Can you help?",
-    a: "You are not alone, and there is nothing to be embarrassed about. Tell us what worries you, and we'll go at your pace, explain each step before we do it, and stop whenever you raise a hand. Our team has worked together for years and keeps the mood calm.",
-  },
-  {
-    q: "Can you get my records from my last dentist?",
-    a: "Yes. Give us your previous dentist's name when you book, and we'll request your records and any recent X-rays. If your X-rays are recent enough, we can often use them instead of taking new ones. It saves you time and keeps your history in one place.",
-  },
-];
 ---
 
 <BaseLayout
@@ -388,7 +343,7 @@ const faqs = [
       ))}
     </div>
     <p class="mt-8 text-center text-slate">
-      Have a question we didn't cover? Call us at <a href={site.phoneHref} class="text-navy font-medium hover:underline">{site.phone}</a> and our front desk will be glad to help.
+      Have a question we didn't cover? <a href="/faq" class="text-navy font-medium underline hover:no-underline">See all our FAQs</a>, or call us at <a href={site.phoneHref} class="text-navy font-medium hover:underline">{site.phone}</a> and our front desk will be glad to help.
     </p>
   </section>
   </div>

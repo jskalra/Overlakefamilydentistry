@@ -38,6 +38,7 @@ export const nav = [
   { label: "New Patients", href: "/new-patients" },
   { label: "Reviews", href: "/reviews" },
   { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
