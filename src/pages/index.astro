@@ -185,6 +185,91 @@ const faqs = [
     </div>
   </div>
 
+  <div class="bg-cream-soft">
+  <!-- Conservative care band with photo -->
+  <section>
+    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+      <div class="rounded-3xl overflow-hidden aspect-[4/3] order-2 md:order-1">
+        <Image src={officeRoom} alt="A treatment room at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
+      <div class="order-1 md:order-2">
+        <p class="eyebrow">Conservative, Tooth-Preserving Care</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">We treat only what needs treating</h2>
+        <p class="mt-5 text-slate text-lg">
+          We reach for the least invasive option first. That might mean watching a small spot
+          on a tooth instead of filling it right away, or fixing a chip with bonding (a
+          tooth-colored resin) instead of a crown.
+        </p>
+        <p class="mt-4 text-slate text-lg">
+          Your own teeth are worth keeping. Each time a dentist drills, less natural tooth is
+          left, so we don't rush into work you may not need. When treatment does make sense,
+          we show you what we see and explain your choices. If another office has told you
+          that you need major work, we're happy to give you an honest second opinion.
+        </p>
+        <div class="mt-6"><Button href="/about" variant="secondary">Our Philosophy</Button></div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- Meet your doctors -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center max-w-2xl mx-auto">
+        <p class="eyebrow">Experienced, Long-Tenured Team</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Meet your doctors</h2>
+      </div>
+      <a href="/doctors" class="group block mt-10 max-w-[470px] mx-auto">
+        <div class="rounded-3xl overflow-hidden">
+          <Image src={drsBrooksKaur} alt="Dr. Brooks and Dr. Kaur, Overlake Family Dentistry" class="w-full h-auto object-cover transition-transform group-hover:scale-[1.02]" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 640px" />
+        </div>
+      </a>
+      <div class="text-center mt-8"><Button href="/doctors" variant="secondary">Read Bios</Button></div>
+    </div>
+  </section>
+
+  <div class="bg-cream-soft">
+  <!-- Welcome / office -->
+  <section>
+    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="eyebrow">Welcome to Our Office</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
+        <p class="mt-5 text-slate text-lg">
+          You'll find us in Forest Office Park, at 148th Ave NE and NE Bel-Red Rd. in Bellevue.
+          Free dedicated parking sits right outside the door, so there's no hunting for a spot
+          or paying a meter.
+        </p>
+        <p class="mt-4 text-slate text-lg">
+          The office is bright and quiet, and it's an easy drive from Redmond, Kirkland, and
+          Sammamish. We're open Monday 8 to 5, Tuesday and Wednesday 7:30 to 4:30, and Thursday
+          7 to 2. Early starts make it easier to fit a visit in before work or school.
+        </p>
+        <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+        <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- Reviews -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center mb-10">
+        <p class="eyebrow">Multi-Decade Patient Loyalty</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
+      </div>
+      <ReviewCarousel client:visible reviews={reviews} />
+      <div class="text-center mt-8">
+        <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Additional Google Reviews</a>
+        {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-cream-soft">
   <!-- How can we help? -->
   <section class="container-page section">
     <div class="text-center max-w-2xl mx-auto">
@@ -210,67 +295,10 @@ const faqs = [
     </div>
     <div class="text-center mt-10"><Button href="/services" variant="secondary">See All Services</Button></div>
   </section>
-
-  <!-- Conservative care band with photo -->
-  <section class="bg-cream-soft">
-    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
-      <div class="rounded-3xl overflow-hidden aspect-[4/3] order-2 md:order-1">
-        <Image src={officeRoom} alt="A treatment room at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
-      </div>
-      <div class="order-1 md:order-2">
-        <p class="eyebrow">Conservative, Tooth-Preserving Care</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">We treat only what needs treating</h2>
-        <p class="mt-5 text-slate text-lg">
-          We reach for the least invasive option first. That might mean watching a small spot
-          on a tooth instead of filling it right away, or fixing a chip with bonding (a
-          tooth-colored resin) instead of a crown.
-        </p>
-        <p class="mt-4 text-slate text-lg">
-          Your own teeth are worth keeping. Each time a dentist drills, less natural tooth is
-          left, so we don't rush into work you may not need. When treatment does make sense,
-          we show you what we see and explain your choices. If another office has told you
-          that you need major work, we're happy to give you an honest second opinion.
-        </p>
-        <div class="mt-6"><Button href="/about" variant="secondary">Our Philosophy</Button></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Meet your doctors -->
-  <section class="bg-cream section">
-    <div class="container-page">
-      <div class="text-center max-w-2xl mx-auto">
-        <p class="eyebrow">Experienced, Long-Tenured Team</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Meet your doctors</h2>
-      </div>
-      <a href="/doctors" class="group block mt-10 max-w-[470px] mx-auto">
-        <div class="rounded-3xl overflow-hidden">
-          <Image src={drsBrooksKaur} alt="Dr. Brooks and Dr. Kaur, Overlake Family Dentistry" class="w-full h-auto object-cover transition-transform group-hover:scale-[1.02]" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 640px" />
-        </div>
-      </a>
-      <div class="text-center mt-8"><Button href="/doctors" variant="secondary">Read Bios</Button></div>
-    </div>
-  </section>
-
-  <!-- Why families stay -->
-  <section class="container-page section">
-    <div class="text-center max-w-2xl mx-auto">
-      <p class="eyebrow">Why Families Stay</p>
-      <h2 class="text-3xl md:text-4xl font-semibold mt-2">What you can count on here</h2>
-    </div>
-    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {reasons.map((r) => (
-        <div class="card">
-          <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
-          <h3 class="text-lg font-semibold">{r.title}</h3>
-          <p class="mt-2 text-slate text-sm">{r.text}</p>
-        </div>
-      ))}
-    </div>
-  </section>
+  </div>
 
   <!-- Your first visit -->
-  <section class="bg-cream-soft">
+  <section>
   <div class="container-page section">
     <div class="text-center max-w-2xl mx-auto">
       <p class="eyebrow">New Patients</p>
@@ -290,32 +318,27 @@ const faqs = [
   </div>
   </section>
 
-  <!-- Welcome / office -->
-  <section>
-    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="eyebrow">Welcome to Our Office</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
-        <p class="mt-5 text-slate text-lg">
-          You'll find us in Forest Office Park, at 148th Ave NE and NE Bel-Red Rd. in Bellevue.
-          Free dedicated parking sits right outside the door, so there's no hunting for a spot
-          or paying a meter.
-        </p>
-        <p class="mt-4 text-slate text-lg">
-          The office is bright and quiet, and it's an easy drive from Redmond, Kirkland, and
-          Sammamish. We're open Monday 8 to 5, Tuesday and Wednesday 7:30 to 4:30, and Thursday
-          7 to 2. Early starts make it easier to fit a visit in before work or school.
-        </p>
-        <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
-      </div>
-      <div class="rounded-3xl overflow-hidden aspect-[4/3]">
-        <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
-      </div>
+  <div class="bg-cream-soft">
+  <!-- Why families stay -->
+  <section class="container-page section">
+    <div class="text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Why Families Stay</p>
+      <h2 class="text-3xl md:text-4xl font-semibold mt-2">What you can count on here</h2>
+    </div>
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {reasons.map((r) => (
+        <div class="card">
+          <div class="w-10 h-10 rounded-full bg-sage/20 mb-4"></div>
+          <h3 class="text-lg font-semibold">{r.title}</h3>
+          <p class="mt-2 text-slate text-sm">{r.text}</p>
+        </div>
+      ))}
     </div>
   </section>
+  </div>
 
   <!-- Insurance & payment + Serving the Eastside -->
-  <section class="bg-cream-soft">
+  <section>
   <div class="container-page section grid md:grid-cols-2 gap-6">
     <div class="card">
       <p class="eyebrow">Insurance &amp; Payment</p>
@@ -349,21 +372,7 @@ const faqs = [
   </div>
   </section>
 
-  <!-- Reviews -->
-  <section class="bg-cream section">
-    <div class="container-page">
-      <div class="text-center mb-10">
-        <p class="eyebrow">Multi-Decade Patient Loyalty</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
-      </div>
-      <ReviewCarousel client:visible reviews={reviews} />
-      <div class="text-center mt-8">
-        <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Additional Google Reviews</a>
-        {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
-      </div>
-    </div>
-  </section>
-
+  <div class="bg-cream-soft">
   <!-- FAQ -->
   <section class="container-page section">
     <div class="text-center max-w-2xl mx-auto">
@@ -382,9 +391,10 @@ const faqs = [
       Have a question we didn't cover? Call us at <a href={site.phoneHref} class="text-navy font-medium hover:underline">{site.phone}</a> and our front desk will be glad to help.
     </p>
   </section>
+  </div>
 
   <!-- CTA band -->
-  <section class="bg-cream-soft">
+  <section>
     <div class="container-page section text-center max-w-2xl mx-auto">
       <h2 class="text-3xl md:text-4xl font-semibold">Ready to book your visit?</h2>
       <p class="mt-4 text-slate text-lg">
