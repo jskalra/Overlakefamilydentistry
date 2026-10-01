@@ -229,47 +229,6 @@ const faqs = [
   </section>
 
   <div class="bg-cream-soft">
-  <!-- Welcome / office -->
-  <section>
-    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="eyebrow">Welcome to Our Office</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
-        <p class="mt-5 text-slate text-lg">
-          You'll find us in Forest Office Park, at 148th Ave NE and NE Bel-Red Rd. in Bellevue.
-          Free dedicated parking sits right outside the door, so there's no hunting for a spot
-          or paying a meter.
-        </p>
-        <p class="mt-4 text-slate text-lg">
-          The office is bright and quiet, and it's an easy drive from Redmond, Kirkland, and
-          Sammamish. We're open Monday 8 to 5, Tuesday and Wednesday 7:30 to 4:30, and Thursday
-          7 to 2. Early starts make it easier to fit a visit in before work or school.
-        </p>
-        <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
-      </div>
-      <div class="rounded-3xl overflow-hidden aspect-[4/3]">
-        <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
-      </div>
-    </div>
-  </section>
-  </div>
-
-  <!-- Reviews -->
-  <section class="section">
-    <div class="container-page">
-      <div class="text-center mb-10">
-        <p class="eyebrow">Multi-Decade Patient Loyalty</p>
-        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
-      </div>
-      <ReviewCarousel client:visible reviews={reviews} />
-      <div class="text-center mt-8">
-        <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Additional Google Reviews</a>
-        {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
-      </div>
-    </div>
-  </section>
-
-  <div class="bg-cream-soft">
   <!-- How can we help? -->
   <section class="container-page section">
     <div class="text-center max-w-2xl mx-auto">
@@ -294,6 +253,47 @@ const faqs = [
       ))}
     </div>
     <div class="text-center mt-10"><Button href="/services" variant="secondary">See All Services</Button></div>
+  </section>
+  </div>
+
+  <!-- Welcome / office -->
+  <section>
+    <div class="container-page section grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <p class="eyebrow">Welcome to Our Office</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">A calm, welcoming space in the Bel-Red corridor</h2>
+        <p class="mt-5 text-slate text-lg">
+          You'll find us in Forest Office Park, at 148th Ave NE and NE Bel-Red Rd. in Bellevue.
+          Free dedicated parking sits right outside the door, so there's no hunting for a spot
+          or paying a meter.
+        </p>
+        <p class="mt-4 text-slate text-lg">
+          The office is bright and quiet, and it's an easy drive from Redmond, Kirkland, and
+          Sammamish. We're open Monday 8 to 5, Tuesday and Wednesday 7:30 to 4:30, and Thursday
+          7 to 2. Early starts make it easier to fit a visit in before work or school.
+        </p>
+        <div class="mt-6"><Button href={site.phoneHref} variant="primary">Call {site.phone}</Button></div>
+      </div>
+      <div class="rounded-3xl overflow-hidden aspect-[4/3]">
+        <Image src={officeLobby} alt="The bright, welcoming entrance at Overlake Family Dentistry" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />
+      </div>
+    </div>
+  </section>
+
+  <div class="bg-cream-soft">
+  <!-- Reviews -->
+  <section class="section">
+    <div class="container-page">
+      <div class="text-center mb-10">
+        <p class="eyebrow">Multi-Decade Patient Loyalty</p>
+        <h2 class="text-3xl md:text-4xl font-semibold mt-2">Families who've trusted us for generations</h2>
+      </div>
+      <ReviewCarousel client:visible reviews={reviews} />
+      <div class="text-center mt-8">
+        <a href={site.googleProfile} target="_blank" rel="noopener" class="btn btn-secondary text-sm">Additional Google Reviews</a>
+        {isPlaceholder && <p class="mt-4 text-xs text-slate">Illustrative examples — real, verified Google reviews will be added before launch.</p>}
+      </div>
+    </div>
   </section>
   </div>
 
@@ -406,4 +406,5 @@ const faqs = [
       </div>
     </div>
   </section>
+
 </BaseLayout>
