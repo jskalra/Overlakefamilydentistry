@@ -97,7 +97,7 @@ export default function ContactForm() {
 
   return (
     <form className="card space-y-4" onSubmit={handleSubmit}>
-      <h2 className="text-xl font-semibold">Send us a message / Choose an appointment time</h2>
+      <h2 className="text-xl font-semibold">Request an Appointment / Send us a message</h2>
       <p className="text-xs text-slate">
         Please do not include personal health information — call for anything medical.
       </p>
