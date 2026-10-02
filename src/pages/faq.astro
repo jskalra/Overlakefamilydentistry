@@ -47,7 +47,7 @@ const groups: Group[] = [
   {
     id: "blog",
     title: "From our blog",
-    subgroups: posts.map((p) => ({ title: p.data.heading, href: `/blog/${p.id}`, faqs: unique(blogFaqs(p.body)) })),
+    subgroups: posts.map((p) => ({ title: p.data.heading, href: `/blog/${p.id}`, faqs: unique([...p.data.faq, ...blogFaqs(p.body)]) })),
   },
 ].map((g) => ({ ...g, subgroups: g.subgroups.filter((s) => s.faqs.length) })).filter((g) => g.subgroups.length);
 

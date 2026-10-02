@@ -43,6 +43,8 @@ const blog = defineCollection({
     date: z.coerce.date(),
     author: z.string().default("Overlake Family Dentistry"),
     excerpt: z.string(),
+    // FAQs kept off the article body; shown on /faq and in FAQ schema.
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),
   }),
 });
 
