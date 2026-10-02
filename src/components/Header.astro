@@ -16,11 +16,16 @@ import logo from "../assets/logo/overlake-logo.png";
       <Image src={logo} alt={site.name} class="h-9 sm:h-10 lg:h-11 w-auto" widths={[340, 440, 660]} sizes="(max-width: 768px) 175px, 215px" loading="eager" />
     </a>
 
-    <nav class="hidden lg:flex items-center gap-4 xl:gap-6">
+    <nav class="hidden lg:flex items-center gap-4 xl:gap-5">
       {nav.map((item) => (
         <a href={item.href} class="whitespace-nowrap text-navy/80 hover:text-navy font-medium text-sm transition-colors">{item.label}</a>
       ))}
-      <a href={site.phoneHref} class="btn btn-primary text-sm whitespace-nowrap">Call {site.phone}</a>
+      <div class="flex items-center gap-2 pl-1">
+        <a href="/contact" class="hidden xl:inline-flex items-center rounded-full border border-slate/60 px-3.5 py-1.5 text-xs font-medium text-navy whitespace-nowrap hover:bg-cream transition-colors">
+          <span class="min-[1400px]:hidden">Book Online</span><span class="hidden min-[1400px]:inline">Request an Appointment</span>
+        </a>
+        <a href={site.phoneHref} class="inline-flex items-center rounded-full bg-navy px-3.5 py-1.5 text-xs font-medium text-cream whitespace-nowrap hover:bg-navy-dark transition-colors">Call {site.phone}</a>
+      </div>
     </nav>
 
     <MobileNav client:load items={nav} phone={site.phone} phoneHref={site.phoneHref} />

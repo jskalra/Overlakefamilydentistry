@@ -21,7 +21,10 @@ export default function MobileNav({ items, phoneHref, phone }: { items: readonly
           {items.map((item) => (
             <a key={item.href} href={item.href} className="py-1 text-navy font-medium">{item.label}</a>
           ))}
-          <a href={phoneHref} className="btn btn-primary mt-2">Call {phone}</a>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <a href="/contact" className="btn btn-secondary text-sm !px-3 !py-2">Request an Appointment</a>
+            <a href={phoneHref} className="btn btn-primary text-sm !px-3 !py-2">Call {phone}</a>
+          </div>
         </nav>
       )}
     </div>
