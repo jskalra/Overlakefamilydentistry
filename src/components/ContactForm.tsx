@@ -6,9 +6,10 @@ import { site } from "../data/site";
 // Public Web3Forms access key (safe to commit). Overridable via env.
 const ACCESS_KEY = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || "45cbc7e7-14f1-4411-aa78-55e8b24d2e36";
 const CONTACT_EMAIL = "info@drkaurdds.com";
-// Cloudflare Turnstile (invisible CAPTCHA). Inert until PUBLIC_TURNSTILE_SITE_KEY is set;
-// the matching secret key goes in the Web3Forms dashboard, which does the verifying.
-const TURNSTILE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+// hCaptcha. The site key is public; the matching secret key lives in the Web3Forms
+// dashboard, which verifies the token. Override via env; blank disables the widget.
+const HCAPTCHA_KEY = (import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY as string | undefined)
+  ?? "778031e2-1f8e-402e-9a86-a1b0cdaa99ba";
 // Spam heuristics: bots submit instantly and almost always include a link.
 const MIN_FILL_SECONDS = 3;
 const LINK_RE = /(https?:\/\/|www\.|\[url|<a\s|\b[a-z0-9-]+\.(?:com|net|org|ru|cn|info|biz|xyz|top|shop|club|online|site)\b)/i;
@@ -26,15 +27,15 @@ export default function ContactForm() {
   const [t2, setT2] = useState("");
   const loadedAt = useRef(Date.now());
 
-  // Load the Turnstile script once, only when a site key is configured.
+  // Load the hCaptcha script once, only when a site key is configured.
   useEffect(() => {
-    if (!TURNSTILE_KEY || document.getElementById("cf-turnstile-script")) return;
-    const s = document.createElement("script");
-    s.id = "cf-turnstile-script";
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-    s.async = true;
-    s.defer = true;
-    document.head.appendChild(s);
+    if (!HCAPTCHA_KEY || document.getElementById("hcaptcha-script")) return;
+    const el = document.createElement("script");
+    el.id = "hcaptcha-script";
+    el.src = "https://js.hcaptcha.com/1/api.js";
+    el.async = true;
+    el.defer = true;
+    document.head.appendChild(el);
   }, []);
 
   // Earliest selectable date: today (local time), formatted YYYY-MM-DD.
@@ -86,6 +87,13 @@ export default function ContactForm() {
       return;
     }
 
+    // hCaptcha injects h-captcha-response into the form once solved.
+    if (HCAPTCHA_KEY && !data.get("h-captcha-response")) {
+      setStatus("error");
+      setError("Please check the \u201cI am human\u201d box below, then send again.");
+      return;
+    }
+
     setStatus("sending");
     setError("");
     try {
@@ -106,7 +114,7 @@ export default function ContactForm() {
         form.reset();
         resetPrefs();
         loadedAt.current = Date.now();
-        (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+        (window as unknown as { hcaptcha?: { reset: () => void } }).hcaptcha?.reset();
       } else {
         setStatus("error");
         setError(json.message || "Something went wrong. Please call us.");
@@ -202,7 +210,7 @@ export default function ContactForm() {
           )}
         </p>
       </fieldset>
-      {TURNSTILE_KEY && <div className="cf-turnstile" data-sitekey={TURNSTILE_KEY} data-size="flexible" />}
+      {HCAPTCHA_KEY && <div className="h-captcha" data-captcha="true" data-sitekey={HCAPTCHA_KEY} />}
       <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
         {status === "sending" ? "Sending…" : "Send"}
       </button>
