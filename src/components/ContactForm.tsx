@@ -6,10 +6,11 @@ import { site } from "../data/site";
 // Public Web3Forms access key (safe to commit). Overridable via env.
 const ACCESS_KEY = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || "45cbc7e7-14f1-4411-aa78-55e8b24d2e36";
 const CONTACT_EMAIL = "info@drkaurdds.com";
-// hCaptcha. The site key is public; the matching secret key lives in the Web3Forms
-// dashboard, which verifies the token. Override via env; blank disables the widget.
+// hCaptcha via Web3Forms. Free plans must use Web3Forms' shared site key below; they
+// verify the token with their own secret (enable hCaptcha in the Web3Forms dashboard).
+// Custom keys only work on paid Web3Forms plans. Override via env; blank disables it.
 const HCAPTCHA_KEY = (import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY as string | undefined)
-  ?? "9692131c-7e66-4b44-846e-ac0a772089a4";
+  ?? "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 // Spam heuristics: bots submit instantly and almost always include a link.
 const MIN_FILL_SECONDS = 3;
 const LINK_RE = /(https?:\/\/|www\.|\[url|<a\s|\b[a-z0-9-]+\.(?:com|net|org|ru|cn|info|biz|xyz|top|shop|club|online|site)\b)/i;
