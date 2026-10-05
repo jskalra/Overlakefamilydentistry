@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { site } from "../data/site";
 
 // Submits via Web3Forms (static-friendly, no backend). Set PUBLIC_WEB3FORMS_KEY to enable.
@@ -6,6 +6,12 @@ import { site } from "../data/site";
 // Public Web3Forms access key (safe to commit). Overridable via env.
 const ACCESS_KEY = (import.meta.env.PUBLIC_WEB3FORMS_KEY as string | undefined) || "45cbc7e7-14f1-4411-aa78-55e8b24d2e36";
 const CONTACT_EMAIL = "info@drkaurdds.com";
+// Cloudflare Turnstile (invisible CAPTCHA). Inert until PUBLIC_TURNSTILE_SITE_KEY is set;
+// the matching secret key goes in the Web3Forms dashboard, which does the verifying.
+const TURNSTILE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
+// Spam heuristics: bots submit instantly and almost always include a link.
+const MIN_FILL_SECONDS = 3;
+const LINK_RE = /(https?:\/\/|www\.|\[url|<a\s|\b[a-z0-9-]+\.(?:com|net|org|ru|cn|info|biz|xyz|top|shop|club|online|site)\b)/i;
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -18,6 +24,18 @@ export default function ContactForm() {
   const [showSecond, setShowSecond] = useState(false);
   const [d2, setD2] = useState("");
   const [t2, setT2] = useState("");
+  const loadedAt = useRef(Date.now());
+
+  // Load the Turnstile script once, only when a site key is configured.
+  useEffect(() => {
+    if (!TURNSTILE_KEY || document.getElementById("cf-turnstile-script")) return;
+    const s = document.createElement("script");
+    s.id = "cf-turnstile-script";
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }, []);
 
   // Earliest selectable date: today (local time), formatted YYYY-MM-DD.
   const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
@@ -45,8 +63,21 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    // Honeypot
-    if (data.get("_hp")) return;
+    // Honeypot: only a bot fills a hidden field. Fail silently so it learns nothing.
+    if (data.get("_hp")) { setStatus("success"); return; }
+
+    // Nobody types a name, email, and message in under a few seconds.
+    if ((Date.now() - loadedAt.current) / 1000 < MIN_FILL_SECONDS) { setStatus("success"); return; }
+
+    // Patients rarely paste links; spam almost always does. Recoverable, so say so.
+    // Strip email addresses first, since a patient may type their own in the message.
+    const deEmail = (t: string) => t.replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, " ");
+    const message = deEmail(String(data.get("message") || ""));
+    if (LINK_RE.test(message) || LINK_RE.test(deEmail(String(data.get("name") || "")))) {
+      setStatus("error");
+      setError(`Please remove any web links from your message, or call us at ${site.phone}.`);
+      return;
+    }
 
     // No key configured yet → fall back to opening the user's email client.
     if (!ACCESS_KEY) {
@@ -63,6 +94,7 @@ export default function ContactForm() {
       const wantsAppt = ["preferred_date", "preferred_time", "preferred_date_2", "preferred_time_2"].some((k) => data.get(k));
       data.append("subject", wantsAppt ? "Appointment request from Overlake Family Dentistry website" : "New inquiry from Overlake Family Dentistry website");
       data.append("from_name", "Overlake Family Dentistry Website");
+      data.append("botcheck", "");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { Accept: "application/json" },
@@ -73,6 +105,8 @@ export default function ContactForm() {
         setStatus("success");
         form.reset();
         resetPrefs();
+        loadedAt.current = Date.now();
+        (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
       } else {
         setStatus("error");
         setError(json.message || "Something went wrong. Please call us.");
@@ -168,6 +202,7 @@ export default function ContactForm() {
           )}
         </p>
       </fieldset>
+      {TURNSTILE_KEY && <div className="cf-turnstile" data-sitekey={TURNSTILE_KEY} data-size="flexible" />}
       <button type="submit" disabled={status === "sending"} className="btn btn-primary w-full disabled:opacity-60">
         {status === "sending" ? "Sending…" : "Send"}
       </button>
