@@ -33,7 +33,9 @@ export default function ContactForm() {
     if (!HCAPTCHA_KEY || document.getElementById("hcaptcha-script")) return;
     const el = document.createElement("script");
     el.id = "hcaptcha-script";
-    el.src = "https://js.hcaptcha.com/1/api.js";
+    // recaptchacompat=off: otherwise hCaptcha also adds g-recaptcha-response, which
+    // Web3Forms treats as reCAPTCHA (a Pro feature) and rejects the submission.
+    el.src = "https://js.hcaptcha.com/1/api.js?recaptchacompat=off";
     el.async = true;
     el.defer = true;
     document.head.appendChild(el);
@@ -98,6 +100,7 @@ export default function ContactForm() {
     setStatus("sending");
     setError("");
     try {
+      data.delete("g-recaptcha-response");
       data.append("access_key", ACCESS_KEY);
       data.set("flexible", flexible ? "Yes, flexible on day and time" : "No");
       const wantsAppt = ["preferred_date", "preferred_time", "preferred_date_2", "preferred_time_2"].some((k) => data.get(k));
