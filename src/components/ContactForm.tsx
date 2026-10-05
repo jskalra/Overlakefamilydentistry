@@ -9,7 +9,7 @@ const CONTACT_EMAIL = "info@drkaurdds.com";
 // hCaptcha. The site key is public; the matching secret key lives in the Web3Forms
 // dashboard, which verifies the token. Override via env; blank disables the widget.
 const HCAPTCHA_KEY = (import.meta.env.PUBLIC_HCAPTCHA_SITE_KEY as string | undefined)
-  ?? "778031e2-1f8e-402e-9a86-a1b0cdaa99ba";
+  ?? "9692131c-7e66-4b44-846e-ac0a772089a4";
 // Spam heuristics: bots submit instantly and almost always include a link.
 const MIN_FILL_SECONDS = 3;
 const LINK_RE = /(https?:\/\/|www\.|\[url|<a\s|\b[a-z0-9-]+\.(?:com|net|org|ru|cn|info|biz|xyz|top|shop|club|online|site)\b)/i;
