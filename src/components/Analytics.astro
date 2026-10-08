@@ -9,11 +9,16 @@
 //
 // Fallback (legacy): if only PUBLIC_GA_ID ("G-XXXXXXXXXX") is set, load GA4
 // directly with the built-in conversion event tracking below.
-const gtmId = import.meta.env.PUBLIC_GTM_ID || "GTM-W5CTWNGS";
+//
+// Two containers share one dataLayer and one consent gate: GTM-M6XQFBJR (owner)
+// and GTM-W5CTWNGS (consultant). Keep each tag in only ONE container, or
+// GA4 pageviews and Ads conversions will double-count.
+const gtmIds = (import.meta.env.PUBLIC_GTM_ID || "GTM-M6XQFBJR,GTM-W5CTWNGS")
+  .split(",").map((id: string) => id.trim()).filter(Boolean);
 const gaId = import.meta.env.PUBLIC_GA_ID;
 ---
-{gtmId && (
-  <script is:inline define:vars={{ gtmId }}>
+{gtmIds.length > 0 && (
+  <script is:inline define:vars={{ gtmIds }}>
     (function () {
       const KEY = "ofd-consent";
       window.dataLayer = window.dataLayer || [];
@@ -54,17 +59,19 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           analytics_storage: "granted",
         });
         window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = "https://www.googletagmanager.com/gtm.js?id=" + gtmId;
-        document.head.appendChild(s);
+        gtmIds.forEach(function (id) {
+          const s = document.createElement("script");
+          s.async = true;
+          s.src = "https://www.googletagmanager.com/gtm.js?id=" + id;
+          document.head.appendChild(s);
+        });
       }
       if (localStorage.getItem(KEY) === "accepted") loadGTM();
       window.addEventListener("consent-granted", loadGTM);
     })();
   </script>
 )}
-{!gtmId && gaId && (
+{gtmIds.length === 0 && gaId && (
   <script is:inline define:vars={{ gaId }}>
     (function () {
       const KEY = "ofd-consent";
