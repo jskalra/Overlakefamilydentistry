@@ -72,17 +72,6 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           document.head.appendChild(s);
         });
 
-        // Google Ads "calls from website": swaps the displayed office number for a
-        // Google forwarding number for ad visitors, so phone calls count as conversions.
-        const aw = document.createElement("script");
-        aw.async = true;
-        aw.src = "https://www.googletagmanager.com/gtag/js?id=AW-18436997887";
-        document.head.appendChild(aw);
-        gtag("js", new Date());
-        gtag("config", "AW-18436997887");
-        gtag("config", "AW-18436997887/DzjVCM2K6ZYdEP-FuddE", {
-          phone_conversion_number: "(425) 883-3040",
-        });
       }
       function loadGTM() { grantConsent(); injectTags(); }
 
