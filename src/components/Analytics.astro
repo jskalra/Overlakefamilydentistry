@@ -26,7 +26,8 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
       window.gtag = window.gtag || gtag;
 
       // Consent Mode v2 — everything denied by default (hard gate below also
-      // prevents GTM from loading at all until the user accepts).
+      // prevents GTM from loading at all until the user accepts, except in
+      // GTM debug sessions).
       gtag("consent", "default", {
         ad_storage: "denied",
         ad_user_data: "denied",
@@ -49,15 +50,20 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
         window.dataLayer.push({ event: "contact_form_submit" });
       });
 
-      function loadGTM() {
-        if (window.__gtmLoaded) return;
-        window.__gtmLoaded = true;
+      function grantConsent() {
+        if (window.__consentGranted) return;
+        window.__consentGranted = true;
         gtag("consent", "update", {
           ad_storage: "granted",
           ad_user_data: "granted",
           ad_personalization: "granted",
           analytics_storage: "granted",
         });
+      }
+
+      function injectTags() {
+        if (window.__gtmLoaded) return;
+        window.__gtmLoaded = true;
         window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
         gtmIds.forEach(function (id) {
           const s = document.createElement("script");
@@ -78,6 +84,13 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           phone_conversion_number: "(425) 883-3040",
         });
       }
+      function loadGTM() { grantConsent(); injectTags(); }
+
+      // GTM Preview / Tag Assistant opens the site with ?gtm_debug=… and times out
+      // if no container loads. For those debug visits only, load the containers with
+      // consent still DENIED (no cookies) so Tag Assistant can connect; accepting the
+      // banner then grants consent as usual.
+      if (/[?&]gtm_debug=/.test(location.search)) injectTags();
       if (localStorage.getItem(KEY) === "accepted") loadGTM();
       window.addEventListener("consent-granted", loadGTM);
     })();
