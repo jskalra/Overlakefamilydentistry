@@ -34,5 +34,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [react(), mdx(), sitemap({ filter: (page) => !page.includes("/styleguide") })]
+  integrations: [react(), mdx(), sitemap({ filter: (page) => !page.includes("/styleguide") && !page.includes("/thank-you") })]
 });

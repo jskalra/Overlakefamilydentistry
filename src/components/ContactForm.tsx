@@ -114,15 +114,13 @@ export default function ContactForm() {
       });
       const json = await res.json();
       if (json.success) {
-        setStatus("success");
-        form.reset();
-        resetPrefs();
-        loadedAt.current = Date.now();
-        (window as unknown as { hcaptcha?: { reset: () => void } }).hcaptcha?.reset();
-      } else {
-        setStatus("error");
-        setError(json.message || "Something went wrong. Please call us.");
+        // Real submissions go to /thank-you (GTM conversion trigger). The silent
+        // honeypot/timing rejections above stay inline so bots never count.
+        window.location.href = "/thank-you";
+        return;
       }
+      setStatus("error");
+      setError(json.message || "Something went wrong. Please call us.");
     } catch {
       setStatus("error");
       setError("Network error. Please call us at (425) 883-3040.");

@@ -1,0 +1,31 @@
+---
+// Shown after a successful contact-form submission (ContactForm redirects here).
+// GTM conversion trigger: Page View where Page Path equals /thank-you.
+// noindex + excluded from the sitemap so only real submissions land here.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { site } from "../data/site";
+---
+<BaseLayout
+  title="Thank You | Overlake Family Dentistry, Bellevue"
+  description="Thanks for contacting Overlake Family Dentistry. We'll be in touch soon."
+  noindex
+>
+  <section class="bg-cream-soft">
+    <div class="container-page section text-center max-w-2xl mx-auto">
+      <p class="eyebrow">Message received</p>
+      <h1 class="text-4xl md:text-5xl font-semibold mt-3">Thank you!</h1>
+      <p class="mt-5 text-slate">
+        We got your message and will call or email you soon. We're open Monday to Thursday.
+      </p>
+      <p class="mt-3 text-slate">
+        For anything urgent, call <a href={site.phoneHref} class="underline">{site.phone}</a>.
+        For dental emergencies, call or text <a href={site.emergencyPhoneHref} class="underline">{site.emergencyPhone}</a>.
+      </p>
+      <div class="mt-8 flex gap-3 justify-center flex-wrap">
+        <Button href="/" variant="primary">Back to home</Button>
+        <Button href="/new-patients" variant="secondary">What to expect at your first visit</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
