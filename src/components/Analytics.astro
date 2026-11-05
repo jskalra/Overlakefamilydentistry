@@ -78,7 +78,10 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
       // if no container loads. For those debug visits only, load the containers with
       // consent still DENIED (no cookies) so Tag Assistant can connect; accepting the
       // banner then grants consent as usual.
-      if (/[?&]gtm_debug=/.test(location.search)) injectTags();
+      // The ?gtm_debug flag is only on the first page, so remember it for the tab:
+      // otherwise the next page (e.g. /thank-you after the form) shows "No Google tags".
+      if (/[?&]gtm_debug=/.test(location.search)) sessionStorage.setItem("ofd-gtm-debug", "1");
+      if (sessionStorage.getItem("ofd-gtm-debug")) injectTags();
       if (localStorage.getItem(KEY) === "accepted") loadGTM();
       window.addEventListener("consent-granted", loadGTM);
     })();
