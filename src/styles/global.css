@@ -106,5 +106,14 @@ h1, h2, h3, h4 {
   .prose blockquote {
     @apply my-6 border-l-4 border-sage pl-5 italic text-navy/70;
   }
+  .prose table {
+    @apply my-6 w-full border-collapse text-base;
+  }
+  .prose th {
+    @apply border-b-2 border-navy/15 px-3 py-2 text-left font-semibold text-navy;
+  }
+  .prose td {
+    @apply border-b border-navy/10 px-3 py-2 align-top;
+  }
 }
 
