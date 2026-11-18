@@ -27,6 +27,10 @@ export default function ContactForm() {
   const [d2, setD2] = useState("");
   const [t2, setT2] = useState("");
   const loadedAt = useRef(Date.now());
+  // /contact?offer=new-patient-special (from the /holiday-special page) tags the request for the holiday offer.
+  const [offer, setOffer] = useState("");
+  useEffect(() => { setOffer(new URLSearchParams(window.location.search).get("offer") || ""); }, []);
+  const isSpecial = offer === "new-patient-special";
 
   // Load the hCaptcha script once, only when a site key is configured.
   useEffect(() => {
@@ -77,7 +81,7 @@ export default function ContactForm() {
     // Strip email addresses first, since a patient may type their own in the message.
     const deEmail = (t: string) => t.replace(/[^\s@]+@[^\s@]+\.[^\s@]+/g, " ");
     const message = deEmail(String(data.get("message") || ""));
-    if (LINK_RE.test(message) || LINK_RE.test(deEmail(String(data.get("name") || "")))) {
+    if (LINK_RE.test(message) || LINK_RE.test(deEmail(String(data.get("name") || ""))) || LINK_RE.test(String(data.get("referred_by") || ""))) {
       setStatus("error");
       setError(`Please remove any web links from your message, or call us at ${site.phone}.`);
       return;
@@ -104,7 +108,14 @@ export default function ContactForm() {
       data.append("access_key", ACCESS_KEY);
       data.set("flexible", flexible ? "Yes, flexible on day and time" : "No");
       const wantsAppt = ["preferred_date", "preferred_time", "preferred_date_2", "preferred_time_2"].some((k) => data.get(k));
-      data.append("subject", wantsAppt ? "Appointment request from Overlake Family Dentistry website" : "New inquiry from Overlake Family Dentistry website");
+      const referredBy = String(data.get("referred_by") || "").trim();
+      if (!referredBy) data.delete("referred_by");
+      if (offer) data.set("offer", offer);
+      const via = referredBy ? ` (referred by ${referredBy})` : "";
+      data.append("subject", isSpecial
+        ? `New patient holiday special${via}: request from Overlake Family Dentistry website`
+        : referredBy ? `Referral${via}: request from Overlake Family Dentistry website`
+        : wantsAppt ? "Appointment request from Overlake Family Dentistry website" : "New inquiry from Overlake Family Dentistry website");
       data.append("from_name", "Overlake Family Dentistry Website");
       data.append("botcheck", "");
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -116,7 +127,7 @@ export default function ContactForm() {
       if (json.success) {
         // Real submissions go to /thank-you (GTM conversion trigger). The silent
         // honeypot/timing rejections above stay inline so bots never count.
-        window.location.href = "/thank-you";
+        window.location.href = isSpecial ? "/thank-you?offer=new-patient-special" : referredBy ? "/thank-you?offer=referral" : "/thank-you";
         return;
       }
       setStatus("error");
@@ -154,6 +165,9 @@ export default function ContactForm() {
       </label>
       <label className="block text-sm">Phone
         <input name="phone" className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
+      </label>
+      <label className="block text-sm">Referred by <span className="text-slate">(optional)</span>
+        <input name="referred_by" maxLength={80} placeholder={isSpecial ? "If a current patient referred you, their name" : "If a friend or family member sent you, tell us who"} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2" />
       </label>
       <label className="block text-sm">Message
         <textarea required name="message" rows={4} className="mt-1 w-full rounded-lg border border-navy/15 px-3 py-2"></textarea>

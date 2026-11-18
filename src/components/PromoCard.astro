@@ -1,0 +1,23 @@
+---
+// Compact holiday-special callout, shown in the home hero under the intro text.
+// Hidden after the offer ends (see data/promo.ts).
+import { holidayPromo, promoActive } from "../data/promo";
+const gold = "#c9a24a", pine = "#1d3d2c";
+---
+{promoActive() && (
+  <a href={holidayPromo.href} data-promo={holidayPromo.endsAt}
+    class="mt-8 flex max-w-lg items-center gap-4 rounded-2xl bg-white p-4 pr-5 ring-1 transition-shadow hover:shadow-md [font-variant-numeric:lining-nums]"
+    style={`--tw-ring-color:${gold}`}>
+    <span class="grid h-16 w-16 shrink-0 -rotate-6 place-content-center rounded-full text-center shadow-md"
+      style={`background: radial-gradient(circle at 35% 30%, #f0dca0, ${gold} 60%, #a8842f); color:${pine}`}>
+      <span class="text-[8px] font-bold uppercase tracking-widest">A</span>
+      <span class="font-heading font-bold text-lg leading-none">$400</span>
+      <span class="text-[8px] font-bold uppercase tracking-widest">value</span>
+    </span>
+    <span class="min-w-0">
+      <span class="block text-[11px] font-bold uppercase tracking-[0.16em]" style="color:#a8323a">Holiday special · ends Jan 31, 2027</span>
+      <span class="mt-0.5 block font-heading font-bold text-lg leading-snug" style={`color:${pine}`}>New patients get Philips Zoom! whitening on us</span>
+      <span class="mt-0.5 block text-sm font-medium underline underline-offset-2" style="color:#134f63">See the holiday special →</span>
+    </span>
+  </a>
+)}

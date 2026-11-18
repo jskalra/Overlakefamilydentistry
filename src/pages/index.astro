@@ -5,6 +5,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import ReviewCarousel from "../components/ReviewCarousel.tsx";
 import Button from "../components/Button.astro";
+import PromoCard from "../components/PromoCard.astro";
 import officeLobby from "../assets/office-lobby.jpg";
 import officeRoom from "../assets/office-room.jpg";
 import drsBrooksKaur from "../assets/drs-brooks-kaur.jpg";
@@ -107,7 +108,9 @@ const cities = [
   title="Overlake Family Dentistry — Conservative, Tooth-Preserving Care in Bellevue"
   jsonLd={[faqSchema(faqs)].filter(Boolean) as object[]}
 >
-  <Hero />
+  <Hero>
+    <PromoCard slot="below" />
+  </Hero>
 
   <!-- Trust strip -->
   <div class="bg-navy text-cream/90">

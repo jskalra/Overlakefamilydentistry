@@ -1,0 +1,142 @@
+---
+// Holiday special landing page: New Patient Special + referral gift (Google Business Profile "Redeem offer" link + poster QR).
+// Visual language matches the print poster in OFD-Print/referral-zoom. Claim sources: OFD-Print/referral-zoom/CLAIMS-SOURCES.md.
+// The campaign ends 2027-01-31; remove or redirect this page after that.
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import smile from "../assets/campaign/holiday-smile.jpg";
+import kit from "../assets/campaign/zoom-daywhite-14-kit.jpg";
+
+const steps = [
+  { n: 1, title: "Book your first visit", body: "Request an appointment or call us. If a friend sent you, tell us their name." },
+  { n: 2, title: "Complete your checkup", body: "Your initial exam, X-rays, and cleaning. Then the gift is ready, for you and the friend who referred you." },
+  { n: 3, title: "We scan, you smile", body: "A quick digital scan of your teeth. Your custom kit arrives at your door within 10 business days." },
+];
+const NEW = "/contact?offer=new-patient-special";
+const pine = "#1d3d2c", berry = "#a8323a", gold = "#c9a24a", zoom = "#134f63";
+---
+<BaseLayout
+  title="Holiday Special: Free Philips Zoom! Whitening for New Patients | Overlake Family Dentistry"
+  description="This holiday season, spread a smile. New patients at Overlake Family Dentistry in Bellevue get a Philips Zoom! Delivered whitening kit, a $400 value, and so do the patients who refer them. Offer ends January 31, 2027."
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-cream-soft [font-variant-numeric:lining-nums]">
+    <div class="container-page grid md:grid-cols-[1.15fr_1fr] items-center gap-8 pt-12 md:pt-16">
+      <div class="pb-6 md:pb-16">
+        <span class="relative inline-block px-6 py-2 font-heading italic text-lg md:text-xl text-white shadow-md" style={`background: linear-gradient(180deg, ${berry}, #84242b)`}>
+          <span style={`color:#e6cf8f`}>✦</span> Holiday Special <span style={`color:#e6cf8f`}>✦</span>
+        </span>
+        <h1 class="mt-6 font-heading font-bold text-4xl md:text-6xl leading-[1.04]" style={`color:${pine}`}>
+          This holiday season,<br />spread a <span style={`color:${zoom}`}>smile.</span>
+        </h1>
+        <p class="mt-5 font-heading font-bold text-xl md:text-2xl" style={`color:${zoom}`}>
+          New patients get Philips Zoom! whitening, <span class="whitespace-nowrap">a $400 value</span>, on us. So do the friends who refer them.
+        </p>
+        <p class="mt-4 text-lg text-slate max-w-xl">
+          <strong class="text-navy">Professional whitening delivered to your door</strong>, with custom trays made just for you.
+        </p>
+        <p class="mt-5 inline-block border-t-2 pt-2 text-sm font-bold uppercase tracking-wider" style={`border-color:${gold}; color:${berry}`}>
+          Offer ends January 31, 2027
+        </p>
+        <div class="mt-7 flex gap-3 flex-wrap">
+          <a href={NEW} class="btn text-white" style={`background:${pine}`}>Book your first visit</a>
+          <a href={site.phoneHref} class="btn btn-secondary">Call {site.phone}</a>
+        </div>
+      </div>
+      <div class="relative self-end ml-auto w-full max-w-md">
+      <div class="absolute left-2 top-4 md:-left-10 md:top-8 z-10 grid h-28 w-28 md:h-36 md:w-36 -rotate-6 place-content-center rounded-full text-center shadow-xl"
+        style={`background: radial-gradient(circle at 35% 30%, #f0dca0, ${gold} 60%, #a8842f); color:${pine}; box-shadow: 0 10px 22px rgba(0,0,0,.25), inset 0 0 0 6px rgba(255,255,255,.35)`}>
+        <span class="text-[11px] md:text-xs font-bold uppercase tracking-widest">A</span>
+        <span class="font-heading font-bold text-3xl md:text-4xl leading-none">$400</span>
+        <span class="text-[11px] md:text-xs font-bold uppercase tracking-widest">value</span>
+      </div>
+      <div
+        style="-webkit-mask-image: linear-gradient(90deg, transparent, #000 22%), linear-gradient(180deg, transparent, #000 8%, #000 82%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(90deg, transparent, #000 22%), linear-gradient(180deg, transparent, #000 8%, #000 82%, transparent); mask-composite: intersect;">
+        <Image src={smile} alt="Smiling woman with a bright smile" widths={[360, 470]} sizes="(max-width: 768px) 90vw, 470px" class="block w-full" loading="eager" />
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The gift (kept high on the page) -->
+  <section class="container-page pt-12 [font-variant-numeric:lining-nums]">
+    <div class="grid md:grid-cols-[1fr_1.1fr] overflow-hidden rounded-2xl bg-white ring-1" style={`--tw-ring-color:${gold}`}>
+      <div class="relative flex items-center justify-center bg-white p-6">
+        <Image src={kit} alt="Philips Zoom! DayWhite 14% take-home whitening kit" widths={[400, 580]} sizes="(max-width: 768px) 90vw, 520px" class="w-full max-w-lg" />
+        <div class="absolute left-5 top-5 grid h-24 w-24 -rotate-6 place-content-center rounded-full text-center shadow-lg"
+          style={`background: radial-gradient(circle at 35% 30%, #f0dca0, ${gold} 60%, #a8842f); color:${pine}`}>
+          <span class="text-[10px] font-bold uppercase tracking-widest">A</span>
+          <span class="font-heading font-bold text-2xl leading-none">$400</span>
+          <span class="text-[10px] font-bold uppercase tracking-widest">value</span>
+        </div>
+      </div>
+      <div class="p-7 md:p-10">
+        <span class="inline-block rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest text-white" style={`background:${zoom}`}>Your gift · a $400 value</span>
+        <h2 class="mt-3 font-heading font-bold text-2xl md:text-3xl" style={`color:${pine}`}>Philips Zoom! Delivered whitening</h2>
+        <p class="mt-2 font-heading italic" style={`color:${zoom}`}>From the #1 patient-requested professional whitening brand in the U.S.**</p>
+        <ul class="mt-5 space-y-3 text-slate">
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full" style={`background:${gold}`}></span><span><strong class="text-navy">Up to 5 shades whiter after 9 applications</strong>, in just 30 minutes a day*</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full" style={`background:${gold}`}></span><span><strong class="text-navy">More than just peroxide:</strong> DayWhite 14% gel adds potassium nitrate and sodium fluoride for comfort</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full" style={`background:${gold}`}></span><span><strong class="text-navy">78% of users</strong> reported no more than minimal sensitivity after 9 days†</span></li>
+          <li class="flex gap-3"><span class="mt-2 h-2.5 w-2.5 shrink-0 rounded-full" style={`background:${gold}`}></span><span><strong class="text-navy">Custom trays</strong> made in the Philips lab from a digital scan of your teeth, shipped to your home</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Two ways to get it -->
+  <section class="container-page pt-14 [font-variant-numeric:lining-nums]">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="relative rounded-2xl bg-white p-7 pt-9 ring-1" style={`--tw-ring-color: rgba(201,162,74,.55)`}>
+        <span class="absolute -top-3.5 left-7 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest text-cream" style="background:#2f5a43">New patient special</span>
+        <h2 class="font-heading font-bold text-2xl" style={`color:${pine}`}>New to Overlake? Your first checkup comes with a gift.</h2>
+        <p class="mt-3 text-slate">Complete your initial exam, X-rays, and cleaning with us, and we'll give you a Philips Zoom! Delivered whitening kit, a $400 value.</p>
+        <a href={NEW} class="mt-5 inline-flex font-medium underline underline-offset-4" style={`color:${zoom}`}>Book your first visit &rarr;</a>
+      </div>
+      <div class="relative rounded-2xl bg-white p-7 pt-9 ring-1" style={`--tw-ring-color: rgba(201,162,74,.55)`}>
+        <span class="absolute -top-3.5 left-7 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-widest text-white" style={`background:${berry}`}>Refer a friend</span>
+        <h2 class="font-heading font-bold text-2xl" style={`color:${pine}`}>Already a patient? Share the gift.</h2>
+        <p class="mt-3 text-slate">Refer someone new. Once they complete their initial exam, X-rays, and cleaning, you get a Philips Zoom! kit too. Just have them mention your name when they book.</p>
+        <p class="mt-5 font-medium" style={`color:${zoom}`}>Send them this page: <span class="whitespace-nowrap">overlakefamilydentistry.com/holiday-special</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="container-page section pt-12">
+    <p class="text-center text-sm font-bold uppercase tracking-[0.2em]" style={`color:${berry}`}>How it works</p>
+    <div class="mt-10 grid md:grid-cols-3 gap-8">
+      {steps.map((s) => (
+        <div class="relative rounded-2xl bg-white px-6 pt-10 pb-7 text-center ring-1" style={`--tw-ring-color: rgba(201,162,74,.55)`}>
+          <span class="absolute -top-5 left-1/2 -translate-x-1/2 grid h-10 w-10 place-items-center rounded-full font-heading font-bold text-white ring-4 ring-cream-soft"
+            style={`background:${s.n === 3 ? zoom : "#2f5a43"}`}>{s.n}</span>
+          <h2 class="font-heading font-bold text-xl" style={`color:${pine}`}>{s.title}</h2>
+          <p class="mt-2 text-slate">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Closing call to action + offer details -->
+  <section class="container-page pb-16 [font-variant-numeric:lining-nums]">
+    <div class="mt-10 text-center">
+      <h2 class="font-heading font-bold text-2xl md:text-3xl" style={`color:${pine}`}>Ready for a brighter smile?</h2>
+      <p class="mt-2 text-slate">New patients, book your first visit. Current patients, send this page to a friend and have them tell us your name.</p>
+      <div class="mt-6 flex gap-3 justify-center flex-wrap">
+        <a href={NEW} class="btn text-white" style={`background:${pine}`}>Book your first visit</a>
+        <a href={site.phoneHref} class="btn btn-secondary">Call {site.phone}</a>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-12 max-w-3xl text-xs leading-relaxed text-slate/90">
+      <h2 class="font-semibold text-navy text-sm">Offer details</h2>
+      <p class="mt-2">New patient special: for new patients who book their first visit by January 31, 2027. One whitening kit per new patient, given after they complete their initial exam, X-rays, and cleaning. Referral gift: for current patients who refer a new patient by January 31, 2027. One kit per referral, given once the new patient completes their initial exam, X-rays, and cleaning. Dr. Kaur will confirm whitening is right for you before we order. Not available where prohibited by law.</p>
+      <p class="mt-2">*Philips data for DayWhite 14% HP; individual results vary. †Philips study: n=48, USA, 2020, DayWhite 14% HP once a day for 9 days. **Per Philips, among dental professionals whose patients request specific whitening brands. Philips and Zoom! are trademarks of Koninklijke Philips N.V.</p>
+    </div>
+  </section>
+
+  <section class="py-8 text-center text-white" style={`background: linear-gradient(180deg, #2f5a43, ${pine})`}>
+    <p class="font-heading italic text-2xl md:text-3xl">Happy Holidays! <span class="ml-3 align-middle font-sans not-italic text-xs md:text-sm font-semibold uppercase tracking-[0.14em]" style="color:#e6cf8f">from all of us at Overlake</span></p>
+  </section>
+</BaseLayout>

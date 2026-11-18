@@ -46,6 +46,7 @@ const areas = [
         <span>Serving Eastside families for 30+ years</span>
         <span>Free building parking</span>
       </div>
+      <slot name="below" />
     </div>
     <div class="rounded-3xl overflow-hidden aspect-[4/3]">
       <Image src={teamPhoto} alt="The Overlake Family Dentistry team in Bellevue" class="w-full h-full object-cover" widths={[400, 800, 1200]} sizes="(max-width: 768px) 100vw, 50vw" />

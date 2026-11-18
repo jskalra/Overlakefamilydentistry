@@ -51,6 +51,14 @@ const graphs = [localBusinessSchema, ...jsonLd];
       <script type="application/ld+json" is:inline set:html={JSON.stringify(g)} />
     ))}
     <Analytics />
+    <script is:inline>
+      // Hide holiday-special mentions once the offer ends, even if the site hasn't been rebuilt.
+      document.addEventListener("DOMContentLoaded", function () {
+        var els = document.querySelectorAll("[data-promo]"), ended = false;
+        els.forEach(function (el) { if (Date.now() >= Date.parse(el.getAttribute("data-promo"))) { el.remove(); ended = true; } });
+        if (ended) document.querySelectorAll("[data-promo-fallback]").forEach(function (el) { el.classList.remove("hidden"); });
+      });
+    </script>
   </head>
   <body class="antialiased">
     <!-- Google Tag Manager (noscript) -->
