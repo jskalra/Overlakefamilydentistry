@@ -5,8 +5,8 @@ import { holidayPromo, promoActive } from "../data/promo";
 const gold = "#c9a24a", pine = "#1d3d2c";
 ---
 {promoActive() && (
-  <a href={holidayPromo.href} data-promo={holidayPromo.endsAt}
-    class="mt-8 flex max-w-lg items-center gap-4 rounded-2xl bg-white p-4 pr-5 ring-1 transition-shadow hover:shadow-md [font-variant-numeric:lining-nums]"
+  <div data-promo={holidayPromo.endsAt}
+    class="mt-8 flex max-w-lg items-center gap-4 rounded-2xl bg-white p-4 pr-5 ring-1 [font-variant-numeric:lining-nums]"
     style={`--tw-ring-color:${gold}`}>
     <span class="grid h-16 w-16 shrink-0 -rotate-6 place-content-center rounded-full text-center shadow-md"
       style={`background: radial-gradient(circle at 35% 30%, #f0dca0, ${gold} 60%, #a8842f); color:${pine}`}>
@@ -16,8 +16,11 @@ const gold = "#c9a24a", pine = "#1d3d2c";
     </span>
     <span class="min-w-0">
       <span class="block text-[11px] font-bold uppercase tracking-[0.16em]" style="color:#a8323a">Holiday special · ends Jan 31, 2027</span>
-      <span class="mt-0.5 block font-heading font-bold text-lg leading-snug" style={`color:${pine}`}>New patients get Philips Zoom! whitening on us</span>
-      <span class="mt-0.5 block text-sm font-medium underline underline-offset-2" style="color:#134f63">See the holiday special →</span>
+      <span class="mt-0.5 block font-heading font-bold text-lg leading-snug" style={`color:${pine}`}>Philips Zoom! whitening on us, a $400 value</span>
+      <span class="mt-1.5 flex flex-wrap gap-x-4 gap-y-1 text-sm font-semibold" style="color:#134f63">
+        <a href={holidayPromo.href} class="underline underline-offset-2 hover:opacity-80">I'm a new patient →</a>
+        <a href={`${holidayPromo.href}#refer`} class="underline underline-offset-2 hover:opacity-80">Refer a friend →</a>
+      </span>
     </span>
-  </a>
+  </div>
 )}

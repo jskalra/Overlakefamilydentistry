@@ -11,7 +11,7 @@ import logo from "../assets/logo/overlake-logo.png";
     <a href={holidayPromo.href} data-promo={holidayPromo.endsAt}
       class="block text-cream text-center text-xs md:text-sm py-2 px-4 border-b-2 border-[#a8323a] bg-[linear-gradient(180deg,#2f5a43,#1d3d2c)] hover:bg-[linear-gradient(180deg,#356650,#234a36)] [font-variant-numeric:lining-nums]">
       <span class="inline-block rounded-full bg-[#a8323a] px-2.5 py-0.5 mr-1.5 text-[10px] md:text-xs font-bold uppercase tracking-wider text-white">✦ {holidayPromo.label}</span>
-      {holidayPromo.short} <span class="font-semibold text-[#e6cf8f] underline underline-offset-2 whitespace-nowrap">See the offer →</span>
+      <span class="hidden md:inline">{holidayPromo.short}</span><span class="md:hidden">{holidayPromo.shortMobile}</span> <span class="font-semibold text-[#e6cf8f] underline underline-offset-2 whitespace-nowrap">See the offer →</span>
     </a>
   ) : null}
   <div data-promo-fallback class:list={["bg-navy text-cream text-center text-xs md:text-sm py-2 px-4", promoActive() && "hidden"]}>
